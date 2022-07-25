@@ -4,6 +4,35 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const babelLoaderRules = {
+    exclude: /node_modules/,
+    test: /\.js$/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        "presets": [
+            ["@babel/preset-env", {
+            "corejs": 3,
+            "useBuiltIns": "entry"
+          }]
+          ]
+        }     
+    }
+  }
+
+const rawLoaderRules = {
+    test: [ /\.vert$/, /\.frag$/ ],
+    use: 'raw-loader'
+  }
+
+const htmlLoaderRules = {
+    test: /\.html$/,
+    use: [{
+      loader: 'html-loader'
+    }]
+  }
+
+
 module.exports = {
     entry: './index.js',
     output: {
@@ -14,10 +43,9 @@ module.exports = {
     mode: 'development',
     module: {
         rules: [
-          {
-            test: [ /\.vert$/, /\.frag$/ ],
-            use: 'raw-loader'
-          }
+            babelLoaderRules,
+            htmlLoaderRules,
+            rawLoaderRules
         ]
     },
     devServer: {
@@ -32,8 +60,7 @@ module.exports = {
             'CANVAS_RENDERER': JSON.stringify(true),
             'WEBGL_RENDERER': JSON.stringify(true)
         }),
-        new HtmlWebpackPlugin({
-            title: 'Laberinto Game',
+        new HtmlWebpackPlugin({ 
             filename: 'index.html',
             template: 'src/index.html'
         })
