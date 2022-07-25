@@ -42,10 +42,22 @@ Enemies
 4. Meanie - Small androids that move towards Dexter.
 
 
+
+### 
 ### TDAs
 
  
 ### Documentación
+
+Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a partir de la version 3.x de Phaser es requerimiento utilizarlo en un servidor. El archivo "index.js" lo unico que hace es crear un servidor local.
+
+1. [Documentación introducción](https://phaser.io/tutorials/getting-started-phaser3/index)
+2. [Documentación Phaser 3.x](https://github.com/photonstorm/phaser3-docs)
+3. [Phaser 3.x - Ejemplos](http://labs.phaser.io)
+4. [Phaser 3.x - Ejemplos Repositorio](https://github.com/photonstorm/phaser3-examples)
+5. [Phaser 3 HTML5 Cross Platform Game Development](https://triqui.gumroad.com/l/FcjQw)
+6. [Phaser 3 HTML5 Cross Platform Game Development - Repositorio](https://github.com/ajbkr/HTML5-Cross-Platform-Game-Development-Using-Phaser-3)
+
 
  
 ### Software
