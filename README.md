@@ -1,4 +1,4 @@
-## Desafío 2: Programación orientada a objetos Phaser
+## Desafío 2: Programación orientada a objetos con Phaser
 
 ### Enunciado
 
@@ -24,9 +24,9 @@ Por lo que podemos identificar algunas funcionalidades
 
 ### Muestra del juego
 
-Para entender el juego más a profundidad podemos ver [la siguiente presentación](https://www.youtube.com/watch?v=0GER_22lwRg&t=465s), algunos recursos como sprites se obtuvieron del siguiente [sitio web]git (https://www.spriters-resource.com/browser_games/pcdexterslabyrinth/?source=genre)
+Para entender el juego más a profundidad podemos ver [la siguiente presentación](https://www.youtube.com/watch?v=0GER_22lwRg&t=465s), algunos recursos como sprites se obtuvieron del siguiente [sitio web](https://www.spriters-resource.com/browser_games/pcdexterslabyrinth/?source=genre)
 
-Items
+**Items**
 
 1. Microchip - Small computer chips that are required to unlock exits so Dexter can go to the next level.
 2. Byte - A small pole with the numbers 1 and 0. 20 of these are required to get an extra life. The numbers can have three different colors, but it is purely cosmetic.
@@ -34,7 +34,7 @@ Items
 4. Floppy - Floppy disks that add to the overall score.
 5. Bolt - A giant screw that can crush both enemies and Dexter himself if he's not too careful. It cannot be picked up.
 
-Enemies
+**Enemies**
 
 1. Virus - A small, bug-like creature that destroys Dexter the instant he touches it. It moves in a square-like pattern.
 2. Nanorobot - Robots that always move in a straight line. They only change direction upon hitting a wall.
@@ -42,14 +42,12 @@ Enemies
 4. Meanie - Small androids that move towards Dexter.
 
 
-
-### 
-### TDAs
+### Clases 
 
  
 ### Documentación
 
-Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a partir de la version 3.x de Phaser es requerimiento utilizarlo en un servidor. El archivo "index.js" lo unico que hace es crear un servidor local.
+Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a partir de la version 3.x de Phaser es requerimiento utilizarlo en un servidor. El archivo raiz del juego es "index.js", a partir de ahi webpack empaqueta todo el programa.
 
 1. [Documentación introducción](https://phaser.io/tutorials/getting-started-phaser3/index)
 2. [Documentación Phaser 3.x](https://github.com/photonstorm/phaser3-docs)
@@ -57,10 +55,12 @@ Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a pa
 4. [Phaser 3.x - Ejemplos Repositorio](https://github.com/photonstorm/phaser3-examples)
 5. [Phaser 3 HTML5 Cross Platform Game Development](https://triqui.gumroad.com/l/FcjQw)
 6. [Phaser 3 HTML5 Cross Platform Game Development - Repositorio](https://github.com/ajbkr/HTML5-Cross-Platform-Game-Development-Using-Phaser-3)
-
+7. [Documentación Webpack](https://webpack.js.org/configuration/)
 
  
 ### Software
+
+El videojuego fue desarrollado en un entorno JavaScript, especificamente utilizando Phaser 3.x un marco de videojuego 2D para crear juegos HTML5 para escritorio y dispositivos móviles.
 
 
 
