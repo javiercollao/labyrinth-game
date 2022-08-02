@@ -31,6 +31,13 @@ const htmlLoaderRules = {
       loader: 'html-loader'
     }]
   }
+  
+const fileLoaderRules = {
+  test: /\.(gif|jpg|png|svg)$/,
+  use: [
+    'file-loader'
+  ]
+}
 
 
 module.exports = {
@@ -45,7 +52,8 @@ module.exports = {
         rules: [
             babelLoaderRules,
             htmlLoaderRules,
-            rawLoaderRules
+            rawLoaderRules,
+            fileLoaderRules
         ]
     },
     devServer: {
