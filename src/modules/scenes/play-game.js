@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-import gameOptions, { directions } from './../config/gameOptions'
+import gameOptions, { directions, tilesConfig } from './../config/gameOptions'
 
 const { LEFT, RIGHT, UP, DOWN } = directions
 
@@ -13,11 +13,23 @@ class PlayGame extends Phaser.Scene {
 
   create () {
      
+    // Creando mapa
+    const map = this.make.tilemap(tilesConfig)
+    /**  Esta es una llamada a la imagen que se usa en el mapa*/
+    const tileset = map.addTilesetImage('drawtiles-spaced','tiles')
+    const tilesetCar = map.addTilesetImage('car','car')
+    /**  Esta crea la capa piso del mapa */
+    const layer = map.createLayer('piso', tileset, 0, 0)
+    /**  Esta crea la capa sprite del mapa */
+    const layer2 = map.createLayer('sprite', tilesetCar, 0, 0)
+    
+    
 
     this.input.keyboard.on('keydown', this.handleKey, this)
     this.input.on('pointerup', this.handleSwipe, this)
   }
 
+  
   
 
   handleKey (e) {

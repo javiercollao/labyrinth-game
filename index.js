@@ -8,18 +8,23 @@ import PlayGame from './src/modules/scenes/play-game'
 
 
 window.onload = function () {
-  const gameConfig = {
-    backgroundColor: 0xecf0f1,
-    height: gameOptions.boardSize.rows * (gameOptions.tileSize +
-      gameOptions.tileSpacing) + gameOptions.tileSpacing,
+  const gameConfig = { 
+    parent: 'root',
+    pixelArt: true,
+    backgroundColor: '#1a1a2d', 
+    width: 640,
+    height: 416,
     scene: [BootGame, PlayGame],
-    width: gameOptions.boardSize.cols * (gameOptions.tileSize +
-      gameOptions.tileSpacing) + gameOptions.tileSpacing
+    scale: { 
+        mode: Phaser.Scale.NONE,
+        height:640,
+        width: 960
+    }
   }
 
   const game = new Phaser.Game(gameConfig)
-  window.focus()
-  const resizeGame = makeResizeGame(game)
-  resizeGame()
-  window.addEventListener('resize', resizeGame)
+  // window.focus()
+  // const resizeGame = makeResizeGame(game)
+  // resizeGame()
+  // window.addEventListener('resize', resizeGame)
 }
