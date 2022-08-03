@@ -12,17 +12,18 @@ class PlayGame extends Phaser.Scene {
    
 
   create () {
-     
+    this.canMove = true
     // Creando mapa
     const map = this.make.tilemap(tilesConfig)
     /**  Esta es una llamada a la imagen que se usa en el mapa*/
     const tileset = map.addTilesetImage('drawtiles-spaced','tiles')
-    const tilesetCar = map.addTilesetImage('car','car')
+    //const tilesetCar = map.addTilesetImage('car','car')
     /**  Esta crea la capa piso del mapa */
     const layer = map.createLayer('piso', tileset, 0, 0)
     /**  Esta crea la capa sprite del mapa */
-    const layer2 = map.createLayer('sprite', tilesetCar, 0, 0)
-    
+    //const layer2 = map.createLayer('sprite', tilesetCar, 0, 0)
+
+    this.player = this.add.image(tilesConfig.tileWidth+(tilesConfig.tileWidth/2), tilesConfig.tileHeight+(tilesConfig.tileHeight/2), 'car');
     
 
     this.input.keyboard.on('keydown', this.handleKey, this)
@@ -30,8 +31,6 @@ class PlayGame extends Phaser.Scene {
   }
 
   
-  
-
   handleKey (e) {
     if (this.canMove) {
       switch (e.code) {
@@ -63,6 +62,20 @@ class PlayGame extends Phaser.Scene {
     console.log(`Vertical distance: ${swipe.y} pixels`)   
   }
  
+  makeMove(d){
+
+    if(d === RIGHT){
+      this.player.x += 32
+      console.log("D")
+    }else if(d === LEFT){
+      this.player.x -= 32
+    }else if(d === DOWN){
+      this.player.y += 32
+    }else{
+      this.player.y -= 32
+    }
+
+  }
 
 }
 
