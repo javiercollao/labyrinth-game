@@ -42,7 +42,10 @@ Para entender el juego más a profundidad podemos ver [la siguiente presentació
 4. Meanie - Small androids that move towards Dexter.
 
 
-### Clases 
+### Clases
+
+Escenas
+Game
 
  
 ### Documentación
