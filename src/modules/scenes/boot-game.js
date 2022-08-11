@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
 import gameOptions from './../config/gameOptions'
-import car from './../assets/sprites/car.png'
-import tiles from './../assets/sprites/drawtiles-spaced.png'
-import mapa from './../assets/grid/map.json'
+import player from './../assets/sprites/player/player.png'
+import levelTiles from './../assets/sprites/dex2.png'
+import level1 from './../assets/grid/level1.json'
 
 
 class BootGame extends Phaser.Scene {
@@ -11,9 +11,19 @@ class BootGame extends Phaser.Scene {
   }
 
   preload () {
-    this.load.image('car', car); 
-    this.load.image('tiles', tiles);
-    this.load.tilemapTiledJSON('map', mapa)
+    // this.load.spritesheet('player', player, { frameWidth: 16, frameHeight: 16 })
+    this.load.spritesheet({
+      key: 'player',
+      url: player,
+      frameConfig: {
+          frameWidth: 16,
+          frameHeight: 16,
+          startFrame: 0,
+          endFrame: 0
+      }
+  })
+    this.load.image('levelTiles', levelTiles)
+    this.load.tilemapTiledJSON('level1', level1)
 
   }
 

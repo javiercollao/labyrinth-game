@@ -12,19 +12,14 @@ window.onload = function () {
     parent: 'root',
     pixelArt: true,
     backgroundColor: '#1a1a2d', 
-    width: 640,
-    height: 416,
-    scene: [BootGame, PlayGame],
-    scale: { 
-        mode: Phaser.Scale.NONE,
-        height:640,
-        width: 960
-    }
+    width: gameOptions.boardSize.cols * gameOptions.tileSize,
+    height: gameOptions.boardSize.rows * gameOptions.tileSize,
+    scene: [BootGame, PlayGame]
   }
 
   const game = new Phaser.Game(gameConfig)
-  // window.focus()
-  // const resizeGame = makeResizeGame(game)
-  // resizeGame()
-  // window.addEventListener('resize', resizeGame)
+  window.focus()
+  const resizeGame = makeResizeGame(game)
+  resizeGame()
+  window.addEventListener('resize', resizeGame)
 }

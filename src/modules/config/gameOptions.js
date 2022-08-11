@@ -6,7 +6,7 @@ export default {
     swipeMaxTime: 1000,
     swipeMinDistance: 20,
     swipeMinNormal: 0.85,
-    tileSize: 32,
+    tileSize: 16,
     tileSpacing: 0,
     tweenSpeed: 2000
   }
@@ -24,7 +24,7 @@ export default {
   }
 
   export const tilesConfig = {
-    key: 'map',
-    tileWidth: 32,
-    tileHeight: 32
+    key: 'level1',
+    tileWidth: 16,
+    tileHeight: 16
   }

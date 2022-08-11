@@ -9,7 +9,7 @@ export default game => function () {
       canvas.style.width = `${windowWidth}px`
       canvas.style.height = `${windowWidth / gameRatio}px`
     } else {
-      canvas.style.width = `${windowHeight * gameRatio}px`
-      canvas.style.height = `${windowHeight}px`
+      canvas.style.width = `${windowHeight * gameRatio/2}px`
+      canvas.style.height = `${windowHeight/2}px`
     }
   }
