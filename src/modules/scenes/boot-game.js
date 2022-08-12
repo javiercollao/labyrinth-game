@@ -1,8 +1,8 @@
 import Phaser from 'phaser'
 import gameOptions from './../config/gameOptions'
-import player from './../assets/sprites/player/player.png'
-import levelTiles from './../assets/sprites/dex2.png'
-import level1 from './../assets/grid/level1.json'
+import frames from './../assets/sprites/sprites.json'
+import sprites from './../assets/sprites/sprites2.png'
+import levels from './../assets/grid/levels.json'
 
 
 class BootGame extends Phaser.Scene {
@@ -11,20 +11,12 @@ class BootGame extends Phaser.Scene {
   }
 
   preload () {
-    // this.load.spritesheet('player', player, { frameWidth: 16, frameHeight: 16 })
-    this.load.spritesheet({
-      key: 'player',
-      url: player,
-      frameConfig: {
-          frameWidth: 16,
-          frameHeight: 16,
-          startFrame: 0,
-          endFrame: 0
-      }
-  })
-    this.load.image('levelTiles', levelTiles)
-    this.load.tilemapTiledJSON('level1', level1)
-
+    // Sprites
+    this.load.atlas("sprites", sprites, frames)
+    
+    // Laberynth Map
+    this.load.image('levelTiles', sprites)
+    this.load.tilemapTiledJSON('levels', levels)
   }
 
   create () {

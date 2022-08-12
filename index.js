@@ -11,7 +11,7 @@ window.onload = function () {
   const gameConfig = { 
     parent: 'root',
     pixelArt: true,
-    backgroundColor: '#1a1a2d', 
+    backgroundColor: '#00679b', 
     width: gameOptions.boardSize.cols * gameOptions.tileSize,
     height: gameOptions.boardSize.rows * gameOptions.tileSize,
     scene: [BootGame, PlayGame]

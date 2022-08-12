@@ -11,7 +11,7 @@ class PlayGame extends Phaser.Scene {
   }
 
   create () {
-    // Permisos de movimiento 
+    // Movements access
     this.canMoveR = true
     this.canMoveL = true
     this.canMoveU = true
@@ -20,15 +20,17 @@ class PlayGame extends Phaser.Scene {
     // Creando mapa
     const map = this.make.tilemap(tilesConfig)
     /**  Esta es una llamada a la imagen que se usa en el mapa*/
-    const tileset = map.addTilesetImage('dex2','levelTiles') 
+    const tileset = map.addTilesetImage('sprites2','levelTiles') 
     /**  Esta crea la capa piso del mapa */
-    this.layer = map.createLayer('piso1', tileset, 0, 0)
-    this.layer2 = map.createLayer('piso1a', tileset, 0, 0)
+    this.layer = map.createLayer('level1', tileset, 0, 0)
     /**  Jugador */ 
     //this.player = this.add.image(tilesConfig.tileWidth+(tilesConfig.tileWidth/2), tilesConfig.tileHeight+(tilesConfig.tileHeight/2), 'car');
-    this.player = this.add.image(tilesConfig.tileWidth+(tilesConfig.tileWidth/2), tilesConfig.tileHeight+(tilesConfig.tileHeight/2), 'player',0)
-
-
+    
+    this.player = this.add.sprite(tilesConfig.tileWidth+(tilesConfig.tileWidth/2), tilesConfig.tileHeight+(tilesConfig.tileHeight/2), 'sprites')
+    this.anims.create({key:'stand', frames:[{ key: 'sprites', frame: 'p_tile000.png'}],repeat: -1 })
+    this.anims.create({key:'walkR', frames:[{ key: 'sprites', frame: 'p_tile002.png'},{ key: 'sprites', frame: 'p_tile003.png'},{ key: 'sprites', frame: 'p_tile004.png'}],repeat: 0 })
+    this.player.play('stand')
+    
     this.canMove()
     this.removeTilePlayer()
     this.input.keyboard.on('keydown', this.handleKey, this)
@@ -41,10 +43,12 @@ class PlayGame extends Phaser.Scene {
         case 'KeyA':
         case 'ArrowLeft':
           this.makeMove(LEFT)
+          this.player.play('walkR').setFlipX(true)
           break
         case 'KeyD':
         case 'ArrowRight':
           this.makeMove(RIGHT)
+          this.player.play('walkR').setFlipX(false)
           break
         case 'KeyW':
         case 'ArrowUp':
@@ -54,7 +58,7 @@ class PlayGame extends Phaser.Scene {
         case 'ArrowDown':
           this.makeMove(DOWN)
           break
-      }
+      } 
   }
 
   handleSwipe (e) {
@@ -87,27 +91,27 @@ class PlayGame extends Phaser.Scene {
 
   nextTileRightIndex(){
     const tile = this.layer.getTileAtWorldXY(this.player.x + 16, this.player.y, true); 
-    (tile.index === 39)? this.canMoveR = true : this.canMoveR = false 
+    (tile.index === 97)? this.canMoveR = false : this.canMoveR = true 
   }
 
   nextTileLeftIndex(){
     const tile = this.layer.getTileAtWorldXY(this.player.x - 16, this.player.y, true);
-    (tile.index === 39)? this.canMoveL = true : this.canMoveL = false
+    (tile.index === 97)? this.canMoveL = false : this.canMoveL = true
   }
 
   nextTileUpIndex(){
     const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y - 16, true);
-    (tile.index === 39)? this.canMoveU = true : this.canMoveU = false
+    (tile.index === 97)? this.canMoveU = false : this.canMoveU = true
   }
 
   nextTileDownIndex(){
     const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y + 16, true);
-    (tile.index === 39)? this.canMoveD = true : this.canMoveD = false
+    (tile.index === 97)? this.canMoveD = false : this.canMoveD = true
   }
 
   removeTilePlayer(){
-    const tile = this.layer2.getTileAtWorldXY(this.player.x, this.player.y, true); 
-    (tile.index === 31)? this.layer2.removeTileAtWorldXY(this.player.x, this.player.y,false) : console.log("no")
+    const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y, true); 
+    (tile.index === 93)? this.layer.removeTileAtWorldXY(this.player.x, this.player.y,false) : console.log("no")
   }
 
   canMove(){

@@ -24,7 +24,7 @@ export default {
   }
 
   export const tilesConfig = {
-    key: 'level1',
+    key: 'levels',
     tileWidth: 16,
     tileHeight: 16
   }
