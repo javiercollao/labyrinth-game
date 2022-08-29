@@ -1,10 +1,8 @@
-import Phaser from 'phaser'
-// Funciones
-import makeResizeGame from './src/modules/config/rezise-game'
-import gameOptions from './src/modules/config/gameOptions'
-// Escenas
-import BootGame from './src/modules/scenes/boot-game'
-import PlayGame from './src/modules/scenes/play-game'
+import 'phaser'
+import makeResizeGame from './modules/config/rezise-game'
+import gameOptions from './modules/config/gameOptions'
+import BootGame from './modules/scenes/boot-game'
+import PlayGame from './modules/scenes/play-game'
 
 
 window.onload = function () {
@@ -23,3 +21,5 @@ window.onload = function () {
   resizeGame()
   window.addEventListener('resize', resizeGame)
 }
+
+ 

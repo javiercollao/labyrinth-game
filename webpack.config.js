@@ -1,76 +1,79 @@
-'use strict';
-
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const package = require("./package.json");
 
 const babelLoaderRules = {
-    exclude: /node_modules/,
     test: /\.js$/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        "presets": [
-            ["@babel/preset-env", {
-            "corejs": 3,
-            "useBuiltIns": "entry"
-          }]
-          ]
-        }     
-    }
+    exclude: /node_modules/,
+    use: ["babel-loader"],
   }
 
-const rawLoaderRules = {
-    test: [ /\.vert$/, /\.frag$/ ],
-    use: 'raw-loader'
+const tsLoaderRules = {
+    test: /\.ts$/,
+    use: "ts-loader",
+    exclude: /node_modules/,
   }
 
-const htmlLoaderRules = {
-    test: /\.html$/,
-    use: [{
-      loader: 'html-loader'
-    }]
-  }
-  
 const fileLoaderRules = {
-  test: /\.(gif|jpg|png|svg)$/,
-  use: [
-    'file-loader'
-  ]
-}
+    test: /\.(png|svg|jpg|gif)$/,
+    use: [
+      {
+        loader: "file-loader",
+      },
+    ],
+  }
 
+ 
 
 module.exports = {
-    entry: './index.js',
-    output: {
-        path: path.resolve(__dirname, 'build'),
-        publicPath: '/build/',
-        filename: 'bundle.js'
-    },
-    mode: 'development',
-    module: {
-        rules: [
-            babelLoaderRules,
-            htmlLoaderRules,
-            rawLoaderRules,
-            fileLoaderRules
-        ]
-    },
-    devServer: {
-        static: {
-          directory: path.join(__dirname, 'build'),
+  entry: path.resolve(__dirname, "./src/index.ts"),
+  module: {
+    rules: [
+      babelLoaderRules,
+      tsLoaderRules,
+      fileLoaderRules 
+    ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "phaser",
+          enforce: true,
+          chunks: "initial",
         },
-        compress: true,
-        port: 8000,
+      },
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'CANVAS_RENDERER': JSON.stringify(true),
-            'WEBGL_RENDERER': JSON.stringify(true)
-        }),
-        new HtmlWebpackPlugin({ 
-            filename: 'index.html',
-            template: 'src/index.html'
-        })
-    ]
+  },
+  resolve: {
+    extensions: [".js", ".ts"],
+  },
+  output: {
+    path: path.resolve(__dirname, "./dist"),
+    filename: "[name].[chunkhash].js",
+    chunkFilename: "[name].[chunkhash].js",
+    clean: true,
+  },
+  devServer: {
+    static: path.resolve(__dirname, "./dist"),
+  },
+  plugins: [
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "src/assets/",
+          to: "assets/",
+        },
+      ],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "./index.html"),
+      filename: "index.html",
+      title: package.description,
+      inject: "body",
+      hot: true,
+    }),
+  ],
 };

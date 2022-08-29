@@ -1,9 +1,9 @@
-export default game => function () {
-    const canvas = document.querySelector('canvas')
+export default (game: Phaser.Game) => function () {
+    const canvas = document.querySelector('canvas')!
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
     const windowRatio = windowWidth / windowHeight
-    const gameRatio = game.config.width / game.config.height
+    const gameRatio = Number(game.config.width) / Number(game.config.height)
   
     if (windowRatio < gameRatio) {
       canvas.style.width = `${windowWidth}px`
