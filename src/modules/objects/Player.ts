@@ -1,4 +1,6 @@
-import 'phaser'  
+import { dexterStand, dexterWalk } from '../config/gameOptions';
+import ICharacter from '../interfaces/character.interface';
+import ISprite from '../interfaces/sprite.interface';
 
 /**
  * @author     Javier Collao
@@ -8,7 +10,7 @@ import 'phaser'
  * @class Player 
  */
 
-export default class Player extends Phaser.GameObjects.Sprite {
+export default class Player extends Phaser.GameObjects.Sprite implements ISprite, ICharacter{
  
   canMoveR: boolean;
   canMoveL: boolean;
@@ -27,24 +29,24 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.score = 0;
   }
 
+  movement(): void {
+    throw new Error('Method not implemented.');
+  }
+    
   /**
    *  @desc Inicializa la animación principal de Dexter
   **/
-  stand(): void {
-    this.anims.create({key:'stand', frames:[{ key: 'sprites', frame: 'p_tile000.png'}],repeat: -1 })
-    this.play('stand')
-  }
+  animation(name : string) : void {
+    this.anims.create({key:'stand', frames:dexterStand, repeat:-1 });
+    this.anims.create({key:'walkR', frames:dexterWalk, repeat:0 , delay:1});
 
-  /**
-   *  @desc Inicializa la animación caminar de Dexter
-  **/
-  walk(direction): void {
-    this.anims.create({key:'walkR', frames:[{ key: 'sprites', frame: 'p_tile002.png'},{ key: 'sprites', frame: 'p_tile003.png'},{ key: 'sprites', frame: 'p_tile004.png'}], repeat:0 , delay:1})
-    if(direction === "LEFT"){
-      this.play('walkR').setFlipX(true)
-    }else{
-      this.play('walkR').setFlipX(false)
+    if(name === 'stand'){
+      this.play('stand');
+    }else if(name === 'walk'){
+      this.play('walkR').setFlipX(false);
+    }else if(name === 'walkLeft'){
+      this.play('walkR').setFlipX(true);
     }
   }
-  
+ 
 }

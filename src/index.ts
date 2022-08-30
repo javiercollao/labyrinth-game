@@ -9,7 +9,11 @@ window.onload = function () {
   const gameConfig = { 
     parent: 'root',
     pixelArt: true,
-    backgroundColor: '#00679b', 
+    backgroundColor: '#00679b',
+    fps:{
+      min: 100, 
+      smoothStep:true
+    }, 
     width: gameOptions.boardSize.cols * gameOptions.tileSize,
     height: gameOptions.boardSize.rows * gameOptions.tileSize,
     scene: [BootGame, PlayGame]
