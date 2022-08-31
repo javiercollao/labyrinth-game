@@ -1,9 +1,7 @@
 import 'phaser' 
-import { directions, tilesConfig, tileType, dexterStand } from '../config/gameOptions'
-import Door from '../objects/door';
-import Enemy from '../objects/Enemy';
-import Player from '../objects/player'; 
-import Point from '../objects/point';
+import { directions, tilesConfig, tileType} from '../config/gameOptions'
+import Door from '../primary/door'; 
+import Player from '../primary/player';
 
 const { LEFT, RIGHT, UP, DOWN } = directions
 
@@ -21,18 +19,14 @@ export default class PlayGame extends Phaser.Scene {
     this.level = 1;
   }
    
-  /**
-   *  @desc Coloca los elementos en la escena
-  **/
   create () {
     this.initLayer();
     
     this.player = new Player(this, this.positionHorizontal(4), this.positionVertical(4));
-    this.player.animation('stand');
+    this.player.standAnimation()
 
-    this.Level1Objects()
-
-
+    // this.Level1Objects()
+ 
     this.player.setDepth(2)
     this.layer.setDepth(0)
     this.capa.setDepth(1) 
@@ -42,13 +36,7 @@ export default class PlayGame extends Phaser.Scene {
     this.input.keyboard.on('keydown', this.handleKey, this)
     //this.input.on('pointerup', this.handleSwipe, this)
   }
-
-//   update(): void { 
-//     this.time
-//     deltaTime = (elapsedMS * fps) / 1000;
-//     sprite.body.velocity.x = velocityX * deltaTime;
-//     sprite.body.velocity.y = velocityY * deltaTime;
-// }
+  
 
   /**
    *  @desc Calcula la posicion de un tile horizontal
@@ -101,7 +89,6 @@ export default class PlayGame extends Phaser.Scene {
   setNewLayer(name: string, posX: number, posY: number, map: Phaser.Tilemaps.Tilemap, tileset: Phaser.Tilemaps.Tileset) : void{
     this.layer.destroy(true)
     this.layer = map.createLayer(name, tileset, 0, 0)
-    this.player.setDepth(2)
     this.layer.setDepth(0)
     this.capa.setDepth(1) 
     this.player.setPosition(this.positionHorizontal(posX), this.positionVertical(posY))
@@ -117,12 +104,12 @@ export default class PlayGame extends Phaser.Scene {
         case 'KeyA':
         case 'ArrowLeft':
           this.makeMove(LEFT)
-          this.player.animation('walkLeft')
+          this.player.walkLeftAnimation();
           break
         case 'KeyD':
         case 'ArrowRight':
           this.makeMove(RIGHT)
-          this.player.animation('walk')
+          this.player.walkRightAnimation();
           break
         case 'KeyW':
         case 'ArrowUp':
@@ -147,20 +134,20 @@ export default class PlayGame extends Phaser.Scene {
    *  @desc Se encarga de mover al personaje principal en la escena
   **/
   makeMove(d): void{
-    if(d === RIGHT && this.player.canMoveR){
-      this.player.x += 16
+    if(d === RIGHT && this.player.getCanMoveRight()){
+      this.player.rightMovement()
       this.canMove()
       this.checkTilePlayer()
-    }else if(d === LEFT && this.player.canMoveL){
-      this.player.x -= 16
+    }else if(d === LEFT && this.player.getCanMoveLeft()){
+      this.player.leftMovement()
       this.canMove()
       this.checkTilePlayer()
-    }else if(d === DOWN && this.player.canMoveD){
-      this.player.y += 16
+    }else if(d === DOWN && this.player.getCanMoveDown()){
+      this.player.downMovement()
       this.canMove()
       this.checkTilePlayer()
-    }else if(d === UP && this.player.canMoveU){
-      this.player.y -= 16
+    }else if(d === UP && this.player.getCanMoveUp()){
+      this.player.upMovement()
       this.canMove()
       this.checkTilePlayer()
     }
@@ -177,73 +164,63 @@ export default class PlayGame extends Phaser.Scene {
   }
 
   nextTileRightIndex(){
-    const tile = this.layer.getTileAtWorldXY(this.player.x + 16, this.player.y, true); 
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.canMoveR = false : this.player.canMoveR = true 
+    const tile = this.layer.getTileAtWorldXY(this.player.getNextRightPosition(), this.player.getPositionY(), true); 
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveRight(false) : this.player.setCanMoveRight(true)
   }
 
   nextTileLeftIndex(){
-    const tile = this.layer.getTileAtWorldXY(this.player.x - 16, this.player.y, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.canMoveL = false : this.player.canMoveL = true
+    const tile = this.layer.getTileAtWorldXY(this.player.getNextLeftPosition(), this.player.getPositionY(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveLeft(false) : this.player.setCanMoveLeft(true)
   }
 
   nextTileUpIndex(){
-    const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y - 16, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.canMoveU = false : this.player.canMoveU = true
+    const tile = this.layer.getTileAtWorldXY(this.player.getPositionX(), this.player.getNextUpPosition(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveUp(false) : this.player.setCanMoveUp(true)
   }
 
   nextTileDownIndex(){
-    const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y + 16, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.canMoveD = false : this.player.canMoveD = true
+    const tile = this.layer.getTileAtWorldXY(this.player.getPositionX(), this.player.getNextDownPosition(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveDown(false) : this.player.setCanMoveDown(true)
   }
 
   /**
    *  @desc Calcula la posicion de un tile horizontal
   **/
   checkTilePlayer(){
-    const tile = this.layer.getTileAtWorldXY(this.player.x, this.player.y, true);
+    const tile = this.layer.getTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(), true);
 
     if(tile.index === tileType.block.a || tileType.block.b || tile.index === 95 || tile.index === 0){
-      this.layer.removeTileAtWorldXY(this.player.x, this.player.y,false)
+      this.layer.removeTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(),false)
     }
-    
-    // else if(tile.index === 30 || tile.index === 85){
-    //   this.player.score++
-    //   this.layer.removeTileAtWorldXY(this.player.x, this.player.y,false)
-    // }else if(tile.index === 2){
-    //   this.setLevel()
-    //   this.initLayer()
-    // }else{
-    //   this.player.score
-    // } 
-    console.log(`Points: ${this.player.score}`)
-  }
-
-  Level1Objects(): void{
-     // Puntos
-     let p1 = new Point(this,this.positionHorizontal(11), this.positionVertical(5) )
-     p1.animation('point1')
-     let p2 = new Point(this,this.positionHorizontal(18), this.positionVertical(5) )
-     p2.animation('point1')
-     // Ships
-     let ship1 = new Point(this,this.positionHorizontal(19), this.positionVertical(14) )
-     ship1.animation('ship')
-     let ship2 = new Point(this,this.positionHorizontal(20), this.positionVertical(13) )
-     ship2.animation('ship')
-     let ship3 = new Point(this,this.positionHorizontal(21), this.positionVertical(13) )
-     ship3.animation('ship')
-     let ship4 = new Point(this,this.positionHorizontal(21), this.positionVertical(14) )
-     ship4.animation('ship')
-     let ship5 = new Point(this,this.positionHorizontal(20), this.positionVertical(14) )
-     ship5.animation('ship')
-     // Puertas
-     let door = new Door(this,this.positionHorizontal(21), this.positionVertical(4) )
-     door.animation()
-
-     //Enemy
-     let screw1 = new Enemy(this,this.positionHorizontal(19), this.positionVertical(13) )
-     screw1.animation('screw')
 
   }
+
+  // Level1Objects(): void{
+  //    // Puntos
+  //    let p1 = new Point(this,this.positionHorizontal(11), this.positionVertical(5) )
+  //    p1.animation('point1')
+  //    let p2 = new Point(this,this.positionHorizontal(18), this.positionVertical(5) )
+  //    p2.animation('point1')
+  //    // Ships
+  //    let ship1 = new Point(this,this.positionHorizontal(19), this.positionVertical(14) )
+  //    ship1.animation('ship')
+  //    let ship2 = new Point(this,this.positionHorizontal(20), this.positionVertical(13) )
+  //    ship2.animation('ship')
+  //    let ship3 = new Point(this,this.positionHorizontal(21), this.positionVertical(13) )
+  //    ship3.animation('ship')
+  //    let ship4 = new Point(this,this.positionHorizontal(21), this.positionVertical(14) )
+  //    ship4.animation('ship')
+  //    let ship5 = new Point(this,this.positionHorizontal(20), this.positionVertical(14) )
+  //    ship5.animation('ship')
+  //    // Puertas
+  //    let door = new Door(this,this.positionHorizontal(21), this.positionVertical(4) )
+  //    door.animation()
+
+  //    //Enemy
+  //    let screw1 = new Enemy(this,this.positionHorizontal(19), this.positionVertical(13) )
+  //    screw1.animation('screw')
+
+  // }
 
  
 }

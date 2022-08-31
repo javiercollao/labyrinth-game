@@ -1,8 +1,8 @@
 import 'phaser'
-import makeResizeGame from './modules/config/rezise-game'
-import gameOptions from './modules/config/gameOptions'
-import BootGame from './modules/scenes/boot-game'
-import PlayGame from './modules/scenes/play-game'
+import makeResizeGame from './scripts/config/rezise-game'
+import gameOptions from './scripts/config/gameOptions'
+import BootGame from './scripts/scenes/boot-game'
+import PlayGame from './scripts/scenes/play-game'
 
 
 window.onload = function () {

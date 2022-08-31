@@ -44,9 +44,23 @@ Para entender el juego más a profundidad podemos ver [la siguiente presentació
 
 ### Clases
 
-Escenas
-Game
+BootGame
+PlayGame
 
+Player
+
+Microship
+Byte
+Power
+Floppy
+Bolt
+
+Virus
+Nanorobot
+Blob
+Meanie
+
+Door
  
 ### Documentación
 

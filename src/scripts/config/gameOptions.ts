@@ -40,7 +40,7 @@ export default {
     }  
   }
 
-  export const point1 = [
+  export const byte = [
     { key: 'sprites', frame: 'tile000.png'},
     { key: 'sprites', frame: 'tile001.png'},
     { key: 'sprites', frame: 'tile002.png'},
@@ -94,7 +94,7 @@ export default {
     { key: 'sprites', frame: 'tile044.png'}
   ]
 
-  export const point4 = [
+  export const power = [
     { key: 'sprites', frame: 'tile045.png'},
     { key: 'sprites', frame: 'tile046.png'},
     { key: 'sprites', frame: 'tile047.png'},
@@ -105,7 +105,7 @@ export default {
     { key: 'sprites', frame: 'tile052.png'}
   ]
 
-  export const ship = [
+  export const microship = [
     { key: 'sprites', frame: 'tile075.png'},
     { key: 'sprites', frame: 'tile075.png'},
     { key: 'sprites', frame: 'tile075.png'},
@@ -141,7 +141,7 @@ export default {
     { key: 'sprites', frame: 'tile082.png'}
   ]
 
-  export const floppyDisk = [
+  export const floppy = [
     { key: 'sprites', frame: 'tile060.png'}
   ]
 
@@ -184,28 +184,28 @@ export default {
     { key: 'sprites', frame: 'p_tile004.png'}
   ]
 
-  export const bee = [
+  export const virus = [
     { key: 'sprites', frame: 'e_tile006.png'},
     { key: 'sprites', frame: 'e_tile006.png'},
     { key: 'sprites', frame: 'e_tile007.png'},
     { key: 'sprites', frame: 'e_tile007.png'},
   ]
 
-  export const monkey = [
+  export const meanie = [
     { key: 'sprites', frame: 'e_tile012.png'},
     { key: 'sprites', frame: 'e_tile012.png'},
     { key: 'sprites', frame: 'e_tile013.png'},
     { key: 'sprites', frame: 'e_tile013.png'},
   ]
 
-  export const robot = [
+  export const nanorobot = [
     { key: 'sprites', frame: 'e_tile018.png'},
     { key: 'sprites', frame: 'e_tile018.png'},
     { key: 'sprites', frame: 'e_tile019.png'},
     { key: 'sprites', frame: 'e_tile019.png'},
   ]
 
-  export const ball = [
+  export const blob = [
     { key: 'sprites', frame: 'e_tile024.png'},
     { key: 'sprites', frame: 'e_tile025.png'},
     { key: 'sprites', frame: 'e_tile026.png'},
@@ -214,7 +214,7 @@ export default {
     { key: 'sprites', frame: 'e_tile029.png'},
   ]
 
-  export const screw = [
+  export const bolt = [
     { key: 'sprites', frame: 't_tile066.png'}
   ]
 
