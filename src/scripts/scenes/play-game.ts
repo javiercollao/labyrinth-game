@@ -1,7 +1,17 @@
 import 'phaser' 
-import { directions, tilesConfig, tileType} from '../config/gameOptions'
+import { directions, tilesConfig, tileType, tilesObject} from '../config/gameOptions'
+import Level from '../maps/level'; 
 import Door from '../primary/door'; 
 import Player from '../primary/player';
+import Blob from '../enemies/blob';
+import Meanie from '../enemies/meanie';
+import Nanorobot from '../enemies/nanorobot';
+import Virus from '../enemies/virus';
+import Bolt from '../items/bolt';
+import Byte from '../items/byte';
+import Floppy from '../items/floppy';
+import Microship from '../items/microship';
+import Power from '../items/power';
 
 const { LEFT, RIGHT, UP, DOWN } = directions
 
@@ -10,26 +20,41 @@ export default class PlayGame extends Phaser.Scene {
   player!: Player; 
   layer!: Phaser.Tilemaps.TilemapLayer; 
   level!: number;
-  capa!: Phaser.Tilemaps.TilemapLayer;
+  //capa!: Phaser.Tilemaps.TilemapLayer;
+  map!: Level;
  
   constructor() {
     super({
       key :'PlayGame'
     })
-    this.level = 1;
+    this.level = 0;
   }
    
   create () {
-    this.initLayer();
+    // this.initLayer(); 
+    // this.map = this.make.tilemap(tilesConfig) 
+    // const tileset = this.map.addTilesetImage('sprites2','levelTiles')
+  
+    // this.layer = this.map.createLayer(1, tileset, 0, 0);
+
+    this.map = new Level(this, this.level)
+ 
+    this.map.init()
+    this.map.setLevel(this.level)
+    this.layer = this.map.getLayerGame()
+
     
-    this.player = new Player(this, this.positionHorizontal(4), this.positionVertical(4));
+    this.player = new Player(this, this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y));
     this.player.standAnimation()
 
-    // this.Level1Objects()
+    this.createDoor()
+    this.createEnemies()
+    this.createItems()
+    // // this.Level1Objects()
  
-    this.player.setDepth(2)
-    this.layer.setDepth(0)
-    this.capa.setDepth(1) 
+    //this.player.setDepth(2)
+    //this.layer.setDepth(0)
+    //this.capa.setDepth(1) 
      
     this.canMove()
     this.checkTilePlayer()
@@ -41,40 +66,40 @@ export default class PlayGame extends Phaser.Scene {
   /**
    *  @desc Calcula la posicion de un tile horizontal
   **/
-  positionHorizontal (tile) : number {
+  positionHorizontal (tile: number) : number {
     return tilesConfig.tileWidth*tile+(tilesConfig.tileWidth/2)
   }
 
   /**
    *  @desc Calcula la posicion de un tile veritcal
   **/
-  positionVertical (tile): number {
+  positionVertical (tile: number): number {
     return tilesConfig.tileHeight*tile+(tilesConfig.tileHeight/2)
   }
   
   /**
    *  @desc gestiona los mapas de cada nivel
   **/
-  initLayer() : void {
-    const map = this.make.tilemap(tilesConfig) 
-    const tilesetMain = map.addTilesetImage('principal','mainGame')  
-    this.capa = map.createLayer('static', tilesetMain, 0, 0)
-    const tileset = map.addTilesetImage('sprites2','levelTiles')
+  // initLayer() : void {
+  //   const map = this.make.tilemap(tilesConfig) 
+  //   const tilesetMain = map.addTilesetImage('principal','mainGame')  
+  //   this.capa = map.createLayer('static', tilesetMain, 0, 0)
+  //   const tileset = map.addTilesetImage('sprites2','levelTiles')
     
-    switch(this.level){
-        case 1: this.layer = map.createLayer('level1', tileset, 0, 0);
-        break;
-        case 2: this.setNewLayer('level2', 1, 1, map, tileset);
-        break;
-        case 3: this.setNewLayer('level3', 0, 12, map, tileset);
-        break;
-        case 4: this.setNewLayer('level4', 0, 0, map, tileset);
-        break;
-        case 5: this.setNewLayer('level5', 0, 13, map, tileset);
-        break;
+  //   switch(this.level){
+  //       case 1: this.layer = map.createLayer('level1', tileset, 0, 0);
+  //       break;
+  //       case 2: this.setNewLayer('level2', 1, 1, map, tileset);
+  //       break;
+  //       case 3: this.setNewLayer('level3', 0, 12, map, tileset);
+  //       break;
+  //       case 4: this.setNewLayer('level4', 0, 0, map, tileset);
+  //       break;
+  //       case 5: this.setNewLayer('level5', 0, 13, map, tileset);
+  //       break;
       
-    }
-  }
+  //   }
+  // }
 
   /**
    *  @desc Modifia el nivel del juego
@@ -90,7 +115,7 @@ export default class PlayGame extends Phaser.Scene {
     this.layer.destroy(true)
     this.layer = map.createLayer(name, tileset, 0, 0)
     this.layer.setDepth(0)
-    this.capa.setDepth(1) 
+    //this.capa.setDepth(1) 
     this.player.setPosition(this.positionHorizontal(posX), this.positionVertical(posY))
     this.canMove()
     this.checkTilePlayer()
@@ -221,6 +246,76 @@ export default class PlayGame extends Phaser.Scene {
   //    screw1.animation('screw')
 
   // }
+
+
+  createDoor(): void{
+    const door = new Door(this, this.positionHorizontal(tilesObject[this.level].door.x), this.positionVertical(tilesObject[this.level].door.y))
+    door.animation()
+  }
+
+  createEnemies() : void {
+    this.createBlob()
+    this.createMeanie()
+    this.createNanorobot()
+    this.createVirus()
+  }
+
+  createBlob(): void{
+    const blobs = tilesObject[this.level].enemies.blob; 
+    blobs.map((blob) => new Blob(this, this.positionHorizontal(blob.x), this.positionVertical(blob.y))).map((enemy) => enemy.animation())
+    
+  }
+
+  createMeanie(): void{
+    const meanies = tilesObject[this.level].enemies.meanie;
+    meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y))).map((enemy) => enemy.animation())
+  }
+
+  createNanorobot(): void{
+    const nanorobots = tilesObject[this.level].enemies.nanorobot;
+    nanorobots.map((nanorobot) => new Nanorobot(this, this.positionHorizontal(nanorobot.x), this.positionVertical(nanorobot.y))).map((enemy) => enemy.animation())
+  }
+
+  createVirus(): void{
+    const virus = tilesObject[this.level].enemies.virus;
+    virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y))).map((enemy) => enemy.animation())
+  }
+
+  createItems() : void{ 
+    this.createBolt();
+    this.createByte();
+    this.createFloppy();
+    this.createMicroship();
+    this.createPower();
+  }
+
+  createBolt() : void{
+    const bolts = tilesObject[this.level].items.bolt;
+    bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y))).map((item) => item.animation())
+  }
+
+  createByte() : void{
+    const bytes = tilesObject[this.level].items.byte;
+    bytes.map((byte) => new Byte(this, this.positionHorizontal(byte.x), this.positionVertical(byte.y))).map((item) => item.animation())
+  }
+
+  createFloppy() : void{
+    const floppys = tilesObject[this.level].items.floppy;
+    floppys.map((floppy) => new Floppy(this, this.positionHorizontal(floppy.x), this.positionVertical(floppy.y))).map((item) => item.animation())
+  }
+
+  createMicroship() : void{
+    const microships = tilesObject[this.level].items.microship;
+    microships.map((microship) => new Microship(this, this.positionHorizontal(microship.x), this.positionVertical(microship.y))).map((item) => item.animation())
+  }
+
+  createPower() : void{
+    const powers = tilesObject[this.level].items.power;
+    powers.map((power) => new Power(this, this.positionHorizontal(power.x), this.positionVertical(power.y))).map((item) => item.animation())
+  }
+
+
+
 
  
 }

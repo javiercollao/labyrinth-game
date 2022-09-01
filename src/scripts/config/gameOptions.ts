@@ -218,5 +218,132 @@ export default {
     { key: 'sprites', frame: 't_tile066.png'}
   ]
 
-
+  const noElement = { x: -1, y: -1}
+  export const tilesObject = [{
+    name: 'level1',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 4
+    },
+    items: 
+      {
+        bolt : [
+          {
+            x:19,
+            y:13
+          }
+        ],
+        byte : [
+          {
+            x: 11,
+            y: 5
+          },
+          {
+            x: 18,
+            y: 5
+          }
+        ],
+        floppy: [noElement],
+        microship: [
+          {
+            x:20,
+            y:13
+          },
+          {
+            x:21,
+            y:13
+          },
+          {
+            x:19,
+            y:14
+          },
+          {
+            x:20,
+            y:14
+          },
+          {
+            x:21,
+            y:14
+          }
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level2',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 4
+    },
+    items: 
+      {
+        bolt : [
+          {
+            x:19,
+            y:13
+          }
+        ],
+        byte : [
+          {
+            x: 11,
+            y: 5
+          },
+          {
+            x: 18,
+            y: 5
+          }
+        ],
+        floppy: [noElement],
+        microship: [
+          {
+            x:20,
+            y:13
+          },
+          {
+            x:21,
+            y:13
+          },
+          {
+            x:19,
+            y:14
+          },
+          {
+            x:20,
+            y:14
+          },
+          {
+            x:21,
+            y:14
+          }
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  }
+]
   
