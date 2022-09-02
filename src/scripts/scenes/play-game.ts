@@ -36,7 +36,7 @@ export default class PlayGame extends Phaser.Scene {
     super({
       key :'PlayGame'
     })
-    this.level = 2;
+    this.level = 6;
   }
    
   create () {
@@ -99,6 +99,8 @@ export default class PlayGame extends Phaser.Scene {
     this.cleanItems()
     this.createGameLaberynth()
     this.createDoor()
+    this.createEnemies()
+    this.createItems()
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
     this.canMove()
     this.checkTilePlayer() 
@@ -231,22 +233,25 @@ export default class PlayGame extends Phaser.Scene {
   createBlob(): void{
     const blobs = tilesObject[this.level].enemies.blob; 
     this.blob = blobs.map((blob) => new Blob(this, this.positionHorizontal(blob.x), this.positionVertical(blob.y)))
-    
+    this.blob.map((blob) => blob.animation())
   }
 
   createMeanie(): void{
     const meanies = tilesObject[this.level].enemies.meanie;
     this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
+    this.meanie.map((meanie) => meanie.animation())
   }
 
   createNanorobot(): void{
     const nanorobots = tilesObject[this.level].enemies.nanorobot;
     this.nanorobot = nanorobots.map((nanorobot) => new Nanorobot(this, this.positionHorizontal(nanorobot.x), this.positionVertical(nanorobot.y)))
+    this.nanorobot.map((nanorobot) => nanorobot.animation())
   }
 
   createVirus(): void{
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
+    this.virus.map((virus) => virus.animation())
   }
 
   createItems() : void{ 

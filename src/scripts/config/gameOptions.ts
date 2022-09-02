@@ -219,7 +219,8 @@ export default {
   ]
 
   const noElement = { x: -1, y: -1}
-  export const tilesObject = [{
+  export const tilesObject = [
+    {
     name: 'level1',
     player: {
       x: 4,
@@ -434,14 +435,58 @@ export default {
     items: 
       {
         bolt : [
-          noElement
+          {x:4,y:3},
+          {x:5,y:3},
+          {x:6,y:4},
+          {x:7,y:5},
+          {x:8,y:6},
+          {x:8,y:7},
+          {x:9,y:7},
+          {x:9,y:8},
+          {x:10,y:8},
+          {x:10,y:9},
+          {x:11,y:9},
+          {x:11,y:10},
+          {x:12,y:10},
+          {x:12,y:11},
+          {x:13,y:11},
+          {x:13,y:10},
+          {x:14,y:10},
+          {x:14,y:9},
+          {x:15,y:9},
+          {x:15,y:8},
+          {x:16,y:8},
+          {x:16,y:7},
+          {x:17,y:7},
+          {x:17,y:6},
+          {x:18,y:5},
+          {x:19,y:4},
+          {x:20,y:3},
+          {x:21,y:3}
         ],
         byte : [
-          noElement
+          {x:10,y:3},
+          {x:11,y:4},
+          {x:12,y:5},
+          {x:13,y:5},
+          {x:14,y:4},
+          {x:15,y:3}
         ],
-        floppy: [noElement],
+        floppy: [
+          {x:11,y:3},
+          {x:12,y:3},
+          {x:13,y:3},
+          {x:14,y:3},
+          {x:12,y:4},
+          {x:13,y:4}
+        ],
         microship: [
-          noElement
+          {x:5,y:4},
+          {x:6,y:5},
+          {x:7,y:6},
+          {x:18,y:6},
+          {x:19,y:5},
+          {x:20,y:4}
         ],
         power: [noElement]
       }
@@ -458,12 +503,12 @@ export default {
   {
     name: 'level4',
     player: {
-      x: 4,
-      y: 4
+      x: 3,
+      y: 3
     },
     door: {
-      x: 21,
-      y: 14
+      x: 22,
+      y: 3
     },
     items: 
       {
@@ -475,7 +520,10 @@ export default {
         ],
         floppy: [noElement],
         microship: [
-          noElement
+          {x:10,y:10},
+          {x:9,y:10},
+          {x:15,y:10},
+          {x:16,y:10}
         ],
         power: [noElement]
       }
@@ -486,52 +534,81 @@ export default {
       ],
       meanie: [noElement],
       nanorobot: [noElement],
-      virus: [noElement]
+      virus: [
+        {x:5,y:8},
+        {x:5,y:11},
+        {x:20,y:13},
+        {x:20,y:8}
+      ]
     }
   },
   {
     name: 'level5',
     player: {
-      x: 4,
-      y: 4
+      x: 3,
+      y: 3
     },
     door: {
-      x: 21,
-      y: 14
+      x: 22,
+      y: 15
     },
     items: 
       {
         bolt : [
-          noElement
+          {x:8,y:3}
         ],
         byte : [
           noElement
         ],
-        floppy: [noElement],
-        microship: [
-         noElement
+        floppy: [
+         {x:6,y:12},
+         {x:7,y:12},
+         {x:8,y:12},
         ],
-        power: [noElement]
+        microship: [
+         {x:8,y:5},
+         {x:9,y:6},
+         {x:10,y:7},
+         {x:11,y:8},
+         {x:12,y:9},
+         {x:13,y:10},
+         {x:14,y:11},
+         {x:15,y:12}
+        ],
+        power: [
+         {x:16,y:13},
+         {x:17,y:14},
+         {x:18,y:15},
+         {x:16,y:14},
+         {x:16,y:15},
+         {x:17,y:15}
+        ]
       }
     ,
     enemies : {
       blob: [
         noElement
       ],
-      meanie: [noElement],
+      meanie: [
+        {x:18,y:5},
+        {x:20,y:8}
+      ],
       nanorobot: [noElement],
-      virus: [noElement]
+      virus: [
+        {x:4,y:10},
+        {x:4,y:13}
+      ]
     }
   },
   {
     name: 'level6',
     player: {
-      x: 4,
-      y: 4
+      x: 9,
+      y: 9
     },
     door: {
-      x: 21,
-      y: 14
+      x: 16,
+      y: 9
     },
     items: 
       {
@@ -541,7 +618,12 @@ export default {
         byte : [
           noElement
         ],
-        floppy: [noElement],
+        floppy: [
+          {x:5,y:3},
+          {x:6,y:3},
+          {x:19,y:3},
+          {x:20,y:3}
+        ],
         microship: [
           noElement
         ],
@@ -554,18 +636,31 @@ export default {
       ],
       meanie: [noElement],
       nanorobot: [noElement],
-      virus: [noElement]
+      virus: [
+        {x:5,y:5},
+        {x:5,y:5},
+        {x:6,y:5},
+        {x:7,y:5},
+        {x:12,y:7},
+        {x:20,y:8},
+        {x:5,y:7},
+        {x:9,y:7},
+        {x:10,y:11},
+        {x:11,y:11},
+        {x:17,y:11},
+        {x:16,y:13}
+      ]
     }
   },
   {
     name: 'level7',
     player: {
-      x: 4,
-      y: 4
+      x: 3,
+      y: 3
     },
     door: {
-      x: 21,
-      y: 14
+      x: 22,
+      y: 15
     },
     items: 
       {
@@ -573,11 +668,66 @@ export default {
           noElement
         ],
         byte : [
-          noElement
+          {x:5,y:3},
+          {x:5,y:7},
+          {x:5,y:11},
+          {x:5,y:15},
+          {x:20,y:3},
+          {x:20,y:7},
+          {x:20,y:11},
+          {x:20,y:15}
         ],
-        floppy: [noElement],
+        floppy: [
+          {x:5,y:9},
+          {x:6,y:9},
+          {x:7,y:9},
+          {x:8,y:9},
+          {x:9,y:9},
+          {x:10,y:9},
+          {x:11,y:9},
+          {x:12,y:9},
+          {x:13,y:9},
+          {x:14,y:9},
+          {x:15,y:9},
+          {x:16,y:9},
+          {x:17,y:9},
+          {x:18,y:9},
+          {x:19,y:9},
+          {x:20,y:9}
+        ],
         microship: [
-          noElement
+          {x:5,y:5},
+          {x:6,y:5},
+          {x:7,y:5},
+          {x:8,y:5},
+          {x:9,y:5},
+          {x:10,y:5},
+          {x:11,y:5},
+          {x:12,y:5},
+          {x:13,y:5},
+          {x:14,y:5},
+          {x:15,y:5},
+          {x:16,y:5},
+          {x:17,y:5},
+          {x:18,y:5},
+          {x:19,y:5},
+          {x:20,y:5},
+          {x:5,y:13},
+          {x:6,y:13},
+          {x:7,y:13},
+          {x:8,y:13},
+          {x:9,y:13},
+          {x:10,y:13},
+          {x:11,y:13},
+          {x:12,y:13},
+          {x:13,y:13},
+          {x:14,y:13},
+          {x:15,y:13},
+          {x:16,y:13},
+          {x:17,y:13},
+          {x:18,y:13},
+          {x:19,y:13},
+          {x:20,y:13},
         ],
         power: [noElement]
       }
