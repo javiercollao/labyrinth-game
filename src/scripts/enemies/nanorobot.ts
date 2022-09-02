@@ -27,4 +27,8 @@ export default class Nanorobot extends Phaser.GameObjects.Sprite implements ICha
         this.play('nanorobot');
     }
 
+    remove(): void{
+        this.destroy()
+    }
+
 }

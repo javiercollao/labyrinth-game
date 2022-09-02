@@ -27,4 +27,8 @@ export default class Blob extends Phaser.GameObjects.Sprite implements ICharacte
         this.play('blob');
     }
 
+    remove(): void{
+        this.destroy()
+    }
+
 }

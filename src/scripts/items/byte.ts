@@ -22,4 +22,8 @@ export default class Byte extends Phaser.GameObjects.Sprite implements ICharacte
     animation(): void {
         this.play('byte');
     }
+
+    remove(): void{
+        this.destroy()
+    }
 }

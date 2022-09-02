@@ -22,4 +22,8 @@ export default class Microship extends Phaser.GameObjects.Sprite implements ICha
     animation(): void {
         this.play('microship');
     }
+
+    remove(): void{
+        this.destroy()
+    }
 }

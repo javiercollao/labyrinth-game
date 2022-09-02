@@ -28,4 +28,8 @@ export default class Meanie extends Phaser.GameObjects.Sprite implements ICharac
         this.play('meanie');
     }
 
+    remove(): void{
+        this.destroy()
+    }
+
 }

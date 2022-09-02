@@ -22,4 +22,8 @@ export default class Floppy extends Phaser.GameObjects.Sprite implements ICharac
     animation(): void {
         this.play('floppy');
     }
+
+    remove(): void{
+        this.destroy()
+    }
 }

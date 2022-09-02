@@ -285,12 +285,321 @@ export default {
   {
     name: 'level2',
     player: {
+      x: 5,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          {
+            x:7,
+            y:4
+          },
+          {
+            x:7,
+            y:5
+          },
+          {
+            x:7,
+            y:6
+          },
+          {
+            x:7,
+            y:7
+          },
+          {
+            x:7,
+            y:8
+          },
+          {
+            x:7,
+            y:9
+          },
+          {
+            x:7,
+            y:10
+          },
+          {
+            x:11,
+            y:5
+          },
+          {
+            x:19,
+            y:5
+          },
+          {
+            x:15,
+            y:6
+          },
+          {
+            x:11,
+            y:10
+          },
+          {
+            x:19,
+            y:9
+          },
+          {
+            x:15,
+            y:12
+          },
+          {
+            x:7,
+            y:13
+          },
+          {
+            x:7,
+            y:14
+          }
+        ],
+        byte : [
+          {
+            x:4,
+            y:13
+          },
+          {
+            x:4,
+            y:14
+          },
+          {
+            x:5,
+            y:13
+          },
+          {
+            x:5,
+            y:14
+          },
+          {
+            x:6,
+            y:13
+          },
+          {
+            x:6,
+            y:14
+          }
+        ],
+        floppy: [noElement], 
+        microship: [
+          {
+            x:7,
+            y:11
+          },
+          {
+            x:11,
+            y:6
+          },
+          {
+            x:11,
+            y:11
+          },
+          {
+            x:15,
+            y:13
+          },
+          {
+            x:19,
+            y:10
+          },
+          {
+            x:21,
+            y:4
+          }
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level3',
+    player: {
+      x: 3,
+      y: 15
+    },
+    door: {
+      x: 22,
+      y: 15
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level4',
+    player: {
       x: 4,
       y: 4
     },
     door: {
       x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level5',
+    player: {
+      x: 4,
       y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+         noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level6',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level7',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level8',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
     },
     items: 
       {
@@ -301,37 +610,82 @@ export default {
           }
         ],
         byte : [
-          {
-            x: 11,
-            y: 5
-          },
-          {
-            x: 18,
-            y: 5
-          }
+          noElement
         ],
         floppy: [noElement],
         microship: [
-          {
-            x:20,
-            y:13
-          },
-          {
-            x:21,
-            y:13
-          },
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level9',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
           {
             x:19,
-            y:14
-          },
-          {
-            x:20,
-            y:14
-          },
-          {
-            x:21,
-            y:14
+            y:13
           }
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
+        ],
+        power: [noElement]
+      }
+    ,
+    enemies : {
+      blob: [
+        noElement
+      ],
+      meanie: [noElement],
+      nanorobot: [noElement],
+      virus: [noElement]
+    }
+  },
+  {
+    name: 'level10',
+    player: {
+      x: 4,
+      y: 4
+    },
+    door: {
+      x: 21,
+      y: 14
+    },
+    items: 
+      {
+        bolt : [
+          noElement
+        ],
+        byte : [
+          noElement
+        ],
+        floppy: [noElement],
+        microship: [
+          noElement
         ],
         power: [noElement]
       }

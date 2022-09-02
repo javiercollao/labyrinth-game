@@ -22,4 +22,8 @@ export default class Power extends Phaser.GameObjects.Sprite implements ICharact
     animation(): void {
         this.play('power');
     }
+
+    remove(): void{
+        this.destroy()
+    }
 }

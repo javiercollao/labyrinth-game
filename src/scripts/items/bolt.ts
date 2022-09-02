@@ -22,4 +22,8 @@ export default class Bolt extends Phaser.GameObjects.Sprite implements ICharacte
     animation(): void {
         this.play('bolt');
     }
+
+    remove(): void{
+        this.destroy()
+    }
 }

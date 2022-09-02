@@ -27,4 +27,8 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
         this.play('virus');
     }
 
+    remove(): void{
+        this.destroy()
+    }
+
 }

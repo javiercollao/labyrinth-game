@@ -20,5 +20,9 @@ import IDoor from "../interfaces/door.interface";
     animation(): void {
         this.play('door');
     }
- 
+
+    remove(): void{
+        this.destroy()
+    }
+    
 }
