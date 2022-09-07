@@ -744,19 +744,18 @@ export default {
   {
     name: 'level8',
     player: {
-      x: 4,
-      y: 4
+      x: 10,
+      y: 9
     },
     door: {
-      x: 21,
-      y: 14
+      x: 15,
+      y: 9
     },
     items: 
       {
         bolt : [
           {
-            x:19,
-            y:13
+           noElement
           }
         ],
         byte : [
@@ -764,7 +763,10 @@ export default {
         ],
         floppy: [noElement],
         microship: [
-          noElement
+          {x:4, y:3},
+          {x:4, y:15},
+          {x:21, y:3},
+          {x:21, y:15}
         ],
         power: [noElement]
       }
@@ -782,26 +784,73 @@ export default {
     name: 'level9',
     player: {
       x: 4,
-      y: 4
+      y: 15
     },
     door: {
       x: 21,
-      y: 14
+      y: 15
     },
     items: 
       {
         bolt : [
-          {
-            x:19,
-            y:13
-          }
+          {x:8,y:3},
+          {x:14,y:3},
+          {x:16,y:3},
+          {x:19,y:3},
+          {x:8,y:4},
+          {x:14,y:4},
+          {x:16,y:4},
+          {x:19,y:4},
+          {x:8,y:6},
+          {x:14,y:6},
+          {x:16,y:6},
+          {x:19,y:6},
+          {x:8,y:7},
+          {x:14,y:7},
+          {x:16,y:7},
+          {x:19,y:7},
+          {x:8,y:9},
+          {x:14,y:9},
+          {x:16,y:9},
+          {x:19,y:9},
+          {x:8,y:10},
+          {x:14,y:10},
+          {x:16,y:10},
+          {x:19,y:10},
+          {x:8,y:13},
+          {x:14,y:13},
+          {x:16,y:13},
+          {x:19,y:13},
+          {x:8,y:14},
+          {x:14,y:14},
+          {x:16,y:14},
+          {x:19,y:14}
         ],
         byte : [
           noElement
         ],
         floppy: [noElement],
         microship: [
-          noElement
+          {x:8,y:15},
+          {x:14,y:15},
+          {x:16,y:15},
+          {x:19,y:15},
+          {x:8,y:5},
+          {x:14,y:5},
+          {x:16,y:5},
+          {x:19,y:5},
+          {x:8,y:8},
+          {x:14,y:8},
+          {x:16,y:8},
+          {x:19,y:8},
+          {x:8,y:11},
+          {x:14,y:11},
+          {x:16,y:11},
+          {x:19,y:11},
+          {x:8,y:12},
+          {x:14,y:12},
+          {x:16,y:12},
+          {x:19,y:12},
         ],
         power: [noElement]
       }
@@ -818,12 +867,12 @@ export default {
   {
     name: 'level10',
     player: {
-      x: 4,
-      y: 4
+      x: 3,
+      y: 3
     },
     door: {
-      x: 21,
-      y: 14
+      x: 22,
+      y: 13
     },
     items: 
       {
@@ -833,9 +882,64 @@ export default {
         byte : [
           noElement
         ],
-        floppy: [noElement],
+        floppy: [
+          {x:8,y:3},
+          {x:9,y:3},
+          {x:10,y:3},
+          {x:11,y:3},
+          {x:12,y:3},
+          {x:13,y:3},
+          {x:14,y:3},
+          {x:15,y:3},
+          {x:16,y:3},
+          {x:17,y:3},
+          {x:18,y:3},
+          {x:9,y:4},
+          {x:10,y:4},
+          {x:11,y:4},
+          {x:12,y:4},
+          {x:13,y:4},
+          {x:14,y:4},
+          {x:15,y:4},
+          {x:16,y:4},
+          {x:17,y:4},
+          {x:10,y:5},
+          {x:11,y:5},
+          {x:12,y:5},
+          {x:13,y:5},
+          {x:14,y:5},
+          {x:15,y:5},
+          {x:16,y:5},
+          {x:11,y:6},
+          {x:12,y:6},
+          {x:13,y:6},
+          {x:14,y:6},
+          {x:15,y:6},
+          {x:12,y:7},
+          {x:13,y:7},
+          {x:14,y:7},
+          {x:13,y:8}
+        ],
         microship: [
-          noElement
+          {x:3,y:15},
+          {x:4,y:15},
+          {x:5,y:15},
+          {x:6,y:15},
+          {x:7,y:15},
+          {x:8,y:15},
+          {x:9,y:15},
+          {x:10,y:15},
+          {x:11,y:15},
+          {x:12,y:15},
+          {x:14,y:15},
+          {x:15,y:15},
+          {x:16,y:15},
+          {x:17,y:15},
+          {x:18,y:15},
+          {x:19,y:15},
+          {x:20,y:15},
+          {x:21,y:15},
+          {x:22,y:15},
         ],
         power: [noElement]
       }
@@ -846,7 +950,7 @@ export default {
       ],
       meanie: [noElement],
       nanorobot: [noElement],
-      virus: [noElement]
+      virus: [{x:13,y:11}]
     }
   }
 ]

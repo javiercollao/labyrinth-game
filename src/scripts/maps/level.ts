@@ -1,11 +1,17 @@
-import { tilesConfig, tilesObject } from "../config/gameOptions"; 
+/**
+ * @author     Javier Collao
+ * @classdesc
+ * Esta clase se encarga de gestionar los mapas de cada nivel del juego.
+ * 
+ * @class Level
+*/ 
 
-export default class Level{  
+export default class Level {  
     layer!: Phaser.Tilemaps.TilemapLayer;
     depth: number; 
 
     constructor(map : Phaser.Tilemaps.Tilemap, tileset : Phaser.Tilemaps.Tileset, depth: number) { 
-        this.layer = map.createLayer(6, tileset, 0, 0); 
+        this.layer = map.createLayer(0, tileset, 0, 0); 
         this.depth = depth
     }
  
@@ -20,8 +26,5 @@ export default class Level{
     removeLayer(){
         this.layer.destroy(true)
     }
-
-
-
 
 }

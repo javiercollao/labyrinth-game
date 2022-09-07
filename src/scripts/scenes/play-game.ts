@@ -36,7 +36,7 @@ export default class PlayGame extends Phaser.Scene {
     super({
       key :'PlayGame'
     })
-    this.level = 6;
+    this.level = 0;
   }
    
   create () {

@@ -24,8 +24,6 @@ const fileLoaderRules = {
     ],
   }
 
- 
-
 module.exports = {
   entry: path.resolve(__dirname, "./src/index.ts"),
   module: {
