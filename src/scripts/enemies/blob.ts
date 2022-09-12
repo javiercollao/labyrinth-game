@@ -1,3 +1,11 @@
+/**
+ * @author     Javier Collao
+ * @classdesc
+ * Esta clase se encarga de gestionar al personaje Blob
+ * 
+ * @class Blob
+*/ 
+
 import ICharacter from "../interfaces/character.interface";
 import IEnemy from "../interfaces/enemy.interface";
 import { blob } from "../config/gameOptions";

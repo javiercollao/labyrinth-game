@@ -1,3 +1,10 @@
+/**
+ * @author     Javier Collao
+ * @classdesc
+ * Esta clase se encarga de gestionar al personaje Meanie
+ * 
+ * @class Meanie
+*/ 
 
 import ICharacter from "../interfaces/character.interface";
 import IEnemy from "../interfaces/enemy.interface";
