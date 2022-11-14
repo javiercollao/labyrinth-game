@@ -30,13 +30,17 @@ export default class PlayGame extends Phaser.Scene {
   floppy!:Floppy[];
   power!: Power[];
   layer!: Level;
-  map!: Phaser.Tilemaps.Tilemap; 
+  map!: Phaser.Tilemaps.Tilemap;
+  bytesPoints: number;
+  microshipsPoints: number;
  
   constructor() {
     super({
       key :'PlayGame'
     })
     this.level = 0;
+    this.bytesPoints = 0;
+    this.microshipsPoints = 0;
   }
    
   create () {
@@ -58,7 +62,7 @@ export default class PlayGame extends Phaser.Scene {
 
    
   nextLevel () {
-    if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
+    if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length){
       this.drawNewMap()
     }
   }
@@ -94,6 +98,7 @@ export default class PlayGame extends Phaser.Scene {
    drawNewMap() : void{
     this.layer.removeLayer() 
     this.setLevel()
+    this.microshipsPoints = 0;
     this.cleanDoor()
     this.cleanEnemies()
     this.cleanItems()
@@ -187,6 +192,24 @@ export default class PlayGame extends Phaser.Scene {
     (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveDown(false) : this.player.setCanMoveDown(true)
   }
 
+  destroyBytes(){
+    this.byte.map((byte) => {
+      if(byte.x === this.player.getPositionX() && byte.y === this.player.getPositionY()){
+        this.bytesPoints += 1;
+        byte.destroy()
+      }
+    })
+  }
+
+  destroyMicroShips(){
+    this.microship.map((microship) => {
+      if(microship.x === this.player.getPositionX() && microship.y === this.player.getPositionY()){
+        this.microshipsPoints += 1;
+        microship.destroy()
+      }
+    })
+  }
+
   /**
    *  @desc Calcula la posicion de un tile horizontal
   **/
@@ -196,8 +219,11 @@ export default class PlayGame extends Phaser.Scene {
     if(tile.index === tileType.block.a || tileType.block.b || tile.index === 95 || tile.index === 0){
       this.map.removeTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(),false)
     }
-
+    this.destroyBytes()
+    this.destroyMicroShips()
     this.nextLevel() 
+    console.log(`microships = ${this.microship.length}`)
+    console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
 
   }
 

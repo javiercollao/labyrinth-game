@@ -15,7 +15,12 @@ window.onload = function () {
     fps:{
       min: 100, 
       smoothStep:true
-    }, 
+    },
+    physics: {
+      default: 'matter',
+      matter: {
+      }
+  },
     width: gameOptions.boardSize.cols * gameOptions.tileSize,
     height: (gameOptions.boardSize.rows * gameOptions.tileSize)-6,
     scene: [BootGame, PlayGame]

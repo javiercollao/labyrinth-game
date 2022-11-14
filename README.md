@@ -26,41 +26,29 @@ Por lo que podemos identificar algunas funcionalidades
 
 Para entender el juego más a profundidad podemos ver [la siguiente presentación](https://www.youtube.com/watch?v=0GER_22lwRg&t=465s), algunos recursos como sprites se obtuvieron del siguiente [sitio web](https://www.spriters-resource.com/browser_games/pcdexterslabyrinth/?source=genre)
 
-**Items**
-
-1. Microchip - Small computer chips that are required to unlock exits so Dexter can go to the next level.
-2. Byte - A small pole with the numbers 1 and 0. 20 of these are required to get an extra life. The numbers can have three different colors, but it is purely cosmetic.
-3. Power - Small atoms that add to the overall score.
-4. Floppy - Floppy disks that add to the overall score.
-5. Bolt - A giant screw that can crush both enemies and Dexter himself if he's not too careful. It cannot be picked up.
-
-**Enemies**
-
-1. Virus - A small, bug-like creature that destroys Dexter the instant he touches it. It moves in a square-like pattern.
-2. Nanorobot - Robots that always move in a straight line. They only change direction upon hitting a wall.
-3. Blob - An enemy that multiplies, destroying anything in its path.
-4. Meanie - Small androids that move towards Dexter.
-
 
 ### Clases
 
-BootGame
-PlayGame
+A. BootGame: tiene como funcionalidad cargar los recursos gráficos y otros para la iniciación del juego.
+B. PlayGame: tiene como funcionalidad mostrar los recursos gráficos en la escena.
+C. Player: contiene todo las caracteristicas que posee Dexter en el laberinto.
+D. Door :  contiene la animacion y permisos que posee un portal para pasar al siguiente nivel.
 
-Player
+**Items**
 
-Microship
-Byte
-Power
-Floppy
-Bolt
+1. Microchip: small computer chips that are required to unlock exits so Dexter can go to the next level.
+2. Byte: A small pole with the numbers 1 and 0. 20 of these are required to get an extra life. The numbers can have three different colors, but it is purely cosmetic.
+3. Power:  small atoms that add to the overall score.
+4. Floppy: floppy disks that add to the overall score.
+5. Bolt: a giant screw that can crush both enemies and Dexter himself if he's not too careful. It cannot be picked up.
 
-Virus
-Nanorobot
-Blob
-Meanie
+**Enemies**
 
-Door
+1. Virus: a small, bug-like creature that destroys Dexter the instant he touches it. It moves in a square-like pattern.
+2. Nanorobot: robots that always move in a straight line. They only change direction upon hitting a wall.
+3. Blob: an enemy that multiplies, destroying anything in its path.
+4. Meanie: small androids that move towards Dexter.
+
  
 ### Documentación
 
@@ -78,13 +66,3 @@ Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a pa
 ### Software
 
 El videojuego fue desarrollado en un entorno JavaScript, especificamente utilizando Phaser 3.x un marco de videojuego 2D para crear juegos HTML5 para escritorio y dispositivos móviles.
-
-
-
-
-
-
- 
-
-
- 

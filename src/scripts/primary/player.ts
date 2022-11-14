@@ -98,4 +98,5 @@ export default class Player extends Phaser.GameObjects.Sprite implements IPlayer
     this.score++;
   }
 
+
 }
