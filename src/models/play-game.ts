@@ -1,17 +1,17 @@
 import 'phaser' 
 import { directions, tilesConfig, tileType, tilesObject} from '../config/gameOptions'
-import Level from '../maps/level'; 
-import Door from '../primary/door'; 
-import Player from '../primary/player';
-import Blob from '../enemies/blob';
-import Meanie from '../enemies/meanie';
-import Nanorobot from '../enemies/nanorobot';
-import Virus from '../enemies/virus';
-import Bolt from '../items/bolt';
-import Byte from '../items/byte';
-import Floppy from '../items/floppy';
-import Microship from '../items/microship';
-import Power from '../items/power';
+import Level from './maps/level';
+import Door from './primary/door';
+import Player from './primary/player';
+import Blob from './enemies/blob';
+import Meanie from './enemies/meanie';
+import Nanorobot from './enemies/nanorobot';
+import Virus from './enemies/virus';
+import Bolt from './items/bolt';
+import Byte from './items/byte';
+import Floppy from './items/floppy';
+import Microship from './items/microship';
+import Power from './items/power';
 
 const { LEFT, RIGHT, UP, DOWN } = directions
 
@@ -62,12 +62,11 @@ export default class PlayGame extends Phaser.Scene {
 
    
   nextLevel () {
-    if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length){
+    if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
+      // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
       this.drawNewMap()
     }
   }
-
-
 
   /**
    *  @desc Calcula la posicion de un tile horizontal
@@ -82,9 +81,7 @@ export default class PlayGame extends Phaser.Scene {
   positionVertical (tile: number): number {
     return tilesConfig.tileHeight*tile+(tilesConfig.tileHeight/2)
   }
-  
    
-
   /**
    *  @desc Modifia el nivel del juego
   **/
@@ -96,7 +93,8 @@ export default class PlayGame extends Phaser.Scene {
    *  @desc Actualiza el mapa del nivel actual y lo inicializa
   **/
    drawNewMap() : void{
-    this.layer.removeLayer() 
+    //this.layer.removeLayer()
+    this.layer.novisible()
     this.setLevel()
     this.microshipsPoints = 0;
     this.cleanDoor()
@@ -106,6 +104,17 @@ export default class PlayGame extends Phaser.Scene {
     this.createDoor()
     this.createEnemies()
     this.createItems()
+    this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
+    this.canMove()
+    this.checkTilePlayer() 
+  }
+
+
+   drawNewMapForLoseLife() : void{ 
+    //this.layer.removeAll()
+    this.createGameLaberynth()
+    this.layer.examp()
+    this.microshipsPoints = 0;
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
     this.canMove()
     this.checkTilePlayer() 
@@ -136,7 +145,6 @@ export default class PlayGame extends Phaser.Scene {
           break
       } 
   }
-
   
  
   /**
@@ -201,11 +209,37 @@ export default class PlayGame extends Phaser.Scene {
     })
   }
 
+  collisionWithMeanie(){
+    this.meanie.map((meanie) => {
+      if(meanie.x === this.player.getPositionX() && meanie.y === this.player.getPositionY()){
+        this.drawNewMapForLoseLife()
+      }
+    })
+  }
+
   destroyMicroShips(){
     this.microship.map((microship) => {
       if(microship.x === this.player.getPositionX() && microship.y === this.player.getPositionY()){
         this.microshipsPoints += 1;
         microship.destroy()
+      }
+    })
+  }
+
+  destroyFloppys(){
+    this.floppy.map((floppy) => {
+      if(floppy.x === this.player.getPositionX() && floppy.y === this.player.getPositionY()){
+        //this.microshipsPoints += 1;
+        floppy.destroy()
+      }
+    })
+  }
+
+  destroyPower(){
+    this.power.map((power) => {
+      if(power.x === this.player.getPositionX() && power.y === this.player.getPositionY()){
+        //this.microshipsPoints += 1;
+        power.destroy()
       }
     })
   }
@@ -221,16 +255,18 @@ export default class PlayGame extends Phaser.Scene {
     }
     this.destroyBytes()
     this.destroyMicroShips()
-    this.nextLevel() 
+    this.destroyFloppys()
+    this.destroyPower()
+    this.collisionWithMeanie()
+    this.nextLevel()
     console.log(`microships = ${this.microship.length}`)
     console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
 
   }
 
   createGameLaberynth(): void {
-    const laberynth = this.map.addTilesetImage('sprites2','levelTiles');
-    this.layer = new Level(this.map, laberynth, 0);
-    this.layer.start();
+    let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
+    this.layer = new Level(this.map, laberynth, this.level);
   }
 
   createGameContainer(): void{

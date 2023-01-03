@@ -1,8 +1,16 @@
-import IItem from "../interfaces/item.interface";
-import ICharacter from "../interfaces/character.interface";
-import { power } from "../config/gameOptions";
+/**
+ * @author     Javier Collao
+ * @classdesc
+ * Esta clase se encarga de gestionar al personaje Blob
+ * 
+ * @class Blob
+*/ 
 
-export default class Power extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+import ICharacter from "../interfaces/character.interface";
+import IEnemy from "../interfaces/enemy.interface";
+import { blob } from "../../config/gameOptions";
+
+export default class Blob extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
@@ -16,14 +24,19 @@ export default class Power extends Phaser.GameObjects.Sprite implements ICharact
         this.canMoveLeft = true;
         this.canMoveUp = true;
         this.canMoveDown = true;
-        this.anims.create({key:'power', frames:power, repeat:-1});
+        this.anims.create({key:'blob', frames:blob, repeat:-1}) 
     }
 
+    movement(): void {
+        throw new Error("Method not implemented.");
+    }
+    
     animation(): void {
-        this.play('power');
+        this.play('blob');
     }
 
     remove(): void{
         this.destroy()
     }
+
 }

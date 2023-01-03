@@ -6,7 +6,7 @@
 * @class Player 
 */
 
-import { dexterStand, dexterWalk } from '../config/gameOptions';
+import { dexterStand, dexterWalk } from '../../config/gameOptions';
 import ICharacter from '../interfaces/character.interface';
 import IPlayer from '../interfaces/player.interface'; 
 

@@ -6,7 +6,7 @@
  * @class Door 
 */ 
 
-import { door } from "../config/gameOptions";
+import { door } from "../../config/gameOptions";
 import IDoor from "../interfaces/door.interface";
 
  export default class Door extends Phaser.GameObjects.Sprite implements IDoor{

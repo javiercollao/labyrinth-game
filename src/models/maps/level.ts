@@ -11,20 +11,33 @@ export default class Level {
     depth: number; 
 
     constructor(map : Phaser.Tilemaps.Tilemap, tileset : Phaser.Tilemaps.Tileset, depth: number) { 
-        this.layer = map.createLayer(0, tileset, 0, 0); 
+        this.layer = map.createLayer(depth, tileset, 0, 0); 
         this.depth = depth
     }
- 
-    start() : void {
-        this.layer.setDepth(this.depth) 
+
+    start(depth : number) : void {
+        this.layer.setDepth(depth) 
     }
 
     getLayer() : Phaser.Tilemaps.TilemapLayer { 
         return this.layer;
     }
 
+    reset(){
+        this.layer.clearAlpha()
+    }
+
     removeLayer(){
         this.layer.destroy(true)
     }
+
+    novisible(){
+        this.layer.setVisible(false)
+    }
+
+    examp(){
+        console.log(this.layer.toJSON())
+    }
+     
 
 }

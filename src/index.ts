@@ -1,9 +1,10 @@
 import 'phaser'
-import setStyles from './scripts/config/styles';
-import makeResizeGame from './scripts/config/rezise-game';
-import gameOptions from './scripts/config/gameOptions';
-import BootGame from './scripts/scenes/boot-game';
-import PlayGame from './scripts/scenes/play-game';
+import setStyles from './config/styles';
+import makeResizeGame from './config/rezise-game';
+import gameOptions from './config/gameOptions';
+import BootGame from './models/boot-game';
+import PlayGame from './models/play-game';
+import Menu from './menu/menu'
 
 
 
@@ -23,7 +24,7 @@ window.onload = function () {
   },
     width: gameOptions.boardSize.cols * gameOptions.tileSize,
     height: (gameOptions.boardSize.rows * gameOptions.tileSize)-6,
-    scene: [BootGame, PlayGame]
+    scene: [BootGame, Menu, PlayGame]
   }
 
   const body = document.body

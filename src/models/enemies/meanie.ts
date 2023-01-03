@@ -8,7 +8,7 @@
 
 import ICharacter from "../interfaces/character.interface";
 import IEnemy from "../interfaces/enemy.interface";
-import { meanie } from "../config/gameOptions";
+import { meanie } from "../../config/gameOptions";
 
 export default class Meanie extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy  {
     

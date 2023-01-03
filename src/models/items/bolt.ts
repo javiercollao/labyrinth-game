@@ -1,8 +1,8 @@
 import IItem from "../interfaces/item.interface";
 import ICharacter from "../interfaces/character.interface";
-import { microship } from "../config/gameOptions";
+import { bolt } from "../../config/gameOptions";
 
-export default class Microship extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+export default class Bolt extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
@@ -16,11 +16,11 @@ export default class Microship extends Phaser.GameObjects.Sprite implements ICha
         this.canMoveLeft = true;
         this.canMoveUp = true;
         this.canMoveDown = true;
-        this.anims.create({key:'microship', frames:microship, repeat:-1});
+        this.anims.create({key:'bolt', frames:bolt, repeat:-1});
     }
-    
+
     animation(): void {
-        this.play('microship');
+        this.play('bolt');
     }
 
     remove(): void{

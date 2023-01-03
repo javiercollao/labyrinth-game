@@ -1,8 +1,8 @@
+import IItem from "../interfaces/item.interface";
 import ICharacter from "../interfaces/character.interface";
-import IEnemy from "../interfaces/enemy.interface";
-import { virus } from "../config/gameOptions";
+import { floppy } from "../../config/gameOptions";
 
-export default class Virus extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
+export default class Floppy extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
@@ -16,19 +16,14 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
         this.canMoveLeft = true;
         this.canMoveUp = true;
         this.canMoveDown = true; 
-        this.anims.create({key:'virus', frames:virus, repeat:-1});
+        this.anims.create({key:'floppy', frames:floppy, repeat:-1});
     }
-    
-    movement(): void {
-        throw new Error("Method not implemented.");
-    }
-    
+
     animation(): void {
-        this.play('virus');
+        this.play('floppy');
     }
 
     remove(): void{
         this.destroy()
     }
-
 }

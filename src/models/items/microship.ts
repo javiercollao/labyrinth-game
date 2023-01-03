@@ -1,16 +1,8 @@
-/**
- * @author     Javier Collao
- * @classdesc
- * Esta clase se encarga de gestionar al personaje Blob
- * 
- * @class Blob
-*/ 
-
+import IItem from "../interfaces/item.interface";
 import ICharacter from "../interfaces/character.interface";
-import IEnemy from "../interfaces/enemy.interface";
-import { blob } from "../config/gameOptions";
+import { microship } from "../../config/gameOptions";
 
-export default class Blob extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
+export default class Microship extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
@@ -24,19 +16,14 @@ export default class Blob extends Phaser.GameObjects.Sprite implements ICharacte
         this.canMoveLeft = true;
         this.canMoveUp = true;
         this.canMoveDown = true;
-        this.anims.create({key:'blob', frames:blob, repeat:-1}) 
-    }
-
-    movement(): void {
-        throw new Error("Method not implemented.");
+        this.anims.create({key:'microship', frames:microship, repeat:-1});
     }
     
     animation(): void {
-        this.play('blob');
+        this.play('microship');
     }
 
     remove(): void{
         this.destroy()
     }
-
 }

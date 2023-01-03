@@ -1,8 +1,8 @@
-import IItem from "../interfaces/item.interface";
 import ICharacter from "../interfaces/character.interface";
-import { bolt } from "../config/gameOptions";
+import IEnemy from "../interfaces/enemy.interface";
+import { nanorobot } from "../../config/gameOptions";
 
-export default class Bolt extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+export default class Nanorobot extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
@@ -15,15 +15,20 @@ export default class Bolt extends Phaser.GameObjects.Sprite implements ICharacte
         this.canMoveRight = true;
         this.canMoveLeft = true;
         this.canMoveUp = true;
-        this.canMoveDown = true;
-        this.anims.create({key:'bolt', frames:bolt, repeat:-1});
+        this.canMoveDown = true; 
+        this.anims.create({key:'nanorobot', frames:nanorobot, repeat:-1});
     }
-
+    
+    movement(): void {
+        throw new Error("Method not implemented.");
+    }
+    
     animation(): void {
-        this.play('bolt');
+        this.play('nanorobot');
     }
 
     remove(): void{
         this.destroy()
     }
+
 }
