@@ -3,50 +3,53 @@ import PlayGame from "~/models/play-game"
 export default class Menu extends Phaser.Scene {
 
     isIntro : Boolean;
-    
+    img!: Phaser.GameObjects.Image;
+    button!: Phaser.GameObjects.Image;
+
     constructor() {
         super({
           key :'Menu'
         })
-        this.isIntro = true
+        this.isIntro = true  
     }
     
     public setIsIntro (v : Boolean) {
         this.isIntro = v;
     }
-    
+
     public create() : void {
-        this.isIntro? this.intro() : this.end()
-    }
+        this.img = new Phaser.GameObjects.Image(this,0,0,'menu-intro')
+        this.button = new Phaser.GameObjects.Image(this,330,289,'btn-menu-intro')
 
-    public intro() : void{
+        this.img.setOrigin(0)
+        this.add.existing(this.img) 
 
-        this.add.image(0,0, 'menu-intro').setOrigin(0).setDepth(1)
-        this.button()
-    }
+        this.button.setOrigin(0)
+        this.add.existing(this.button)
 
-    public end() : void{
-        this.add.image(0,0, 'menu-end').setOrigin(0).setDepth(2)
-        this.button()
-    }
-
-    public button() : void{
-        let button = this.createButton()
-        button.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-            //this.isIntro? this.setIsIntro(false): this.setIsIntro(true)
-            console.log("hoals")
+        this.button.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+            if(this.isIntro){
+                this.setIsIntro(false)
+                this.playMenu()
+            }else{
+                this.setIsIntro(true)
+                this.playAgainMenu()
+            }
         })
     }
-
-    public createButton(): Phaser.GameObjects.Image{
-        if(this.isIntro){
-            let buttonStart = this.add.image(330,289,'btn-menu-intro').setOrigin(0).setDepth(1)
-            return buttonStart
-        }
-        let buttonEnd = this.add.image(20,289,'btn-menu-end').setOrigin(0).setDepth(2)
-        return buttonEnd
+    
+    public playMenu() : void{ 
+        this.img.setTexture('menu-intro')
+        this.button.setTexture('btn-menu-intro')
+        this.button.setX(330)
+        this.button.setY(289)
     }
 
-
+    public playAgainMenu() : void{
+        this.img.setTexture('menu-end')
+        this.button.setTexture('btn-menu-end')
+        this.button.setX(20)
+        this.button.setY(289)
+    }
 
 }
