@@ -1,3 +1,4 @@
+import { Data } from "phaser";
 import PlayGame from "~/models/play-game"
 
 export default class Menu extends Phaser.Scene {
@@ -17,24 +18,34 @@ export default class Menu extends Phaser.Scene {
         this.isIntro = v;
     }
 
-    public create() : void {
-        this.img = new Phaser.GameObjects.Image(this,0,0,'menu-intro')
-        this.button = new Phaser.GameObjects.Image(this,330,289,'btn-menu-intro')
+    public create(data) : void {
 
+        if(data.intro){
+            this.img = new Phaser.GameObjects.Image(this,0,0,'menu-intro')
+            this.button = new Phaser.GameObjects.Image(this,330,289,'btn-menu-intro')
+
+        }else{
+            this.img = new Phaser.GameObjects.Image(this,0,0,'menu-end')
+            this.button = new Phaser.GameObjects.Image(this,20,289,'btn-menu-end')
+        }
+       
+        
         this.img.setOrigin(0)
         this.add.existing(this.img) 
 
         this.button.setOrigin(0)
         this.add.existing(this.button)
 
+
         this.button.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-            if(this.isIntro){
-                this.setIsIntro(false)
-                this.playMenu()
-            }else{
-                this.setIsIntro(true)
-                this.playAgainMenu()
-            }
+            // if(this.isIntro){
+            //     this.setIsIntro(false)
+            //     this.playMenu()
+            // }else{
+            //     this.setIsIntro(true)
+            //     this.playAgainMenu()
+            // }
+            this.scene.start('Playgame')
         })
     }
     
