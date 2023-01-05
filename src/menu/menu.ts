@@ -1,5 +1,6 @@
 import { Data } from "phaser";
 import PlayGame from "~/models/play-game"
+import BootGame from "~/models/boot-game";
 
 export default class Menu extends Phaser.Scene {
 
@@ -37,7 +38,7 @@ export default class Menu extends Phaser.Scene {
         this.add.existing(this.button)
 
 
-        this.button.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+        this.button.setInteractive().on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, (data) => {
             // if(this.isIntro){
             //     this.setIsIntro(false)
             //     this.playMenu()
@@ -45,7 +46,8 @@ export default class Menu extends Phaser.Scene {
             //     this.setIsIntro(true)
             //     this.playAgainMenu()
             // }
-            this.scene.start('Playgame')
+            this.scene.start('PlayGame', {level: 0})
+            
         })
     }
     

@@ -43,18 +43,21 @@ export default class PlayGame extends Phaser.Scene {
     this.microshipsPoints = 0;
   }
    
-  create () {
+  create (data) {
     this.map = this.make.tilemap(tilesConfig);
 
+    console.log("nivel x",this.level)
+
+    this.setLevel(data.level)
     this.createGameContainer();
     this.createGameLaberynth();
-     
+    
     this.createPlayer()
     this.createDoor()
     this.createEnemies()
     this.createItems()
     
-     
+    
     this.canMove()
     this.checkTilePlayer()
     this.input.keyboard.on('keydown', this.handleKey, this)
@@ -64,7 +67,8 @@ export default class PlayGame extends Phaser.Scene {
   nextLevel () {
     if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
       // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
-      this.drawNewMap()
+      this.level == 2? this.scene.start('Menu', {intro: false}):this.drawNewMap()
+       
     }
   }
 
@@ -82,10 +86,14 @@ export default class PlayGame extends Phaser.Scene {
     return tilesConfig.tileHeight*tile+(tilesConfig.tileHeight/2)
   }
    
+
+  setLevel(v : number) : void {
+    this.level = v
+  }
   /**
-   *  @desc Modifia el nivel del juego
+   *  @desc Aumenta el nivel del juego
   **/
-  setLevel() : number {
+  upgradeLevel() : number {
     return this.level++;
   }
 
@@ -95,7 +103,7 @@ export default class PlayGame extends Phaser.Scene {
    drawNewMap() : void{
     //this.layer.removeLayer()
     this.layer.novisible()
-    this.setLevel()
+    this.upgradeLevel()
     this.microshipsPoints = 0;
     this.cleanDoor()
     this.cleanEnemies()

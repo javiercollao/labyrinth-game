@@ -30,6 +30,14 @@ export default class BootGame extends Phaser.Scene implements ILoaderPhaser{
     
   create() : void { 
     this.scene.start('Menu', {intro: true})
-    //this.scene.start('PlayGame')
   }
+
+  startMenuPlayAgain() : void{
+    this.scene.start('Menu', {intro: false})
+  }
+
+  startGame() : void{
+    this.scene.start('PlayGame', {level: 0})
+  }
+
 }
