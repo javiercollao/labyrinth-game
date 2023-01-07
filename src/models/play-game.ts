@@ -67,7 +67,7 @@ export default class PlayGame extends Phaser.Scene {
   nextLevel () {
     if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
       // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
-      this.level == 2? this.scene.start('Menu', {intro: false}):this.drawNewMap()
+      this.level == 7? this.scene.start('Menu', {intro: false}):this.drawNewMap()
        
     }
   }
@@ -217,10 +217,10 @@ export default class PlayGame extends Phaser.Scene {
     })
   }
 
-  collisionWithMeanie(){
-    this.meanie.map((meanie) => {
-      if(meanie.x === this.player.getPositionX() && meanie.y === this.player.getPositionY()){
-        this.drawNewMapForLoseLife()
+  collisionWithEnemie(enemies){
+    enemies.map((enemie) => {
+      if(enemie.x === this.player.getPositionX() && enemie.y === this.player.getPositionY()){
+        this.scene.start('PlayGame', {level: this.level})
       }
     })
   }
@@ -265,14 +265,16 @@ export default class PlayGame extends Phaser.Scene {
     this.destroyMicroShips()
     this.destroyFloppys()
     this.destroyPower()
-    this.collisionWithMeanie()
+    this.collisionWithEnemie(this.meanie)
+    this.collisionWithEnemie(this.blob)
+    this.collisionWithEnemie(this.nanorobot)
+    this.collisionWithEnemie(this.virus)
     this.nextLevel()
     console.log(`microships = ${this.microship.length}`)
     console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
-
   }
 
-  createGameLaberynth(): void {
+  createGameLaberynth(): void{
     let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
     this.layer = new Level(this.map, laberynth, this.level);
   }
@@ -396,15 +398,19 @@ export default class PlayGame extends Phaser.Scene {
   cleanBolt(): void{
     this.bolt.map((bolt) => bolt.remove())
   }
+
   cleanByte(): void{
     this.byte.map((byte) => byte.remove())
   }
+
   cleanFloppy(): void{
     this.floppy.map((floppy) => floppy.remove())
   }
+
   cleanMicroship():void{
     this.microship.map((microship) => microship.remove())
   }
+
   cleanPower():void{
     this.power.map((power) => power.remove())
   }
@@ -412,4 +418,5 @@ export default class PlayGame extends Phaser.Scene {
   cleanDoor():void{
     this.door.remove()
   }
+
 }

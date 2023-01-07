@@ -6,8 +6,6 @@ import BootGame from './models/boot-game';
 import PlayGame from './models/play-game';
 import Menu from './menu/menu'
 
-
-
 window.onload = function () {
   const gameConfig = { 
     parent: 'root',

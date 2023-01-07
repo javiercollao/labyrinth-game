@@ -33,6 +33,11 @@ module.exports = {
       fileLoaderRules 
     ],
   },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 2512000,
+    maxAssetSize: 2512000
+  },
   optimization: {
     splitChunks: {
       cacheGroups: {
@@ -67,7 +72,7 @@ module.exports = {
       ],
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "./index.html"),
+      template: path.resolve(__dirname, "./src/index.html"),
       filename: "index.html",
       title: package.description,
       inject: "body",
