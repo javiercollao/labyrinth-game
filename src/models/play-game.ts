@@ -44,29 +44,47 @@ export default class PlayGame extends Phaser.Scene {
   }
    
   create (data) {
+
+    // creamos mapa
     this.map = this.make.tilemap(tilesConfig);
 
-    console.log("nivel x",this.level)
-
+    // actualizamos el nivel y creamos todo lo del juego
     this.setLevel(data.level)
     this.createGameContainer();
     this.createGameLaberynth();
     
+    //this.createGameLaberynth();
     this.createPlayer()
     this.createDoor()
     this.createEnemies()
     this.createItems()
     
+    console.log("nivel x",this.level)
     
-    
-    this.canMove()
+    // Debemos inicializar a cada personaje de la escena 
+    this.canMove(this.player)
     this.checkTilePlayer()
+
+    if(this.level == 3){
+      this.virus.map((viru) => {
+        this.canMove(viru) 
+        setInterval(() => {
+          viru.movement()
+          this.canMove(viru)
+          console.log('hola')
+        }, 1000);
+      })
+    }
+    
+
+
+    // escuchamos los eventos del teclado
     this.input.keyboard.on('keydown', this.handleKey, this)
   }
+  
 
    
-   
-  collisionDetectorBetweenAPlayerAndPortal () {
+  collisionDetectorBetweenAPlayerAndDoor () {
     if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
       // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
       this.level == 7? this.scene.start('Menu', {intro: false}):this.drawNewMap()
@@ -115,10 +133,19 @@ export default class PlayGame extends Phaser.Scene {
     this.createEnemies()
     this.createItems()
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
-    this.canMove()
+    this.canMove(this.player)
+    if(this.level == 3){
+      this.virus.map((viru) => {
+        this.canMove(viru) 
+        setInterval(() => {
+          viru.movement()
+          this.canMove(viru)
+          console.log('hola')
+        }, 1000);
+      })
+    }
     this.checkTilePlayer() 
   }
-
 
    drawNewMapForLoseLife() : void { 
     //this.layer.removeAll()
@@ -126,35 +153,21 @@ export default class PlayGame extends Phaser.Scene {
     this.layer.examp()
     this.microshipsPoints = 0;
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
-    this.canMove()
+    this.canMove(this.player)
+    if(this.level == 3){
+      this.virus.map((viru) => {
+        this.canMove(viru) 
+        setInterval(() => {
+          viru.movement()
+          this.canMove(viru)
+          console.log('hola')
+        }, 1000);
+      })
+    }
     this.checkTilePlayer() 
   }
    
-  /**
-   *  @desc Gestiona los controles
-  **/
-  handleKey(e): void {
-      switch (e.code) {
-        case 'KeyA':
-        case 'ArrowLeft':
-          this.makeMove(LEFT)
-          this.player.walkLeftAnimation();
-          break
-        case 'KeyD':
-        case 'ArrowRight':
-          this.makeMove(RIGHT)
-          this.player.walkRightAnimation();
-          break
-        case 'KeyW':
-        case 'ArrowUp':
-          this.makeMove(UP)
-          break
-        case 'KeyS':
-        case 'ArrowDown':
-          this.makeMove(DOWN)
-          break
-      } 
-  }
+  
   
 
   /**
@@ -163,19 +176,19 @@ export default class PlayGame extends Phaser.Scene {
   makeMove(d): void {
     if(d === RIGHT && this.player.getCanMoveRight()){
       this.player.rightMovement()
-      this.canMove()
+      this.canMove(this.player)
       this.checkTilePlayer()
     }else if(d === LEFT && this.player.getCanMoveLeft()){
       this.player.leftMovement()
-      this.canMove()
+      this.canMove(this.player)
       this.checkTilePlayer()
     }else if(d === DOWN && this.player.getCanMoveDown()){
       this.player.downMovement()
-      this.canMove()
+      this.canMove(this.player)
       this.checkTilePlayer()
     }else if(d === UP && this.player.getCanMoveUp()){
       this.player.upMovement()
-      this.canMove()
+      this.canMove(this.player)
       this.checkTilePlayer()
     }
   }
@@ -183,31 +196,31 @@ export default class PlayGame extends Phaser.Scene {
   /**
    *  @desc Modifica los permisos del jugador de moverse a las casillas disponibles en la escena
   **/
-  canMove(){
-    this.nextTileRightIndex()
-    this.nextTileLeftIndex()
-    this.nextTileDownIndex()
-    this.nextTileUpIndex()
+  canMove(character){
+    this.nextTileRightIndex(character)
+    this.nextTileLeftIndex(character)
+    this.nextTileDownIndex(character)
+    this.nextTileUpIndex(character)
   }
 
-  nextTileRightIndex(){
-    const tile = this.map.getTileAtWorldXY(this.player.getNextRightPosition(), this.player.getPositionY(), true); 
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveRight(false) : this.player.setCanMoveRight(true)
+  nextTileRightIndex(character){
+    const tile = this.map.getTileAtWorldXY(character.getNextRightPosition(), character.getPositionY(), true); 
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveRight(false) : character.setCanMoveRight(true)
   }
 
-  nextTileLeftIndex(){
-    const tile = this.map.getTileAtWorldXY(this.player.getNextLeftPosition(), this.player.getPositionY(), true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveLeft(false) : this.player.setCanMoveLeft(true)
+  nextTileLeftIndex(character){
+    const tile = this.map.getTileAtWorldXY(character.getNextLeftPosition(), character.getPositionY(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveLeft(false) : character.setCanMoveLeft(true)
   }
 
-  nextTileUpIndex(){
-    const tile = this.map.getTileAtWorldXY(this.player.getPositionX(), this.player.getNextUpPosition(), true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveUp(false) : this.player.setCanMoveUp(true)
+  nextTileUpIndex(character){
+    const tile = this.map.getTileAtWorldXY(character.getPositionX(), character.getNextUpPosition(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveUp(false) : character.setCanMoveUp(true)
   }
 
-  nextTileDownIndex(){
-    const tile = this.map.getTileAtWorldXY(this.player.getPositionX(), this.player.getNextDownPosition(), true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.player.setCanMoveDown(false) : this.player.setCanMoveDown(true)
+  nextTileDownIndex(character){
+    const tile = this.map.getTileAtWorldXY(character.getPositionX(), character.getNextDownPosition(), true);
+    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveDown(false) : character.setCanMoveDown(true)
   }
 
   destroyBytes(){
@@ -271,10 +284,30 @@ export default class PlayGame extends Phaser.Scene {
     this.collisionWithEnemie(this.blob)
     this.collisionWithEnemie(this.nanorobot)
     this.collisionWithEnemie(this.virus)
-    this.collisionDetectorBetweenAPlayerAndPortal()
+    this.collisionDetectorBetweenAPlayerAndDoor()
     console.log(`microships = ${this.microship.length}`)
     console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // ========================================================================
+ 
 
   createGameLaberynth(): void{
     let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
@@ -326,7 +359,6 @@ export default class PlayGame extends Phaser.Scene {
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
     this.virus.map((virus) => virus.animation())
-    this.virus.map((virus) => virus.movement())
   }
 
   createItems() : void{ 
@@ -422,4 +454,30 @@ export default class PlayGame extends Phaser.Scene {
     this.door.remove()
   }
 
+
+  /**
+   *  @desc Gestiona los controles
+  **/
+  handleKey(e): void {
+    switch (e.code) {
+      case 'KeyA':
+      case 'ArrowLeft':
+        this.makeMove(LEFT)
+        this.player.walkLeftAnimation();
+        break
+      case 'KeyD':
+      case 'ArrowRight':
+        this.makeMove(RIGHT)
+        this.player.walkRightAnimation();
+        break
+      case 'KeyW':
+      case 'ArrowUp':
+        this.makeMove(UP)
+        break
+      case 'KeyS':
+      case 'ArrowDown':
+        this.makeMove(DOWN)
+        break
+    } 
+}
 }
