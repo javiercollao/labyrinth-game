@@ -58,13 +58,15 @@ export default class PlayGame extends Phaser.Scene {
     this.createItems()
     
     
+    
     this.canMove()
     this.checkTilePlayer()
     this.input.keyboard.on('keydown', this.handleKey, this)
   }
 
    
-  nextLevel () {
+   
+  collisionDetectorBetweenAPlayerAndPortal () {
     if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
       // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
       this.level == 7? this.scene.start('Menu', {intro: false}):this.drawNewMap()
@@ -100,7 +102,7 @@ export default class PlayGame extends Phaser.Scene {
   /**
    *  @desc Actualiza el mapa del nivel actual y lo inicializa
   **/
-   drawNewMap() : void{
+   drawNewMap() : void {
     //this.layer.removeLayer()
     this.layer.novisible()
     this.upgradeLevel()
@@ -118,7 +120,7 @@ export default class PlayGame extends Phaser.Scene {
   }
 
 
-   drawNewMapForLoseLife() : void{ 
+   drawNewMapForLoseLife() : void { 
     //this.layer.removeAll()
     this.createGameLaberynth()
     this.layer.examp()
@@ -131,7 +133,7 @@ export default class PlayGame extends Phaser.Scene {
   /**
    *  @desc Gestiona los controles
   **/
-  handleKey(e): void{
+  handleKey(e): void {
       switch (e.code) {
         case 'KeyA':
         case 'ArrowLeft':
@@ -154,11 +156,11 @@ export default class PlayGame extends Phaser.Scene {
       } 
   }
   
- 
+
   /**
    *  @desc Se encarga de mover al personaje principal en la escena
   **/
-  makeMove(d): void{
+  makeMove(d): void {
     if(d === RIGHT && this.player.getCanMoveRight()){
       this.player.rightMovement()
       this.canMove()
@@ -269,7 +271,7 @@ export default class PlayGame extends Phaser.Scene {
     this.collisionWithEnemie(this.blob)
     this.collisionWithEnemie(this.nanorobot)
     this.collisionWithEnemie(this.virus)
-    this.nextLevel()
+    this.collisionDetectorBetweenAPlayerAndPortal()
     console.log(`microships = ${this.microship.length}`)
     console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
   }
@@ -324,6 +326,7 @@ export default class PlayGame extends Phaser.Scene {
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
     this.virus.map((virus) => virus.animation())
+    this.virus.map((virus) => virus.movement())
   }
 
   createItems() : void{ 
