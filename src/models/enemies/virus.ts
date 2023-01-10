@@ -67,24 +67,20 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
       this.y += 16;
     }
     
-    movement(): void { 
-        if(this.canMoveUp && this.canMoveLeft){
+    movement(map: Phaser.Tilemaps.Tilemap): void { 
+        let tile = map.getTileAtWorldXY(this.getPositionX(), this.getPositionY(), true)
+        if(tile.index === 4){
             // move left
             this.leftMovement()
-            
-        }else if(this.canMoveUp && this.canMoveRight){
+        }else if(tile.index === 1){
             // move u
-            this.upMovement()
-        }else if(this.canMoveDown && this.canMoveRight){
+            this.upMovement() 
+        }else if(tile.index === 2){
             // move r
-            this.rightMovement()
-        }else if(this.canMoveDown && this.canMoveLeft){
+            this.rightMovement() 
+        }else if(tile.index === 3){
             // move d
-            this.downMovement()
-        }else if(this.canMoveLeft && this.canMoveLeft){
-            this.stillLeft? this.leftMovement() : this.rightMovement()
-        }else if(this.canMoveUp && this.canMoveDown){
-            this.stillDown? this.downMovement() : this.upMovement()
+            this.downMovement() 
         }
  
     }
@@ -97,7 +93,32 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
         this.destroy()
     }
 
-     
 
+    // canMove(map: Phaser.Tilemaps.Tilemap){
+    //     this.nextTileRightIndex(map)
+    //     this.nextTileLeftIndex(map)
+    //     this.nextTileDownIndex(map)
+    //     this.nextTileUpIndex(map)
+    // }
+    
+    //   nextTileRightIndex(map: Phaser.Tilemaps.Tilemap){
+    //     const ; 
+    //     (tile.index != 1)? this.setCanMoveRight(false) : this.setCanMoveRight(true)
+    //   }
+    
+    //   nextTileLeftIndex(map: Phaser.Tilemaps.Tilemap){
+    //     const tile = map.getTileAtWorldXY(this.getNextLeftPosition(), this.getPositionY(), true);
+    //     (tile.index != 1)? this.setCanMoveLeft(false) : this.setCanMoveLeft(true)
+    //   }
+    
+    //   nextTileUpIndex(map: Phaser.Tilemaps.Tilemap){
+    //     const tile = map.getTileAtWorldXY(this.getPositionX(), this.getNextUpPosition(), true);
+    //     (tile.index != 1)? this.setCanMoveUp(false) : this.setCanMoveUp(true)
+    //   }
+    
+    //   nextTileDownIndex(map: Phaser.Tilemaps.Tilemap){
+    //     const tile = map.getTileAtWorldXY(this.getPositionX(), this.getNextDownPosition(), true);
+    //     (tile.index != 1)? this.setCanMoveDown(false) : this.setCanMoveDown(true)
+    //   }
 
 }

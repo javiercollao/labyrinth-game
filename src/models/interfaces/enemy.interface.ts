@@ -1,5 +1,5 @@
 interface IEnemy { 
-    movement(): void;
+    //movement(): void;
     animation(): void;
 }
 

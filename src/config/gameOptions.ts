@@ -36,7 +36,8 @@ export default {
     },
     block:{
       a: 640,
-      b: 639
+      b: 639,
+      c: 641
     }  
   }
 

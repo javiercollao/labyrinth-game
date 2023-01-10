@@ -65,12 +65,10 @@ export default class PlayGame extends Phaser.Scene {
     this.canMove(this.player)
     this.checkTilePlayer()
 
-    if(this.level == 3){
-      this.virus.map((viru) => {
-        this.canMove(viru) 
+    if(this.level == 3 || this.level ==  4){
+      this.virus.map((viru) => { 
         setInterval(() => {
-          viru.movement()
-          this.canMove(viru)
+          viru.movement(this.map)
           console.log('hola')
         }, 1000);
       })
@@ -134,12 +132,10 @@ export default class PlayGame extends Phaser.Scene {
     this.createItems()
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
     this.canMove(this.player)
-    if(this.level == 3){
+    if(this.level == 3 || this.level ==  4){
       this.virus.map((viru) => {
-        this.canMove(viru) 
         setInterval(() => {
-          viru.movement()
-          this.canMove(viru)
+          viru.movement(this.map)
           console.log('hola')
         }, 1000);
       })
@@ -154,12 +150,10 @@ export default class PlayGame extends Phaser.Scene {
     this.microshipsPoints = 0;
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
     this.canMove(this.player)
-    if(this.level == 3){
-      this.virus.map((viru) => {
-        this.canMove(viru) 
+    if(this.level == 3 || this.level ==  4 ){
+      this.virus.map((viru) => { 
         setInterval(() => {
-          viru.movement()
-          this.canMove(viru)
+          viru.movement(this.map) 
           console.log('hola')
         }, 1000);
       })
@@ -203,7 +197,8 @@ export default class PlayGame extends Phaser.Scene {
     this.nextTileUpIndex(character)
   }
 
-  nextTileRightIndex(character){
+
+  nextTileRightIndex(character){ 
     const tile = this.map.getTileAtWorldXY(character.getNextRightPosition(), character.getPositionY(), true); 
     (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveRight(false) : character.setCanMoveRight(true)
   }
@@ -273,7 +268,7 @@ export default class PlayGame extends Phaser.Scene {
   checkTilePlayer(){
     const tile = this.map.getTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(), true);
 
-    if(tile.index === tileType.block.a || tileType.block.b || tile.index === 95 || tile.index === 0){
+    if(tile.index === tileType.block.a || tile.index === tileType.block.b || tile.index === tileType.block.c || tile.index === 95 ){
       this.map.removeTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(),false)
     }
     this.destroyBytes()
