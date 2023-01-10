@@ -65,14 +65,14 @@ export default class PlayGame extends Phaser.Scene {
     this.canMove(this.player)
     this.checkTilePlayer()
 
-    if(this.level == 3 || this.level ==  4){
-      this.virus.map((viru) => { 
-        setInterval(() => {
-          viru.movement(this.map)
-          console.log('hola')
-        }, 1000);
-      })
-    }
+    // if(this.level == 3 || this.level ==  4){
+    //   this.virus.map((viru) => { 
+    //     setInterval(() => {
+    //       viru.movement(this.map)
+    //       console.log('hola')
+    //     }, 1000);
+    //   })
+    // }
     
 
 
@@ -132,14 +132,14 @@ export default class PlayGame extends Phaser.Scene {
     this.createItems()
     this.player.setPosition(this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y))
     this.canMove(this.player)
-    if(this.level == 3 || this.level ==  4){
-      this.virus.map((viru) => {
-        setInterval(() => {
-          viru.movement(this.map)
-          console.log('hola')
-        }, 1000);
-      })
-    }
+    // if(this.level == 3 || this.level ==  4){
+    //   this.virus.map((viru) => {
+    //     setInterval(() => {
+    //       viru.movement(this.map)
+    //       console.log('hola')
+    //     }, 1000);
+    //   })
+    // }
     this.checkTilePlayer() 
   }
 
@@ -160,10 +160,7 @@ export default class PlayGame extends Phaser.Scene {
     }
     this.checkTilePlayer() 
   }
-   
-  
-  
-
+ 
   /**
    *  @desc Se encarga de mover al personaje principal en la escena
   **/
@@ -291,15 +288,7 @@ export default class PlayGame extends Phaser.Scene {
 
 
 
-
-
-
-
-
-
-
-
-
+ 
 
   // ========================================================================
  
@@ -353,7 +342,15 @@ export default class PlayGame extends Phaser.Scene {
   createVirus(): void{
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
-    this.virus.map((virus) => virus.animation())
+    this.virus.map((virus) => virus.animation()) 
+
+    if(this.virus.length > 1){
+       this.virus.map((viru) => {
+           setInterval(() => {
+             viru.movement(this.map)
+           }, 1000);
+         })
+    }
   }
 
   createItems() : void{ 

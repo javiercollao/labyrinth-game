@@ -19,7 +19,7 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
         this.canMoveUp = true;
         this.canMoveDown = true;
         this.stillLeft = true;
-        this.stillDown = true; 
+        this.stillDown = true;
         this.anims.create({key:'virus', frames:virus, repeat:-1});
     }
 
@@ -69,20 +69,15 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
     
     movement(map: Phaser.Tilemaps.Tilemap): void { 
         let tile = map.getTileAtWorldXY(this.getPositionX(), this.getPositionY(), true)
-        if(tile.index === 4){
-            // move left
+        if(tile.index === 4){ 
             this.leftMovement()
-        }else if(tile.index === 1){
-            // move u
+        }else if(tile.index === 1){ 
             this.upMovement() 
-        }else if(tile.index === 2){
-            // move r
+        }else if(tile.index === 2){ 
             this.rightMovement() 
-        }else if(tile.index === 3){
-            // move d
+        }else if(tile.index === 3){ 
             this.downMovement() 
         }
- 
     }
     
     animation(): void {
@@ -92,33 +87,5 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
     remove(): void{
         this.destroy()
     }
-
-
-    // canMove(map: Phaser.Tilemaps.Tilemap){
-    //     this.nextTileRightIndex(map)
-    //     this.nextTileLeftIndex(map)
-    //     this.nextTileDownIndex(map)
-    //     this.nextTileUpIndex(map)
-    // }
-    
-    //   nextTileRightIndex(map: Phaser.Tilemaps.Tilemap){
-    //     const ; 
-    //     (tile.index != 1)? this.setCanMoveRight(false) : this.setCanMoveRight(true)
-    //   }
-    
-    //   nextTileLeftIndex(map: Phaser.Tilemaps.Tilemap){
-    //     const tile = map.getTileAtWorldXY(this.getNextLeftPosition(), this.getPositionY(), true);
-    //     (tile.index != 1)? this.setCanMoveLeft(false) : this.setCanMoveLeft(true)
-    //   }
-    
-    //   nextTileUpIndex(map: Phaser.Tilemaps.Tilemap){
-    //     const tile = map.getTileAtWorldXY(this.getPositionX(), this.getNextUpPosition(), true);
-    //     (tile.index != 1)? this.setCanMoveUp(false) : this.setCanMoveUp(true)
-    //   }
-    
-    //   nextTileDownIndex(map: Phaser.Tilemaps.Tilemap){
-    //     const tile = map.getTileAtWorldXY(this.getPositionX(), this.getNextDownPosition(), true);
-    //     (tile.index != 1)? this.setCanMoveDown(false) : this.setCanMoveDown(true)
-    //   }
-
+ 
 }
