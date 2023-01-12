@@ -70,7 +70,7 @@ export default class PlayGame extends Phaser.Scene {
     //     setInterval(() => {
     //       viru.movement(this.map)
     //       console.log('hola')
-    //     }, 1000);
+    //     }, 500);
     //   })
     // }
     
@@ -137,7 +137,7 @@ export default class PlayGame extends Phaser.Scene {
     //     setInterval(() => {
     //       viru.movement(this.map)
     //       console.log('hola')
-    //     }, 1000);
+    //     }, 500);
     //   })
     // }
     this.checkTilePlayer() 
@@ -155,7 +155,7 @@ export default class PlayGame extends Phaser.Scene {
         setInterval(() => {
           viru.movement(this.map) 
           console.log('hola')
-        }, 1000);
+        }, 500);
       })
     }
     this.checkTilePlayer() 
@@ -288,7 +288,15 @@ export default class PlayGame extends Phaser.Scene {
 
 
 
- 
+
+
+
+
+
+
+
+
+
 
   // ========================================================================
  
@@ -343,12 +351,12 @@ export default class PlayGame extends Phaser.Scene {
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
     this.virus.map((virus) => virus.animation()) 
-
+    
     if(this.virus.length > 1){
        this.virus.map((viru) => {
            setInterval(() => {
              viru.movement(this.map)
-           }, 1000);
+           }, 500);
          })
     }
   }
