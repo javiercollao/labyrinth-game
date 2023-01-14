@@ -2,9 +2,9 @@ import 'phaser'
 import setStyles from './config/styles';
 import makeResizeGame from './config/rezise-game';
 import gameOptions from './config/gameOptions';
-import BootGame from './models/boot-game';
-import PlayGame from './models/play-game';
-import Menu from './menu/menu'
+import BootGame from './scenes/boot-game';
+import PlayGame from './scenes/play-game';
+import Menu from './scenes/menu'
 
 window.onload = function () {
   const gameConfig = { 

@@ -1,6 +1,6 @@
 import { Data } from "phaser";
-import PlayGame from "~/models/play-game"
-import BootGame from "~/models/boot-game";
+import PlayGame from "~/scenes/play-game"
+import BootGame from "~/scenes/boot-game";
 
 export default class Menu extends Phaser.Scene {
 
@@ -46,7 +46,7 @@ export default class Menu extends Phaser.Scene {
             //     this.setIsIntro(true)
             //     this.playAgainMenu()
             // }
-            this.scene.start('PlayGame', {level: 0})
+            this.scene.start('PlayGame', {level: 3})
             
         })
     }
