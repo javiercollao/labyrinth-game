@@ -49,8 +49,7 @@ export default class PlayGame extends Phaser.Scene {
     // creamos abejas
     const virus = tilesObject[this.level].enemies.virus;
     this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
-    
-    console.log('jookl')
+     
       // //     this.virus.create(viru.x, viru.y,'sprites')
       // //     this.virus.playAnimation('virus','e_tile006.png')
     
@@ -77,8 +76,9 @@ export default class PlayGame extends Phaser.Scene {
   update(time: number, delta: number): void {
     
     this.player.movement()
-    this.player.removeTiles()
+    
     this.virus.map((virus) => virus.movement())
+    
   }
   
 
@@ -89,7 +89,8 @@ export default class PlayGame extends Phaser.Scene {
 
   createGameLaberynth(): void{
     let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
-    this.layer = new Level(this.map, laberynth, this.level);
+    this.layer = new Level(this, this.map, laberynth, this.level);
+  
   }
 
   createGameContainer(): void{

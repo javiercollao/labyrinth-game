@@ -1,6 +1,6 @@
 import ICharacter from "../interfaces/character.interface";
 import IEnemy from "../interfaces/enemy.interface";
-import { tileType, virus } from "../../config/gameOptions";
+import { virus } from "../../config/gameOptions";
 
 export default class Virus extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
     

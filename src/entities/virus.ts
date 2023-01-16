@@ -1,6 +1,6 @@
 import PlayGame from "~/scenes/play-game";
 import Character from "./character";
-import { virus } from "./../config/gameOptions";
+import { virus } from './../config/gameOptions';
 
 
 export default class Virus extends Character {
@@ -21,7 +21,7 @@ export default class Virus extends Character {
 
     movement(): void { 
         
-        let tile = this.scene.map.getTileAtWorldXY(this.getPositionX(), this.getPositionY(), true)
+        let tile = this.scene.map.getTileAtWorldXY(this.positionX, this.positionY, true)
         if(tile.index === 4){ 
             this.leftMovement()
         }else if(tile.index === 1){ 
