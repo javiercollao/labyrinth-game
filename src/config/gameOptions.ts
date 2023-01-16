@@ -186,10 +186,10 @@ export default {
   ]
 
   export const virus = [
-    { key: 'sprites', frame: 'e_tile006.png'},
-    { key: 'sprites', frame: 'e_tile006.png'},
-    { key: 'sprites', frame: 'e_tile007.png'},
-    { key: 'sprites', frame: 'e_tile007.png'},
+    { key: 'sprites', frame: 'e_tile006.png', duration: 1000, visible: true},
+    { key: 'sprites', frame: 'e_tile006.png', duration: 1000, visible: true},
+    { key: 'sprites', frame: 'e_tile007.png', duration: 1000, visible: true},
+    { key: 'sprites', frame: 'e_tile007.png', duration: 1000, visible: true}
   ]
 
   export const meanie = [

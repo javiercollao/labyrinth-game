@@ -12,7 +12,7 @@ window.onload = function () {
     pixelArt: true,
     backgroundColor: '#00679b',
     fps:{
-      target: 20,
+      target: 12,
       forceSetTimeOut: true
     },
     physics: {

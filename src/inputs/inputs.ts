@@ -38,6 +38,4 @@ export default class Inputs {
       return this.keys.right.isDown || this.keys.D.isDown;
     }
 
-    
-
 }

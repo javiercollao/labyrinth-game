@@ -1,76 +1,51 @@
+import { tileType } from '~/config/gameOptions';
 import PlayGame from '~/scenes/play-game';
-import { dexterStand, dexterWalk } from '../config/gameOptions';
- 
 import Character from "./character";
 
 export default class Player extends Character {
   public scene!: PlayGame;
 
   constructor(scene: PlayGame, x: number, y: number) {
-    super(scene, x, y); 
-    this.animatePlayer()
-    this.standAnimation()
-  }
-
-  rightMovement(): void {
-    this.x += 16;
-  }
-  leftMovement(): void {
-    this.x -= 16;
-  }
-  upMovement(): void {
-    this.y -= 16;
-  }
-  downMovement(): void {
-    this.y += 16;
+    super(scene, x, y);
   }
 
   standAnimation(): void {
-    this.skin.play('stand');
+    this.skin.setTexture('sprites','p_tile000.png')
   }
-  walkRightAnimation(): void {
-    this.skin.play('walk').setFlipX(false);
+
+  rightAnimation(): void {
+    this.skin.setTexture('sprites','p_tile002.png').setFlipX(false);
   }
-  walkLeftAnimation(): void {
-    this.skin.play('walk').setFlipX(true);
-  } 
 
-  animatePlayer() : void {
-    this.skin.anims.create({
-        key:'stand', 
-        frames:dexterStand, 
-        repeat:0
-    })
+  leftAnimation(): void {
+    this.skin.setTexture('sprites','p_tile002.png').setFlipX(true);
+  }
 
-    this.skin.anims.create({
-        key:'walk', 
-        frames:dexterWalk, 
-        repeat:0, 
-        delay:1
-    })
-   }
+  removeTiles(){
+      const tile = this.scene.map.getTileAtWorldXY(this.getPositionX(), this.getPositionY(), true);
+      if(tile.index === tileType.block.a || tile.index === tileType.block.b || tile.index === tileType.block.c || tile.index === 95 ){
+        this.scene.map.removeTileAtWorldXY(this.getPositionX(), this.getPositionY(), false)
+      }
+  }
 
-   movement()  : void{
+  movement()  : void{
     const { left, right, up, down } = this.scene.inputs;
 
     if (left) { 
-        console.log("IZQUIERDA")
         this.leftMovement()
-        this.walkLeftAnimation()
-    } else if(right){
-        console.log("DERECHA")
+        this.leftAnimation()
+    } else if(right){ 
         this.rightMovement()
-        this.walkRightAnimation()
-    } else if (up) {
-        console.log("ARRIBA")
-        console.log(up)
+        this.rightAnimation()
+    } else if (up) { 
         this.upMovement()
         this.standAnimation()
-    }else if(down){
-        console.log("ABAJO")
+    }else if(down){ 
         this.downMovement()
         this.standAnimation()
+    }else{
+        this.standAnimation()
     }
-   }
+  }
 
 }

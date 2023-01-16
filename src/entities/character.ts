@@ -14,10 +14,33 @@ export default class Character extends Phaser.GameObjects.Container {
       this.setSize(SKIN_WIDTH, SKIN_LENGTH);
       this.setDepth(0);
   
-      this.scene.add.existing(this);
-  
+      this.scene.add.existing(this); 
       this.sprite = this.scene.matter.add.gameObject(
         this
       ) as Phaser.Physics.Matter.Sprite;
+    }
+    
+    getPositionX(): number {
+        return this.x;
+    }
+
+    getPositionY(): number {
+      return this.y;
+    }
+
+    rightMovement(): void {
+        this.x += 16;
+    }
+
+    leftMovement(): void {
+      this.x -= 16;
+    }
+
+    upMovement(): void {
+      this.y -= 16;
+    }
+
+    downMovement(): void {
+      this.y += 16;
     }
   }

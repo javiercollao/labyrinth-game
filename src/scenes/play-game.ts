@@ -4,7 +4,7 @@ import Inputs from "../inputs/Inputs";
 import Level from '../entities/maps/level';
 import Door from '../entities/primary/door';
 import Player from '../entities/player';
-import Virus from '../entities/enemies/virus';
+import Virus from '../entities/virus';
 
 
 export default class PlayGame extends Phaser.Scene {
@@ -14,8 +14,8 @@ export default class PlayGame extends Phaser.Scene {
   level!: number;
   player!: Player; 
   door!: Door;
-  //virus!: Phaser.Physics.Arcade.Group;
-  isPlayerMoving !: boolean;
+  virus!: Virus[];
+
   layer!: Level;
   map!: Phaser.Tilemaps.Tilemap;
   bytesPoints: number;
@@ -45,9 +45,15 @@ export default class PlayGame extends Phaser.Scene {
      
     // creamos jugador sprite
     this.player = new Player(this, this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y));
-
-    this.isPlayerMoving = false;
-    // creamos abeja
+ 
+    // creamos abejas
+    const virus = tilesObject[this.level].enemies.virus;
+    this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
+    
+    console.log('jookl')
+      // //     this.virus.create(viru.x, viru.y,'sprites')
+      // //     this.virus.playAnimation('virus','e_tile006.png')
+    
  
     // this.createPlayer()
     // this.createDoor()
@@ -71,6 +77,8 @@ export default class PlayGame extends Phaser.Scene {
   update(time: number, delta: number): void {
     
     this.player.movement()
+    this.player.removeTiles()
+    this.virus.map((virus) => virus.movement())
   }
   
 
