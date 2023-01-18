@@ -21,6 +21,7 @@ export default class Virus extends Phaser.GameObjects.Sprite implements ICharact
         this.stillLeft = true;
         this.stillDown = true;
         this.anims.create({key:'virus', frames:virus, repeat:-1});
+
     }
 
     getPositionX(): number {

@@ -12,16 +12,16 @@ window.onload = function () {
     pixelArt: true,
     backgroundColor: '#00679b',
     fps:{
-      target: 12,
-      forceSetTimeOut: true
+      target: 15,
+      forceSetTimeOut: true,
+      smoothStep: false,
+      deltaHistory: 2,
+      min: 1
     },
     physics: {
       default: "matter",
       matter: {
         debug: false,
-        gravity: {
-          y: 0,
-        },
     },
   },
     width: gameOptions.boardSize.cols * gameOptions.tileSize,

@@ -7,8 +7,8 @@ export default class Player extends Character {
   public scene!: PlayGame;
 
   constructor(scene: PlayGame, x: number, y: number) {
-    super(scene, x, y);
-    this.canMove()
+    super(scene, x, y, 'player', 0); 
+    this.sprite.setIgnoreGravity(true)
   }
 
   standAnimation(): void {
@@ -50,35 +50,32 @@ export default class Player extends Character {
     (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.setCanMoveDown(false) : this.setCanMoveDown(true)
   }
 
-
-  canMove(){
-      this.nextTileRightIndex()
-      this.nextTileLeftIndex()
-      this.nextTileDownIndex()
-      this.nextTileUpIndex()
-  }
- 
+  
 
   movement()  : void{
     const { left, right, up, down } = this.scene.inputs;
 
     if (left && this.canMoveLeft) { 
         this.leftMovement()
+        console.log(`posicion DEX X :${this.positionX}, posicion DEX Y :${this.positionY}`)
         this.leftAnimation() 
         this.removeTiles()
         this.canMove()
     } else if(right && this.canMoveRight){ 
         this.rightMovement()
+        console.log(`posicion DEX X :${this.positionX}, posicion DEX Y :${this.positionY}`)
         this.rightAnimation()
         this.removeTiles()
         this.canMove()
     } else if (up && this.canMoveUp) { 
         this.upMovement()
+        console.log(`posicion DEX X :${this.positionX}, posicion DEX Y :${this.positionY}`)
         this.standAnimation()
         this.removeTiles()
         this.canMove()
     }else if(down && this.canMoveDown){ 
         this.downMovement()
+        console.log(`posicion DEX X :${this.positionX}, posicion DEX Y :${this.positionY}`)
         this.standAnimation()
         this.removeTiles()
         this.canMove()

@@ -1,3 +1,6 @@
+import { tileType } from './../config/gameOptions';
+import PlayGame from "~/scenes/play-game";
+
 export default class Character extends Phaser.GameObjects.Container {
     public skin: Phaser.GameObjects.Sprite; 
     public sprite: Phaser.Physics.Matter.Sprite;
@@ -5,14 +8,15 @@ export default class Character extends Phaser.GameObjects.Container {
     public canMoveLeft: boolean;
     public canMoveUp: boolean;
     public canMoveDown: boolean;
-  
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    public scene!: PlayGame;
+    
+    constructor(scene: Phaser.Scene, x: number, y: number, label: string, friction : number) {
       super(scene, x, y);
-
+      
       this.canMoveRight = true;
       this.canMoveLeft = true;
-      this.canMoveUp = false;
-      this.canMoveDown = false;
+      this.canMoveUp = true;
+      this.canMoveDown = true;
   
       const SKIN_WIDTH = 16; 
       const SKIN_LENGTH = 16;
@@ -25,7 +29,13 @@ export default class Character extends Phaser.GameObjects.Container {
   
       this.scene.add.existing(this); 
       this.sprite = this.scene.matter.add.gameObject(
-        this
+        this, 
+        {
+            friction: friction,
+            sleepThreshold:0,
+            label: label,
+            slop: 0
+        }
       ) as Phaser.Physics.Matter.Sprite;
     }
 
@@ -52,7 +62,26 @@ export default class Character extends Phaser.GameObjects.Container {
     get nextDownPosition(): number {
         return this.y + 16;
     }
-    
+
+    canMove(){
+        this.nextTileRightIndex()
+        this.nextTileLeftIndex()
+        this.nextTileDownIndex()
+        this.nextTileUpIndex()
+    }
+
+    nextTileRightIndex() {
+        throw new Error('Method not implemented.');
+    }
+    nextTileLeftIndex() {
+        throw new Error('Method not implemented.');
+    }
+    nextTileDownIndex() {
+        throw new Error('Method not implemented.');
+    }
+    nextTileUpIndex() {
+        throw new Error('Method not implemented.');
+    }
 
     setCanMoveRight(value: boolean): void {
         this.canMoveRight = value;
