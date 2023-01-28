@@ -50,21 +50,21 @@ export default class PlayGame extends Phaser.Scene {
      
     // creamos abejas
     
-    //const virus = tilesObject[this.level].enemies.virus;
-    //this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
+    const virus = tilesObject[this.level].enemies.virus;
+    this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
     
     // creamos meanie
 
-    this.meanie =  new Meanie(this, this.positionHorizontal(10), this.positionVertical(13) )
-    
+    //this.meanie =  new Meanie(this, this.positionHorizontal(10), this.positionVertical(13) )
+     
     // colision con  
     
  
-    this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
-        this.scene.start('PlayGame', {level: this.level})
-      }
-    })
+    // this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
+    //   if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
+    //     this.scene.start('PlayGame', {level: this.level})
+    //   }
+    // })
 
     // this.createPlayer()
     // this.createDoor()
@@ -80,8 +80,8 @@ export default class PlayGame extends Phaser.Scene {
     
     this.player.movement()
     
-    //this.virus.map((virus) => virus.movement())
-    this.meanie.movement()
+    this.virus.map((virus) => virus.movement())
+    //this.meanie.movement()
     
   }
   

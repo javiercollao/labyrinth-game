@@ -86,6 +86,7 @@ export default class Meanie extends Character {
         }
     }
 
+    // TO DO: BFS Algortim
     movement() :void {
         let playerX = this.scene.player.positionX
         let playerY = this.scene.player.positionY
@@ -94,61 +95,6 @@ export default class Meanie extends Character {
         let deltaPy = (playerY - this.positionY)/16
         this.canMove()
 
-
-        //movimiento en el eje X
-        // if(deltaPx < deltaPy && deltaPx < 0){
-
-        //     if(this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.randomMovementLR()
-        //     }else if (this.canMoveLeft && this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.leftMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && this.canMoveDown && !this.canMoveUp){
-        //         this.downMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && this.canMoveUp){
-        //         this.upMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.randomMovementUD()
-        //     }
-
-        // }else if(deltaPx < deltaPy && deltaPx > 0){
-        //     if(!this.canMoveLeft && this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.randomMovementLR()
-        //     }else if (this.canMoveLeft && this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.rightMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && this.canMoveDown && !this.canMoveUp){
-        //         this.downMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && this.canMoveUp){
-        //         this.upMovement()
-        //     }else if (!this.canMoveLeft && !this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.upMovement()
-        //     }
-        // }else if(deltaPx > deltaPy && deltaPy < 0){
-        //     if(!this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && this.canMoveUp){
-        //         this.upMovement()
-        //     }else if (this.canMoveLeft && this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.upMovement()
-        //     }else if (this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.leftMovement()
-        //     }else if (!this.canMoveLeft && this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.rightMovement()
-        //     }else if (this.canMoveLeft && this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.randomMovementLR()
-        //     }
-        // }else if(deltaPx > deltaPy && deltaPy < 0 ){
-        //     if(!this.canMoveLeft && !this.canMoveRight && this.canMoveDown && !this.canMoveUp){
-        //         this.downMovement()
-        //     }else if (this.canMoveLeft && this.canMoveRight && this.canMoveDown && this.canMoveUp){
-        //         this.downMovement()
-        //     }else if (this.canMoveLeft && !this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.leftMovement()
-        //     }else if (!this.canMoveLeft && this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.rightMovement()
-        //     }else if (this.canMoveLeft && this.canMoveRight && !this.canMoveDown && !this.canMoveUp){
-        //         this.randomMovementLR()
-        //     }
-        // }else if( deltaPx === 0){
-
-        // }
 
         if(deltaPx < deltaPy && deltaPx < 0 && this.canMoveLeft && this.canMoveRight && this.canMoveUp && this.canMoveDown){
             this.randomMovement()

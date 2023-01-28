@@ -28,6 +28,7 @@ export default class Character extends Phaser.GameObjects.Container {
       this.setDepth(0);
   
       this.scene.add.existing(this); 
+      
       this.sprite = this.scene.matter.add.gameObject(
         this, 
         {
@@ -37,7 +38,11 @@ export default class Character extends Phaser.GameObjects.Container {
             slop: 0
         }
       ) as Phaser.Physics.Matter.Sprite;
+
+      this.sprite.setBounce(0)
+      this.sprite.setFriction(0)
     }
+ 
 
     get positionX(): number {
         return this.x;
