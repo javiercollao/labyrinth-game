@@ -62,6 +62,12 @@ Para poder realizar este juego se utilizo nodeJs para la ejecución, ya que a pa
 6. [Phaser 3 HTML5 Cross Platform Game Development - Repositorio](https://github.com/ajbkr/HTML5-Cross-Platform-Game-Development-Using-Phaser-3)
 7. [Documentación Webpack](https://webpack.js.org/configuration/)
 
+8. [maze 2d](https://www.emanueleferonato.com/2019/10/08/understanding-advanced-collision-management-with-matter-physics-using-risky-road-game-prototype/)
+9. [BFS] (https://blog.ourcade.co/posts/2020/phaser-3-point-click-pathfinding-movement-tilemap/)
+
+10. [Behaivor Pacman gosth](https://gameinternals.com/understanding-pac-man-ghost-behavior)
+11. [beahvor pac 2 ](https://github.com/ourcade/pac-man-ghost-ai-phaser3/blob/master/src/game/ghost-ai/utils/determineDirectionFromTarget.ts)
+12. [3 beha](https://github.com/servetgulnaroglu/pacman-js/blob/master/ghost.js)
  
 ### Software
 
