@@ -46,7 +46,7 @@ export default class Menu extends Phaser.Scene {
             //     this.setIsIntro(true)
             //     this.playAgainMenu()
             // }
-            this.scene.start('PlayGame', {level: 3})
+            this.scene.start('PlayGame', {level: 1})
             
         })
     }

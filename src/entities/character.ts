@@ -76,16 +76,16 @@ export default class Character extends Phaser.GameObjects.Container {
     }
 
     nextTileRightIndex() {
-        throw new Error('Method not implemented.');
+      console.log("get tile")
     }
     nextTileLeftIndex() {
-        throw new Error('Method not implemented.');
+      console.log("get tile")
     }
     nextTileDownIndex() {
-        throw new Error('Method not implemented.');
+      console.log("get tile")
     }
     nextTileUpIndex() {
-        throw new Error('Method not implemented.');
+      console.log("get tile")
     }
 
     setCanMoveRight(value: boolean): void {

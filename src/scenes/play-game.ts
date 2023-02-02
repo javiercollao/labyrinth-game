@@ -6,6 +6,7 @@ import Door from '../entities/primary/door';
 import Player from '../entities/player';
 import Virus from '../entities/virus'; 
 import Meanie from '../entities/meanie';
+import Bolt from '../entities/bolt';
 
 
 export default class PlayGame extends Phaser.Scene {
@@ -17,6 +18,7 @@ export default class PlayGame extends Phaser.Scene {
   door!: Door;
   virus!: Virus[];
   meanie!: Meanie;
+  bolt! : Bolt[];
 
   layer!: Level;
   map!: Phaser.Tilemaps.Tilemap;
@@ -50,21 +52,24 @@ export default class PlayGame extends Phaser.Scene {
      
     // creamos abejas
     
-    const virus = tilesObject[this.level].enemies.virus;
-    this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
+    //const virus = tilesObject[this.level].enemies.virus;
+    //this.virus = virus.map((viru) => new Virus(this, this.positionHorizontal(viru.x), this.positionVertical(viru.y)))
     
     // creamos meanie
-
     //this.meanie =  new Meanie(this, this.positionHorizontal(10), this.positionVertical(13) )
      
+
+    // creamos tornillos
+    const bolts = tilesObject[this.level].items.bolt;
+    this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)) )
+
     // colision con  
     
- 
-    // this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-    //   if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
-    //     this.scene.start('PlayGame', {level: this.level})
-    //   }
-    // })
+    this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
+      if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
+        this.scene.start('PlayGame', {level: this.level})
+      }
+    })
 
     // this.createPlayer()
     // this.createDoor()
@@ -80,7 +85,7 @@ export default class PlayGame extends Phaser.Scene {
     
     this.player.movement()
     
-    this.virus.map((virus) => virus.movement())
+    //this.virus.map((virus) => virus.movement())
     //this.meanie.movement()
     
   }
