@@ -15,7 +15,7 @@ export default class Bolt extends Character {
         this.canMoveRightAndDown = false
         this.setTile()
         this.startAnimation() 
-        this.canMove()
+        this.canMove() 
     }
 
     startAnimation() : void { 
@@ -33,6 +33,49 @@ export default class Bolt extends Character {
 
     setCanMoveLeftDown(value: boolean): void {
     this.canMoveLeftAndDown = value;
+    }
+
+
+    checkingTileToLeftFromPosition(): void {
+      const tile = this.scene.map.getTileAtWorldXY(this.nextRightPosition, this.positionY, true);
+      const invalidTileIndices = new Set([
+        tileType.wall.a,
+        tileType.wall.b,
+        tileType.block.a,
+        tileType.block.b,
+        tileType.block.c,
+        95,
+        2,
+        7,
+      ]);
+      if (invalidTileIndices.has(tile.index)) {
+        this.setCanMoveLeft(false);
+      } else {
+        this.setCanMoveLeft(true);
+      }
+
+    }
+
+
+
+    checkingTileToRightFromPosition(): void {
+      const tile = this.scene.map.getTileAtWorldXY(this.nextRightPosition, this.positionY, true);
+      const invalidTileIndices = new Set([
+        tileType.wall.a,
+        tileType.wall.b,
+        tileType.block.a,
+        tileType.block.b,
+        tileType.block.c,
+        95,
+        2,
+        7,
+      ]);
+      if (invalidTileIndices.has(tile.index)) {
+        this.setCanMoveRight(false);
+      } else {
+        this.setCanMoveRight(true);
+      }
+
     }
 
     checkingTileToRightAndDownFromPosition(): void { 

@@ -22,7 +22,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
       this.setSize(SKIN_WIDTH, SKIN_LENGTH);
       this.setDepth(0);
   
-      this.scene.add.existing(this); 
+      this.scene.add.existing(this);
       
     }
  

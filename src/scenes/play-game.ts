@@ -84,9 +84,9 @@ export default class PlayGame extends Phaser.Scene {
   update(time: number, delta: number): void {
     
     this.player.movement() 
-    this.bolt.map((virus) => virus.setTile())
-    this.bolt.map((virus) => virus.movement())
-    //this.meanie.movement()
+    this.bolt.map((bolt) => bolt.setTile()) 
+    this.bolt.map((bolt) => bolt.movement())
+    this.bolt.map((bolt) => (bolt.positionY === this.player.positionY && this.player.positionX+16 === bolt.positionX && bolt.canMoveRight)? this.player.moveTilePosition(bolt): console.log("h"))
     
   }
   

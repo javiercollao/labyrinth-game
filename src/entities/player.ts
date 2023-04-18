@@ -1,6 +1,7 @@
 import { tileType } from './../config/gameOptions';
 import PlayGame from '~/scenes/play-game';
 import Character from './character';
+import Bolt from './bolt';
 
 export default class Player extends Character {
   public scene!: PlayGame;
@@ -24,30 +25,101 @@ export default class Player extends Character {
 
   removeTiles(): void {
     const tile = this.scene.map.getTileAtWorldXY(this.positionX, this.positionY, true);
-    if(tile.index === tileType.block.a || tile.index === tileType.block.b || tile.index === tileType.block.c || tile.index === 95 ){
-      this.scene.map.removeTileAtWorldXY(this.positionX, this.positionY, false)
-    }
+
+    const invalidTileIndices = new Set([
+      tileType.wall.a,
+      tileType.wall.b,
+      tileType.block.a,
+      tileType.block.b,
+      tileType.block.c,
+      95
+    ]);
+
+    if (invalidTileIndices.has(tile.index)) {
+      this.scene.map.putTileAtWorldXY(0, this.positionX, this.positionY)
+    } 
   }
 
   checkingTileToRightFromPosition(): void { 
-    const tile = this.scene.map.getTileAtWorldXY(this.nextRightPosition, this.positionY, true); 
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.setCanMoveRight(false) : this.setCanMoveRight(true)
+    const tile = this.scene.map.getTileAtWorldXY(this.nextRightPosition, this.positionY, true);
+    const invalidTileIndices = new Set([
+      tileType.wall.a,
+      tileType.wall.b,
+      2
+    ]); 
+
+    if (invalidTileIndices.has(tile.index)) {
+      this.setCanMoveRight(false) 
+    }else{
+      this.setCanMoveRight(true)
+    }
   }
+
+  moveTilePosition(bolt : Bolt){
+     const { left, right } = this.scene.inputs;
+    if (right && bolt.canMoveRight) {
+      bolt.removeTile()
+      bolt.rightMovement()
+      this.rightMovement()
+      bolt.setTile() 
+      bolt.canMove()
+    }else if (left && bolt.canMoveLeft){
+      bolt.removeTile()
+      bolt.leftMovement()
+      this.leftMovement()
+      bolt.setTile() 
+      bolt.canMove()
+    } 
+    bolt.canMove()
+  }
+
 
   checkingTileToLeftFromPosition(): void {
     const tile = this.scene.map.getTileAtWorldXY(this.nextLeftPosition, this.positionY, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.setCanMoveLeft(false) : this.setCanMoveLeft(true)
-  }
+    const invalidTileIndices = new Set([
+      tileType.wall.a,
+      tileType.wall.b,
+      2
+    ]); 
+
+    if (invalidTileIndices.has(tile.index)) {
+      this.setCanMoveLeft(false) 
+    }else{
+      this.setCanMoveLeft(true)
+    }
+   }
 
   checkingTileToUpFromPosition(): void {
     const tile = this.scene.map.getTileAtWorldXY(this.positionX, this.nextUpPosition, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.setCanMoveUp(false) : this.setCanMoveUp(true)
-  }
+
+    const invalidTileIndices = new Set([
+      tileType.wall.a,
+      tileType.wall.b,
+      2
+    ]); 
+
+    if (invalidTileIndices.has(tile.index)) {
+      this.setCanMoveUp(false)
+    }else{
+      this.setCanMoveUp(true)
+    }
+
+   }
 
   checkingTileToDownFromPosition(): void {
     const tile = this.scene.map.getTileAtWorldXY(this.positionX, this.nextDownPosition, true);
-    (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? this.setCanMoveDown(false) : this.setCanMoveDown(true)
-  }
+    const invalidTileIndices = new Set([
+      tileType.wall.a,
+      tileType.wall.b,
+      2
+    ]); 
+
+    if (invalidTileIndices.has(tile.index)) {
+      this.setCanMoveDown(false) 
+    }else{
+      this.setCanMoveDown(true)
+    }
+   }
 
   setTile() :void{
     this.scene.map.putTileAtWorldXY(7, this.positionX, this.positionY)
