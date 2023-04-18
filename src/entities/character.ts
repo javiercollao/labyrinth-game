@@ -1,17 +1,15 @@
 import { tileType } from './../config/gameOptions';
 import PlayGame from "~/scenes/play-game";
 
-export default class Character extends Phaser.GameObjects.Container {
-    public skin: Phaser.GameObjects.Sprite; 
-    public sprite: Phaser.Physics.Matter.Sprite;
+export default class Character extends Phaser.GameObjects.Sprite {
+    public scene!: PlayGame;
     public canMoveRight: boolean;
     public canMoveLeft: boolean;
     public canMoveUp: boolean;
     public canMoveDown: boolean;
-    public scene!: PlayGame;
     
-    constructor(scene: Phaser.Scene, x: number, y: number, label: string, friction : number) {
-      super(scene, x, y);
+    constructor(scene: Phaser.Scene, x: number, y: number, label: string) {
+      super(scene, x, y, 'sprites');
       
       this.canMoveRight = true;
       this.canMoveLeft = true;
@@ -20,27 +18,12 @@ export default class Character extends Phaser.GameObjects.Container {
   
       const SKIN_WIDTH = 16; 
       const SKIN_LENGTH = 16;
-  
-      this.skin = new Phaser.GameObjects.Sprite(scene, 0, 0, "sprites");
-       
-      this.add(this.skin);
+    
       this.setSize(SKIN_WIDTH, SKIN_LENGTH);
       this.setDepth(0);
   
       this.scene.add.existing(this); 
       
-      this.sprite = this.scene.matter.add.gameObject(
-        this, 
-        {
-            friction: friction,
-            sleepThreshold:0,
-            label: label,
-            slop: 0
-        }
-      ) as Phaser.Physics.Matter.Sprite;
-
-      this.sprite.setBounce(0)
-      this.sprite.setFriction(0)
     }
  
 
@@ -69,23 +52,23 @@ export default class Character extends Phaser.GameObjects.Container {
     }
 
     canMove(){
-        this.nextTileRightIndex()
-        this.nextTileLeftIndex()
-        this.nextTileDownIndex()
-        this.nextTileUpIndex()
+        this.checkingTileToRightFromPosition()
+        this.checkingTileToLeftFromPosition()
+        this.checkingTileToDownFromPosition()
+        this.checkingTileToUpFromPosition()
     }
 
-    nextTileRightIndex() {
-      console.log("get tile")
+    checkingTileToRightFromPosition() {
+      ;
     }
-    nextTileLeftIndex() {
-      console.log("get tile")
+    checkingTileToLeftFromPosition() {
+      ;
     }
-    nextTileDownIndex() {
-      console.log("get tile")
+    checkingTileToDownFromPosition() {
+      ;
     }
-    nextTileUpIndex() {
-      console.log("get tile")
+    checkingTileToUpFromPosition() {
+      ;
     }
 
     setCanMoveRight(value: boolean): void {

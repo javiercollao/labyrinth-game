@@ -14,19 +14,18 @@ export default class Meanie extends Character {
     public scene!: PlayGame;
     
     constructor(scene : Phaser.Scene, x : number, y : number) {
-        super(scene, x, y, 'enemy', 0);
+        super(scene, x, y, 'enemy');
         scene.add.existing(this);
-        this.skin.anims.create({
+        this.anims.create({
             key: 'meanie', 
             frames: meanie,
             repeat: -1 });
-        this.startAnimation()
-        this.sprite.setIgnoreGravity(true)
+        this.startAnimation() 
         this.canMove() 
     }
     
     startAnimation() : void{ 
-        this.skin.play('meanie', true)
+        this.play('meanie', true)
     }
 
     nextTileRightIndex(): void{ 

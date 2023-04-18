@@ -65,11 +65,11 @@ export default class PlayGame extends Phaser.Scene {
 
     // colision con  
     
-    this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
-        this.scene.start('PlayGame', {level: this.level})
-      }
-    })
+    // this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
+    //   if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
+    //     this.scene.start('PlayGame', {level: this.level})
+    //   }
+    // })
 
     // this.createPlayer()
     // this.createDoor()
@@ -83,9 +83,9 @@ export default class PlayGame extends Phaser.Scene {
 
   update(time: number, delta: number): void {
     
-    this.player.movement()
-    
-    //this.virus.map((virus) => virus.movement())
+    this.player.movement() 
+    this.bolt.map((virus) => virus.setTile())
+    this.bolt.map((virus) => virus.movement())
     //this.meanie.movement()
     
   }

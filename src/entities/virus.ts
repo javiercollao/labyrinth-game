@@ -7,17 +7,16 @@ export default class Virus extends Character {
     public scene!: PlayGame;
 
     constructor(scene: PlayGame, x: number, y: number) {
-        super(scene, x, y, 'enemy', 0);
-        this.skin.anims.create({
+        super(scene, x, y, 'enemy');
+        this.anims.create({
             key: 'virus', 
             frames: virus,
             repeat: -1 });
-        this.startAnimation()
-        this.sprite.setIgnoreGravity(true)
+        this.startAnimation() 
     }
 
     startAnimation() : void{ 
-        this.skin.play('virus', true)
+        this.play('virus', true)
     }
 
     movement(): void { 
