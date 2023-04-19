@@ -56,22 +56,39 @@ export default class Player extends Character {
   }
 
   moveTilePosition(bolt : Bolt){
-     const { left, right } = this.scene.inputs;
-    if (right && bolt.canMoveRight) {
+     const { right, left } = this.scene.inputs;
+    if (right) {
+       
+        bolt.removeTile()
+        this.removeTile()
+        bolt.rightMovement()
+        this.rightMovement()
+        this.rightAnimation()
+        bolt.setTile()
+        this.setTile()
+        bolt.canMove()
+        bolt.checkingTileToLeftAndDownFromPosition()
+        bolt.checkingTileToRightAndDownFromPosition()
+        this.canMove()
+         
+    }
+    if(left){
       bolt.removeTile()
-      bolt.rightMovement()
-      this.rightMovement()
-      bolt.setTile() 
-      bolt.canMove()
-    }else if (left && bolt.canMoveLeft){
-      bolt.removeTile()
+      this.removeTile()
       bolt.leftMovement()
       this.leftMovement()
-      bolt.setTile() 
+      this.leftAnimation()
+      bolt.setTile()
+      this.setTile()
       bolt.canMove()
-    } 
+      bolt.checkingTileToLeftAndDownFromPosition()
+      bolt.checkingTileToRightAndDownFromPosition()
+      this.canMove()
+    }
     bolt.canMove()
   }
+
+   
 
 
   checkingTileToLeftFromPosition(): void {
@@ -164,7 +181,7 @@ export default class Player extends Character {
         this.standAnimation()
         this.removeTiles()
         this.canMove()
-    }
+    } 
   }
 
 }

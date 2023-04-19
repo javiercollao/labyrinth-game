@@ -70,6 +70,45 @@ revisar este
 11. [beahvor pac 2 ](https://github.com/ourcade/pac-man-ghost-ai-phaser3/blob/master/src/game/ghost-ai/utils/determineDirectionFromTarget.ts)
 12. [3 beha](https://github.com/servetgulnaroglu/pacman-js/blob/master/ghost.js)
  
-### Software
 
-El videojuego fue desarrollado en un entorno JavaScript, especificamente utilizando Phaser 3.x un marco de videojuego 2D para crear juegos HTML5 para escritorio y dispositivos móviles.
+
+
+
+
+
+Dexter's Labyrinth is a maze-puzzle game where the player takes control of Dexter, a boy genius who must repair his infected computer in a virtual world. The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player must collect chips to progress to the next level, while avoiding enemies and hazards.
+
+### Gameplay
+
+Dexter starts with three lives and a score of zero. The player must navigate through each level, avoiding enemies and hazards such as falling objects and walls. The game features different types of enemies, some of which are more difficult to evade than others. As the player progresses through the levels, new enemies and more complex mazes are introduced.
+
+The game includes objects called chips and bits that the player can collect to increase their score. Dexter can also push screws, which can be used to eliminate enemies or create paths through the maze. However, if a screw falls on Dexter's head, he will lose a life. When an enemy is defeated, it transforms into six chips.
+
+### Copyright
+
+This project is an open source clone of the game Dexter's Labyrinth. While the original game is no longer available, some of the sprites used in this project belong to the original creators.
+
+Please note that this project is not intended for commercial use and is solely for educational purposes as part of a programming course. All credit for the original game and its assets goes to their respective owners.
+
+If you are the owner of any of the assets used in this project and would like them removed, please contact me and I will take appropriate action.
+
+I do not claim ownership over any of the original game's intellectual property, and this project is not affiliated with, endorsed by, or sponsored by the original creators or publishers of the game.
+
+Thank you for understanding and respecting the intellectual property rights of others.
+
+
+### Installation
+
+To play the game, simply download the files and open the index.html file in your browser. The game can be played with a keyboard.
+
+### License
+
+This project is licensed under the MIT License. Feel free to use, modify and distribute the code, as long as you include the original license and copyright information.
+
+### How to Contribute
+
+Contributions to the game are welcome. If you would like to make changes or add new features, please submit a pull request. Before submitting a pull request, please ensure that your changes are in line with the project's goals and do not infringe on any copyrights.
+
+### Acknowledgments
+
+This game was inspired by the original game Dexter's Laberynth. Thank you to the creators of the original game for the inspiration.

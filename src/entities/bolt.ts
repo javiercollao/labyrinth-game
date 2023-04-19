@@ -35,9 +35,8 @@ export default class Bolt extends Character {
     this.canMoveLeftAndDown = value;
     }
 
-
     checkingTileToLeftFromPosition(): void {
-      const tile = this.scene.map.getTileAtWorldXY(this.nextRightPosition, this.positionY, true);
+      const tile = this.scene.map.getTileAtWorldXY(this.nextLeftPosition, this.positionY, true);
       const invalidTileIndices = new Set([
         tileType.wall.a,
         tileType.wall.b,
@@ -179,8 +178,8 @@ export default class Bolt extends Character {
       }
       this.checkingTileToLeftAndDownFromPosition()
       this.checkingTileToRightAndDownFromPosition()
-      this.setTile()
       this.canMove()
+      this.setTile()
     }
 
 }

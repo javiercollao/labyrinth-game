@@ -86,8 +86,24 @@ export default class PlayGame extends Phaser.Scene {
     this.player.movement() 
     this.bolt.map((bolt) => bolt.setTile()) 
     this.bolt.map((bolt) => bolt.movement())
-    this.bolt.map((bolt) => (bolt.positionY === this.player.positionY && this.player.positionX+16 === bolt.positionX && bolt.canMoveRight)? this.player.moveTilePosition(bolt): console.log("h"))
-    
+    this.bolt.map((bolt) => { 
+      if (bolt.positionY === this.player.positionY) {
+        if (this.player.positionX + 16 === bolt.positionX && bolt.canMoveRight) {
+          console.log("bolt: (" + bolt.positionX +","+bolt.positionY);
+      console.log("playr:(" + this.player.positionX +","+this.player.positionY);
+          console.log("puede der");
+          this.player.moveTilePosition(bolt);
+        }
+        if (this.player.positionX - 16 === bolt.positionX && bolt.canMoveLeft ) {
+          console.log("bolt: (" + bolt.positionX +","+bolt.positionY);
+      console.log("playr:(" + this.player.positionX +","+this.player.positionY);
+          console.log("puede izq");
+          
+          this.player.moveTilePosition(bolt);
+        }
+      }
+    })
+    //this.bolt.map((bolt) => (bolt.positionY === this.player.positionY && this.player.positionX-16 === bolt.positionX && bolt.canMoveLeft ) ? this.player.moveTilePositionLeft(bolt) : console.log("dd"))
   }
   
 
