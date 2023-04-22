@@ -1,8 +1,7 @@
-import IItem from "../interfaces/item.interface";
-import ICharacter from "../interfaces/character.interface";
-import { floppy } from "../../config/gameOptions";
+ 
+import { floppy } from "../config/gameOptions";
 
-export default class Floppy extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+export default class Floppy extends Phaser.GameObjects.Sprite{
     
     canMoveRight: boolean;
     canMoveLeft: boolean;

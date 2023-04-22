@@ -1,10 +1,3 @@
-/**
- * @author     Javier Collao
- * @classdesc
- * Esta clase se encarga de gestionar los mapas de cada nivel del juego.
- * 
- * @class Level
-*/ 
 
 export default class Level {  
     layer!: Phaser.Tilemaps.TilemapLayer;

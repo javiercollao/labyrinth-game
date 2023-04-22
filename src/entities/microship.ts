@@ -1,8 +1,7 @@
-import IItem from "../interfaces/item.interface";
-import ICharacter from "../interfaces/character.interface";
-import { microship } from "../../config/gameOptions";
+ 
+import { microship } from "../config/gameOptions";
 
-export default class Microship extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+export default class Microship extends Phaser.GameObjects.Sprite {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;

@@ -1,8 +1,7 @@
-import ICharacter from "../interfaces/character.interface";
-import IEnemy from "../interfaces/enemy.interface";
-import { nanorobot } from "../../config/gameOptions";
 
-export default class Nanorobot extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
+import { nanorobot } from "../config/gameOptions";
+
+export default class Nanorobot extends Phaser.GameObjects.Sprite  {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;

@@ -1,16 +1,6 @@
-/**
- * @author     Javier Collao
- * @classdesc
- * Esta clase se encarga de gestionar al personaje Blob
- * 
- * @class Blob
-*/ 
+import { blob } from "../config/gameOptions";
 
-import ICharacter from "../interfaces/character.interface";
-import IEnemy from "../interfaces/enemy.interface";
-import { blob } from "../../config/gameOptions";
-
-export default class Blob extends Phaser.GameObjects.Sprite implements ICharacter, IEnemy {
+export default class Blob extends Phaser.GameObjects.Sprite {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;

@@ -1,11 +1,3 @@
-/**
- * @author     Javier Collao
- * @classdesc
- * Esta clase se encarga de gestionar al personaje Meanie
- * 
- * @class Meanie
-*/ 
-
 import PlayGame from "~/scenes/play-game";
 import { meanie, tileType } from "../config/gameOptions";
 import Character from "./character";

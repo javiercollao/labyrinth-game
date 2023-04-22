@@ -1,8 +1,6 @@
-import IItem from "./interfaces/item.interface";
-import ICharacter from "./interfaces/character.interface";
 import { power } from "../config/gameOptions";
 
-export default class Power extends Phaser.GameObjects.Sprite implements ICharacter, IItem {
+export default class Power extends Phaser.GameObjects.Sprite {
     
     canMoveRight: boolean;
     canMoveLeft: boolean;
