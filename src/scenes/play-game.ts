@@ -1,8 +1,8 @@
 import 'phaser' 
 import { tilesConfig, tileType, tilesObject} from '../config/gameOptions'
 import Inputs from "../inputs/Inputs";
-import Level from '../entities/maps/level';
-import Door from '../entities/primary/door';
+import Level from '../entities/level';
+import Door from '../entities/door';
 import Player from '../entities/player';
 import Virus from '../entities/virus'; 
 import Meanie from '../entities/meanie';
@@ -63,22 +63,15 @@ export default class PlayGame extends Phaser.Scene {
     const bolts = tilesObject[this.level].items.bolt;
     this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)) )
 
-    // colision con  
-    
-    // this.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-    //   if((bodyA.label == "player" && bodyB.label == "enemy") || (bodyB.label == "player" && bodyA.label == "enemy")){
-    //     this.scene.start('PlayGame', {level: this.level})
-    //   }
-    // })
 
     // this.createPlayer()
-    // this.createDoor()
+    this.createDoor()
     // this.createEnemies()
     // this.createItems()
  
     console.log("nivel x",this.level)
   
-    
+    console.log(this.map.getLayer())
   }
 
   update(time: number, delta: number): void {
@@ -86,24 +79,8 @@ export default class PlayGame extends Phaser.Scene {
     this.player.movement() 
     this.bolt.map((bolt) => bolt.setTile()) 
     this.bolt.map((bolt) => bolt.movement())
-    this.bolt.map((bolt) => { 
-      if (bolt.positionY === this.player.positionY) {
-        if (this.player.positionX + 16 === bolt.positionX && bolt.canMoveRight) {
-          console.log("bolt: (" + bolt.positionX +","+bolt.positionY);
-      console.log("playr:(" + this.player.positionX +","+this.player.positionY);
-          console.log("puede der");
-          this.player.moveTilePosition(bolt);
-        }
-        if (this.player.positionX - 16 === bolt.positionX && bolt.canMoveLeft ) {
-          console.log("bolt: (" + bolt.positionX +","+bolt.positionY);
-      console.log("playr:(" + this.player.positionX +","+this.player.positionY);
-          console.log("puede izq");
-          
-          this.player.moveTilePosition(bolt);
-        }
-      }
-    })
-    //this.bolt.map((bolt) => (bolt.positionY === this.player.positionY && this.player.positionX-16 === bolt.positionX && bolt.canMoveLeft ) ? this.player.moveTilePositionLeft(bolt) : console.log("dd"))
+    this.bolt.map((bolt) => bolt.checkingCollitionWithPlayer())
+
   }
   
 
@@ -144,8 +121,15 @@ export default class PlayGame extends Phaser.Scene {
 
 
 
+  createDoor(): void{
+    this.door = new Door(this, this.positionHorizontal(tilesObject[this.level].door.x), this.positionVertical(tilesObject[this.level].door.y))
+    this.door.animation()
+  }
 
 
+  upgradeLevel() : number {
+    return this.level++;
+  }
 
 
 
@@ -175,9 +159,7 @@ export default class PlayGame extends Phaser.Scene {
   // /**
   //  *  @desc Aumenta el nivel del juego
   // **/
-  // upgradeLevel() : number {
-  //   return this.level++;
-  // }
+  // 
 
   // /**
   //  *  @desc Actualiza el mapa del nivel actual y lo inicializa
@@ -347,10 +329,7 @@ export default class PlayGame extends Phaser.Scene {
   // //   this.player.standAnimation()
   // // }
 
-  // // createDoor(): void{
-  // //   this.door = new Door(this, this.positionHorizontal(tilesObject[this.level].door.x), this.positionVertical(tilesObject[this.level].door.y))
-  // //   this.door.animation()
-  // // }
+
 
   // // createEnemies() : void {
   // //   // this.createBlob()
@@ -499,30 +478,5 @@ export default class PlayGame extends Phaser.Scene {
   // //   this.door.remove()
   // // }
 
-
-  // /**
-  //  *  @desc Gestiona los controles
-  // **/
-  // handleKey(e): void {
-  //   switch (e.code) {
-  //     case 'KeyA':
-  //     case 'ArrowLeft':
-  //       this.makeMove(LEFT)
-  //       this.player.walkLeftAnimation(); 
-  //       break
-  //     case 'KeyD':
-  //     case 'ArrowRight':
-  //       this.makeMove(RIGHT)
-  //       this.player.walkRightAnimation();
-  //       break
-  //     case 'KeyW':
-  //     case 'ArrowUp':
-  //       this.makeMove(UP)
-  //       break
-  //     case 'KeyS':
-  //     case 'ArrowDown':
-  //       this.makeMove(DOWN)
-  //       break
-  //   } 
-  // }
+ 
 }

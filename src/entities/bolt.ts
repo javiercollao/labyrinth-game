@@ -149,37 +149,49 @@ export default class Bolt extends Character {
     removeTile(): void {
       this.scene.map.putTileAtWorldXY(0, this.positionX, this.positionY)
     }
+
+
+  checkingCollitionWithPlayer(): void {
+      if (this.positionY === this.scene.player.positionY) {
+        if (this.scene.player.positionX + 16 === this.positionX && this.canMoveRight) {  
+          this.scene.player.moveTilePosition(this)
+        }
+        if (this.scene.player.positionX - 16 === this.positionX && this.canMoveLeft ) { 
+          this.scene.player.moveTilePosition(this)
+        }
+      }
+  }
   
 
-    movement(): void {  
-      if(this.canMoveDown){ 
-        this.removeTile()
-        this.downMovement()
-        this.setTile()
-        this.canMove()
-        this.checkingTileToLeftAndDownFromPosition()
-        this.checkingTileToRightAndDownFromPosition()
-      }else if(this.canMoveLeftAndDown){
-        this.removeTile()
-        this.leftMovement()
-        this.downMovement()
-        this.setTile()
-        this.canMove()
-        this.checkingTileToLeftAndDownFromPosition()
-        this.checkingTileToRightAndDownFromPosition()
-      }else if(this.canMoveRightAndDown){
-        this.removeTile()
-        this.rightMovement()
-        this.downMovement()
-        this.setTile()
-        this.canMove()
-        this.checkingTileToLeftAndDownFromPosition()
-        this.checkingTileToRightAndDownFromPosition()
-      }
+  movement(): void {  
+    if(this.canMoveDown){ 
+      this.removeTile()
+      this.downMovement()
+      this.setTile()
+      this.canMove()
       this.checkingTileToLeftAndDownFromPosition()
       this.checkingTileToRightAndDownFromPosition()
-      this.canMove()
+    }else if(this.canMoveLeftAndDown){
+      this.removeTile()
+      this.leftMovement()
+      this.downMovement()
       this.setTile()
+      this.canMove()
+      this.checkingTileToLeftAndDownFromPosition()
+      this.checkingTileToRightAndDownFromPosition()
+    }else if(this.canMoveRightAndDown){
+      this.removeTile()
+      this.rightMovement()
+      this.downMovement()
+      this.setTile()
+      this.canMove()
+      this.checkingTileToLeftAndDownFromPosition()
+      this.checkingTileToRightAndDownFromPosition()
     }
+    this.checkingTileToLeftAndDownFromPosition()
+    this.checkingTileToRightAndDownFromPosition()
+    this.canMove()
+    this.setTile()
+  }
 
 }

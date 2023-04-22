@@ -37,7 +37,7 @@ export default class BootGame extends Phaser.Scene implements ILoaderPhaser{
   }
 
   startGame() : void{
-    this.scene.start('PlayGame', {level: 3})
+    this.scene.start('PlayGame', {level: 1})
   }
 
 }
