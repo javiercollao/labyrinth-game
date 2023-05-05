@@ -5,8 +5,8 @@ export default class Level {
     scene: Phaser.Scene;
 
     constructor(scene: Phaser.Scene, map : Phaser.Tilemaps.Tilemap, tileset : Phaser.Tilemaps.Tileset, depth: number) { 
-        this.scene = scene;
-        this.layer = map.createLayer(depth, tileset, 0, 0); 
+        this.scene = scene; 
+        this.layer = map.createLayer(depth, tileset, 0, 0) 
         this.depth = depth
     }
 

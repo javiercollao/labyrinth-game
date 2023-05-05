@@ -1,6 +1,6 @@
 import 'phaser' 
 import { tilesConfig, tileType, tilesObject} from '../config/gameOptions'
-import Inputs from "../inputs/Inputs";
+import Inputs from "../inputs/inputs";
 import Level from '../entities/level';
 import Door from '../entities/door';
 import Player from '../entities/player';
@@ -80,6 +80,7 @@ export default class PlayGame extends Phaser.Scene {
     this.bolt.map((bolt) => bolt.setTile()) 
     this.bolt.map((bolt) => bolt.movement())
     this.bolt.map((bolt) => bolt.checkingCollitionWithPlayer())
+    this.door.checkingCollitionWithPlayer()
 
   }
   
@@ -91,14 +92,14 @@ export default class PlayGame extends Phaser.Scene {
 
   createGameLaberynth(): void{
     let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
-    this.layer = new Level(this, this.map, laberynth, this.level);
+    this.layer = new Level(this, this.map, laberynth!, this.level);
   
   }
 
   createGameContainer(): void{
     const container = this.map.addTilesetImage('principal','mainGame')
-    const gameContainer = this.map.createLayer('static', container, 0, 0);
-    gameContainer.setDepth(2)
+    const gameContainer = this.map.createLayer('static', container!, 0, 0);
+    gameContainer!.setDepth(2)
   }
 
 
@@ -115,9 +116,6 @@ export default class PlayGame extends Phaser.Scene {
   positionVertical (tile: number): number {
     return tilesConfig.tileHeight*tile+(tilesConfig.tileHeight/2)
   }
-
-
-
 
 
 
@@ -474,9 +472,9 @@ export default class PlayGame extends Phaser.Scene {
   // //   this.power.map((power) => power.remove())
   // // }
 
-  // // cleanDoor():void{
-  // //   this.door.remove()
-  // // }
+  // cleanDoor():void{
+  //   this.door.removeDoor()
+  // }
 
  
 }

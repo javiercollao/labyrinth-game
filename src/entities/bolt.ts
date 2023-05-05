@@ -36,7 +36,7 @@ export default class Bolt extends Character {
     }
 
     checkingTileToLeftFromPosition(): void {
-      const tile = this.scene.map.getTileAtWorldXY(this.nextLeftPosition, this.positionY, true);
+      const tile = this.scene.map.getTileAtWorldXY(this.nextLeftPosition, this.positionY, true) ;
       const invalidTileIndices = new Set([
         tileType.wall.a,
         tileType.wall.b,
@@ -47,7 +47,7 @@ export default class Bolt extends Character {
         2,
         7,
       ]);
-      if (invalidTileIndices.has(tile.index)) {
+      if (invalidTileIndices.has(tile!.index)) {
         this.setCanMoveLeft(false);
       } else {
         this.setCanMoveLeft(true);
@@ -69,7 +69,7 @@ export default class Bolt extends Character {
         2,
         7,
       ]);
-      if (invalidTileIndices.has(tile.index)) {
+      if (invalidTileIndices.has(tile!.index)) {
         this.setCanMoveRight(false);
       } else {
         this.setCanMoveRight(true);
@@ -91,7 +91,7 @@ export default class Bolt extends Character {
           7,
         ]);
 
-        if (invalidTileIndices.has(tileA.index) && invalidTileIndices.has(tileB.index) || invalidTileIndices.has(tileA.index) && !invalidTileIndices.has(tileB.index) || !invalidTileIndices.has(tileA.index) && invalidTileIndices.has(tileB.index)) {
+        if (invalidTileIndices.has(tileA!.index) && invalidTileIndices.has(tileB!.index) || invalidTileIndices.has(tileA!.index) && !invalidTileIndices.has(tileB!.index) || !invalidTileIndices.has(tileA!.index) && invalidTileIndices.has(tileB!.index)) {
           this.setCanMoveRightDown(false);
         } else {
           this.setCanMoveRightDown(true);
@@ -114,7 +114,7 @@ export default class Bolt extends Character {
         7,
       ]);
 
-      if (invalidTileIndices.has(tileA.index) && invalidTileIndices.has(tileB.index) || invalidTileIndices.has(tileA.index) && !invalidTileIndices.has(tileB.index) || !invalidTileIndices.has(tileA.index) && invalidTileIndices.has(tileB.index)) {
+      if (invalidTileIndices.has(tileA!.index) && invalidTileIndices.has(tileB!.index) || invalidTileIndices.has(tileA!.index) && !invalidTileIndices.has(tileB!.index) || !invalidTileIndices.has(tileA!.index) && invalidTileIndices.has(tileB!.index)) {
         this.setCanMoveLeftDown(false);
       } else{
         this.setCanMoveLeftDown(true);
@@ -134,7 +134,7 @@ export default class Bolt extends Character {
         7,
       ]);
 
-      if (invalidTileIndices.has(tile.index)) {
+      if (invalidTileIndices.has(tile!.index)) {
         this.setCanMoveDown(false);
       } else {
         this.setCanMoveDown(true);

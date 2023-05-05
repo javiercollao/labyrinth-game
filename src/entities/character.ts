@@ -51,6 +51,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
         return this.y + 16;
     }
 
+    setPositionSprite(x: number, y:number): void {
+      this.x = x;
+      this.y = y;
+    }
+
     canMove(){
         this.checkingTileToRightFromPosition()
         this.checkingTileToLeftFromPosition()

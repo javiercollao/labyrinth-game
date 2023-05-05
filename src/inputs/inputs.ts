@@ -16,7 +16,7 @@ export default class Inputs {
     constructor(scene: Phaser.Scene) {
       this.scene = scene;
   
-      this.keys = this.scene.input.keyboard.addKeys(
+      this.keys = this.scene.input.keyboard!.addKeys(
         "W,A,S,D,up,left,down,right"
       ) as Keys;
  
