@@ -16,7 +16,7 @@ export default class BootScene extends Scene{
         })
     }
 
-    preload() {
+    public preload() {
       this.load.tilemapTiledJSON('levels', levels) 
       this.load.atlas("sprites", sprites, frames) 
       this.load.image('mainGame', main)
@@ -27,11 +27,8 @@ export default class BootScene extends Scene{
       this.load.image('btn-menu-end', menuEndButton )
     }
 
-    create () { 
+    public create () { 
       this.game.scene.start('InitGame')
     } 
     
 }
-
-   
-  

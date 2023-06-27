@@ -1,6 +1,7 @@
 import BootScene from "./BootScene";
 import LevelScene from "./LevelScene";
 import MenuScene from "./MenuScene";
+import { buttonGameInit, buttonGameOver } from "../config/buttons";
 
 export default class Game extends Phaser.Game {
 
@@ -11,8 +12,8 @@ export default class Game extends Phaser.Game {
     public main() {
         this.scene.add('BootScene', BootScene);
 
-        const initGame = new MenuScene('InitGame','menu-intro');
-        const gameOver = new MenuScene('GameOver', 'menu-end'); 
+        const initGame = new MenuScene('InitGame','menu-intro','btn-menu-intro', buttonGameInit);
+        const gameOver = new MenuScene('GameOver', 'menu-end', 'btn-menu-end', buttonGameOver); 
 
         this.scene.add('InitGame', initGame);
         this.scene.add('GameOver', gameOver);
