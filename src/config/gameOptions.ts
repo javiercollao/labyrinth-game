@@ -287,7 +287,7 @@ export default {
   {
     name: 'level2',
     player: {
-      x: 5,
+      x: 4,
       y: 4
     },
     door: {

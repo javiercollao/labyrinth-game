@@ -3,13 +3,13 @@ import frames from '../assets/sprites/sprites.json'
 import sprites from './../assets/sprites/sprites2.png'
 import main from './../assets/sprites/capa1.png'
 import levels from '../assets/grid/levels.json'; 
-import ILoaderPhaser from '../entities/interfaces/phaserInterfaces/phaser.preloader.interface';
+//import ILoaderPhaser from '../entities/interfaces/phaserInterfaces/phaser.preloader.interface';
 import menuIntroBackground from './../assets/sprites/menu-intro.png'
 import menuEndBackground  from './../assets/sprites/menu-end.png'
 import menuIntroButton  from './../assets/sprites/btn-menu.png'
 import menuEndButton from './../assets/sprites/btn-menu-end.png'
  
-export default class BootGame extends Phaser.Scene implements ILoaderPhaser{
+export default class BootGame extends Phaser.Scene{
 
   constructor() {
     super({

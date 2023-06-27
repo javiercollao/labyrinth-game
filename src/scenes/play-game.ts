@@ -7,6 +7,7 @@ import Player from '../entities/player';
 import Virus from '../entities/virus'; 
 import Meanie from '../entities/meanie';
 import Bolt from '../entities/bolt';
+import Microship from '../entities/microship';
 
 
 export default class PlayGame extends Phaser.Scene {
@@ -19,6 +20,8 @@ export default class PlayGame extends Phaser.Scene {
   virus!: Virus[];
   meanie!: Meanie;
   bolt! : Bolt[];
+
+  microship!: Microship[];
 
   layer!: Level;
   map!: Phaser.Tilemaps.Tilemap;
@@ -42,6 +45,8 @@ export default class PlayGame extends Phaser.Scene {
     // creamos mapa
     this.map = this.make.tilemap(tilesConfig);
 
+    
+
     // actualizamos el nivel y creamos todo lo del juego
     this.setLevel(data.level)
     this.createGameContainer();
@@ -50,6 +55,8 @@ export default class PlayGame extends Phaser.Scene {
     // creamos jugador sprite
     this.player = new Player(this, this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y));
      
+    this.createBolt()
+    this.createMicroship()
     // creamos abejas
     
     //const virus = tilesObject[this.level].enemies.virus;
@@ -60,8 +67,8 @@ export default class PlayGame extends Phaser.Scene {
      
 
     // creamos tornillos
-    const bolts = tilesObject[this.level].items.bolt;
-    this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)) )
+    // const bolts = tilesObject[this.level].items.bolt;
+    // this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)) )
 
 
     // this.createPlayer()
@@ -75,25 +82,22 @@ export default class PlayGame extends Phaser.Scene {
   }
 
   update(time: number, delta: number): void {
-    
+     
     this.player.movement() 
-    this.bolt.map((bolt) => bolt.setTile()) 
-    this.bolt.map((bolt) => bolt.movement())
-    this.bolt.map((bolt) => bolt.checkingCollitionWithPlayer())
+    // this.bolt.map((bolt) => bolt.setTile()) 
+    // this.bolt.map((bolt) => bolt.movement())
+    // this.bolt.map((bolt) => bolt.checkingCollitionWithPlayer())
     this.door.checkingCollitionWithPlayer()
-
   }
   
-
   setLevel(v : number) : void {
     this.level = v
   }
 
-
   createGameLaberynth(): void{
     let laberynth = this.map.addTilesetImage('sprites2','levelTiles');
     this.layer = new Level(this, this.map, laberynth!, this.level);
-  
+    console.log(this.map.getLayer)
   }
 
   createGameContainer(): void{
@@ -102,22 +106,17 @@ export default class PlayGame extends Phaser.Scene {
     gameContainer!.setDepth(2)
   }
 
-
-  /**
-   *  @desc Calcula la posicion de un tile horizontal
-  **/
   positionHorizontal (tile: number) : number {
     return tilesConfig.tileWidth*tile+(tilesConfig.tileWidth/2)
   }
 
-  /**
-   *  @desc Calcula la posicion de un tile veritcal
-  **/
   positionVertical (tile: number): number {
     return tilesConfig.tileHeight*tile+(tilesConfig.tileHeight/2)
   }
 
-
+  upgradeLevel() : number {
+    return this.level++;
+  }
 
   createDoor(): void{
     this.door = new Door(this, this.positionHorizontal(tilesObject[this.level].door.x), this.positionVertical(tilesObject[this.level].door.y))
@@ -125,40 +124,7 @@ export default class PlayGame extends Phaser.Scene {
   }
 
 
-  upgradeLevel() : number {
-    return this.level++;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-  // MALO
-   
-  // collisionDetectorBetweenAPlayerAndDoor () {
-  //   if(this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY()){
-  //     // this.door.x === this.player.getPositionX() && this.door.y === this.player.getPositionY() && this.microshipsPoints >= this.microship.length
-  //     this.level == 7? this.scene.start('Menu', {intro: false}):this.drawNewMap()
-       
-  //   }
-  // }
-
  
-   
-
- 
-  // /**
-  //  *  @desc Aumenta el nivel del juego
-  // **/
-  // 
-
   // /**
   //  *  @desc Actualiza el mapa del nivel actual y lo inicializa
   // **/
@@ -193,59 +159,8 @@ export default class PlayGame extends Phaser.Scene {
   //   this.checkTilePlayer() 
   // }
  
-  // /**
-  //  *  @desc Se encarga de mover al personaje principal en la escena
-  // **/
-  // makeMove(d): void {
-  //   if(d === RIGHT && this.player.getCanMoveRight()){
-  //     this.player.rightMovement()
-  //     this.canMove(this.player)
-  //     this.checkTilePlayer()
-  //   }else if(d === LEFT && this.player.getCanMoveLeft()){
-  //     this.player.leftMovement()
-  //     this.canMove(this.player)
-  //     this.checkTilePlayer()
-  //   }else if(d === DOWN && this.player.getCanMoveDown()){
-  //     this.player.downMovement()
-  //     this.canMove(this.player)
-  //     this.checkTilePlayer()
-  //   }else if(d === UP && this.player.getCanMoveUp()){
-  //     this.player.upMovement()
-  //     this.canMove(this.player)
-  //     this.checkTilePlayer()
-  //   }
-  // }
 
-  // /**
-  //  *  @desc Modifica los permisos del jugador de moverse a las casillas disponibles en la escena
-  // **/
-  // canMove(character){
-  //   this.nextTileRightIndex(character)
-  //   this.nextTileLeftIndex(character)
-  //   this.nextTileDownIndex(character)
-  //   this.nextTileUpIndex(character)
-  // }
-
-
-  // nextTileRightIndex(character){ 
-  //   const tile = this.map.getTileAtWorldXY(character.getNextRightPosition(), character.getPositionY(), true); 
-  //   (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveRight(false) : character.setCanMoveRight(true)
-  // }
-
-  // nextTileLeftIndex(character){
-  //   const tile = this.map.getTileAtWorldXY(character.getNextLeftPosition(), character.getPositionY(), true);
-  //   (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveLeft(false) : character.setCanMoveLeft(true)
-  // }
-
-  // nextTileUpIndex(character){
-  //   const tile = this.map.getTileAtWorldXY(character.getPositionX(), character.getNextUpPosition(), true);
-  //   (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveUp(false) : character.setCanMoveUp(true)
-  // }
-
-  // nextTileDownIndex(character){
-  //   const tile = this.map.getTileAtWorldXY(character.getPositionX(), character.getNextDownPosition(), true);
-  //   (tile.index === tileType.wall.a || tile.index === tileType.wall.b)? character.setCanMoveDown(false) : character.setCanMoveDown(true)
-  // }
+  
 
   // // destroyBytes(){
   // //   this.byte.map((byte) => {
@@ -291,36 +206,9 @@ export default class PlayGame extends Phaser.Scene {
   // //   })
   // // }
 
-  // /**
-  //  *  @desc Calcula la posicion de un tile horizontal
-  // **/
-  // checkTilePlayer(){
-  //   const tile = this.map.getTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(), true);
-
-  //   if(tile.index === tileType.block.a || tile.index === tileType.block.b || tile.index === tileType.block.c || tile.index === 95 ){
-  //     this.map.removeTileAtWorldXY(this.player.getPositionX(), this.player.getPositionY(),false)
-  //   }
-  //   // this.destroyBytes()
-  //   // this.destroyMicroShips()
-  //   // this.destroyFloppys()
-  //   // this.destroyPower()
-  //   // this.collisionWithEnemie(this.meanie)
-  //   // this.collisionWithEnemie(this.blob)
-  //   // this.collisionWithEnemie(this.nanorobot)
-  //   // this.collisionWithEnemie(this.virus)
-  //   // this.collisionDetectorBetweenAPlayerAndDoor()
-  //   // console.log(`microships = ${this.microship.length}`)
-  //   // console.log(`pointsMS = ${this.microshipsPoints} , pointsByte = ${this.bytesPoints}`)
-  // }
-
-
  
-
- 
-
   // // ========================================================================
  
-
 
   // // createPlayer(): void{
   // //   this.player = new Player(this, this.positionHorizontal(tilesObject[this.level].player.x), this.positionVertical(tilesObject[this.level].player.y));
@@ -390,11 +278,11 @@ export default class PlayGame extends Phaser.Scene {
   // //   this.createPower();
   // // }
 
-  // // createBolt() : void{
-  // //   const bolts = tilesObject[this.level].items.bolt;
-  // //   this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)))
-  // //   this.bolt.map((bolt) => bolt.animation())
-  // // }
+  createBolt() : void{
+    const bolts = tilesObject[this.level].items.bolt;
+    this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)))
+    this.bolt.map((bolt) => bolt.startAnimation())
+  }
 
   // // createByte() : void{
   // //   const bytes = tilesObject[this.level].items.byte;
@@ -408,11 +296,11 @@ export default class PlayGame extends Phaser.Scene {
   // //   this.floppy.map((floppy) => floppy.animation())
   // // }
 
-  // // createMicroship() : void{
-  // //   const microships = tilesObject[this.level].items.microship;
-  // //   this.microship = microships.map((microship) => new Microship(this, this.positionHorizontal(microship.x), this.positionVertical(microship.y)))
-  // //   this.microship.map((microship) => microship.animation())
-  // // }
+  createMicroship() : void{
+    const microships = tilesObject[this.level].items.microship;
+    this.microship = microships.map((microship) => new Microship(this, this.positionHorizontal(microship.x), this.positionVertical(microship.y)))
+    this.microship.map((microship) => microship.animation())
+  }
 
   // // createPower() : void{
   // //   const powers = tilesObject[this.level].items.power;
@@ -471,10 +359,6 @@ export default class PlayGame extends Phaser.Scene {
   // // cleanPower():void{
   // //   this.power.map((power) => power.remove())
   // // }
-
-  // cleanDoor():void{
-  //   this.door.removeDoor()
-  // }
-
+ 
  
 }

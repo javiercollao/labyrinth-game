@@ -1,23 +1,18 @@
  
+import PlayGame from "~/scenes/play-game";
 import { microship } from "../config/gameOptions";
+import Character from "./character";
 
-export default class Microship extends Phaser.GameObjects.Sprite {
-    
-    canMoveRight: boolean;
-    canMoveLeft: boolean;
-    canMoveUp: boolean;
-    canMoveDown: boolean;
 
-    constructor(scene : Phaser.Scene, posX : number, posY : number) {
-        super(scene, posX, posY, 'sprites');
-        scene.add.existing(this);
-        this.canMoveRight = true;
-        this.canMoveLeft = true;
-        this.canMoveUp = true;
-        this.canMoveDown = true;
+export default class Microship extends Character {
+    public scene!: PlayGame;
+  
+    constructor(scene: PlayGame, x: number, y: number) {
+        super(scene, x, y, 'microship');
+        scene.add.existing(this); 
         this.anims.create({key:'microship', frames:microship, repeat:-1});
     }
-    
+   
     animation(): void {
         this.play('microship');
     }

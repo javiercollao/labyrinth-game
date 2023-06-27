@@ -1,6 +1,6 @@
 
 import PlayGame from "~/scenes/play-game";
-import { door, tilesObject } from "../config/gameOptions";
+import { door } from "../config/gameOptions";
 import Character from "./character"; 
 
  export default class Door extends Character {
@@ -17,23 +17,8 @@ import Character from "./character";
 
     checkingCollitionWithPlayer(): void{
         if (this.positionY === this.scene.player.positionY && this.scene.player.positionX  === this.positionX ) {
-            this.scene.level == 7? console.log("fgh") : this.levelManager()
+            this.scene.level == 7? this.scene.scene.start('Menu', {intro: false}) : this.scene.layer.levelManager()
         }
     }
 
-    levelManager(): void{
-        
-        this.scene.layer.novisible()
-        this.scene.upgradeLevel()
-        this.scene.microshipsPoints = 0; 
-        this.scene.createGameLaberynth() 
-        
-        this.scene.player.setPosition(this.scene.positionHorizontal(tilesObject[this.scene.level].player.x), this.scene.positionVertical(tilesObject[this.scene.level].player.y))
-        this.setPosition(this.scene.positionHorizontal(tilesObject[this.scene.level].door.x), this.scene.positionVertical(tilesObject[this.scene.level].door.y))
-        
-        this.scene.player.canMove()
-    }
-    
-    
-    
 }
