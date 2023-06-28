@@ -1,16 +1,4 @@
-export type SpriteConfig = {
-    label: string, 
-    key: string, 
-    frames: any, 
-    repeat: number
-  };
 
-export const dexterSprite : SpriteConfig = {
-    label: 'player',
-    key: "",
-    frames: undefined,
-    repeat: 0
-}
 
 export const dexterStand = [
     { key: 'sprites', frame: 'p_tile000.png'}
@@ -190,14 +178,27 @@ export const byte = [
     { key: 'sprites', frame: 'e_tile029.png'},
   ]
 
+  const wallA= 643
+  const wallB = 644
+
+  const blockA = 640
+  const blockB = 639
+  const blockC = 641
+
   export const tileType = {
     wall: {
-      a: 643,
-      b: 644
+      a: wallA,
+      b: wallB
     },
     block:{
-      a: 640,
-      b: 639,
-      c: 641
-    }  
+      a: blockA,
+      b: blockB,
+      c: blockC
+    }
   }
+    
+  export const invalidTileIndicesDexter: number[] = [
+    wallA,
+    wallB,
+    2
+  ]

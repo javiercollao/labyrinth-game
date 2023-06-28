@@ -8,7 +8,7 @@ export default class Player extends Character {
 
   constructor(scene: PlayGame, x: number, y: number) {
     super(scene, x, y, 'player');
-    this.setTile()  
+    this.setTile()
   }
 
   standAnimation(): void {
