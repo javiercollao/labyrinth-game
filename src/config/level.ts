@@ -5,7 +5,7 @@ export const tiles: Phaser.Types.Tilemaps.TilemapConfig = {
   tileHeight: 16
 };
 
-export const levelInitTesting = "Level5"
+export const levelInitTesting = "Level3"
 export const levelTesting = "GameOver"
 
 const noElement = { x: -1, y: -1}
@@ -42,7 +42,7 @@ export const level1Config = {
       }
     ],
     floppy: [noElement],
-    microship: [
+    microchip: [
       {
         x: 20,
         y: 13
@@ -179,7 +179,7 @@ export const level2Config  = {
         }
       ],
       floppy: [noElement], 
-      microship: [
+      microchip: [
         {
           x:7,
           y:11
@@ -280,7 +280,7 @@ export const level3Config  = {
         {x:12,y:4},
         {x:13,y:4}
       ],
-      microship: [
+      microchip: [
         {x:5,y:4},
         {x:6,y:5},
         {x:7,y:6},
@@ -325,7 +325,7 @@ export const level4Config  = {
         noElement
       ],
       floppy: [noElement],
-      microship: [
+      microchip: [
         {x:10,y:10},
         {x:9,y:10},
         {x:15,y:10},
@@ -376,7 +376,7 @@ export const level5Config  = {
        {x:7,y:12},
        {x:8,y:12},
       ],
-      microship: [
+      microchip: [
        {x:8,y:5},
        {x:9,y:6},
        {x:10,y:7},
@@ -440,7 +440,7 @@ export const level6Config  = {
         {x:19,y:3},
         {x:20,y:3}
       ],
-      microship: [
+      microchip: [
         noElement
       ],
       power: [noElement]
@@ -517,7 +517,7 @@ export const level7Config  = {
         {x:19,y:9},
         {x:20,y:9}
       ],
-      microship: [
+      microchip: [
         {x:5,y:5},
         {x:6,y:5},
         {x:7,y:5},
@@ -589,7 +589,7 @@ export const level8Config  = {
         noElement
       ],
       floppy: [noElement],
-      microship: [
+      microchip: [
         {x:4, y:3},
         {x:4, y:15},
         {x:21, y:3},
@@ -662,7 +662,7 @@ export const level9Config  = {
         noElement
       ],
       floppy: [noElement],
-      microship: [
+      microchip: [
         {x:8,y:15},
         {x:14,y:15},
         {x:16,y:15},
@@ -757,7 +757,7 @@ export const level10Config  = {
         {x:14,y:7},
         {x:13,y:8}
       ],
-      microship: [
+      microchip: [
         {x:3,y:15},
         {x:4,y:15},
         {x:5,y:15},

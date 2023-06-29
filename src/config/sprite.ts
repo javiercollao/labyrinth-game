@@ -79,7 +79,7 @@ export const byte = [
     { key: 'sprites', frame: 'tile052.png'}
   ]
 
-  export const microship = [
+  export const microchip = [
     { key: 'sprites', frame: 'tile075.png'},
     { key: 'sprites', frame: 'tile075.png'},
     { key: 'sprites', frame: 'tile075.png'},
