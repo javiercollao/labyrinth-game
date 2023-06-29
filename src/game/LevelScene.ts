@@ -10,8 +10,6 @@ import Microchip from "./Microchip";
 import Player from "./Player";
 import Virus from "./Virus";
 
-
- 
 export default class LevelScene extends Phaser.Scene{
     public inputs!: Inputs
     public player!: Player
@@ -34,6 +32,10 @@ export default class LevelScene extends Phaser.Scene{
 
     public init() {
       this.inputs = new Inputs(this);
+      this.data = new Phaser.Data.DataManager(this); 
+      this.data.set('score', 0);
+      this.data.set('chip', 0);
+      this.data.set('bit', 0);
     }
     
     public create (): void {  
@@ -47,6 +49,21 @@ export default class LevelScene extends Phaser.Scene{
       const laberynth = this.map.addTilesetImage('sprites2', 'levelTiles')
       const layer = this.map.createLayer(this.config.levelNumber, laberynth, 0, 0)
       layer.setDepth(1)
+
+      // Info
+        this.data.set('level', this.config.levelNumber+1);
+        
+        const score = this.data.get('score');
+        const chip = this.data.get('chip');
+        const bit = this.data.get('bit');
+        const level = this.data.get('level');
+        console.log(score, chip, bit, level); 
+
+
+      const t = this.add.text(111, 316,  '999999', { fontFamily: 'CustomFont', fontSize: '9px' })
+      t.setAlign('right')
+      t.setDepth(2)
+
 
       // Player
       this.player = new Player(this, this.positionHorizontal(this.config.player.x),this.positionVertical(this.config.player.y))
@@ -69,10 +86,10 @@ export default class LevelScene extends Phaser.Scene{
       this.floppy = floppys.map((floppy) =>  new Floppy(this, this.positionHorizontal(floppy.x), this.positionVertical(floppy.y)))
 
       // Enemies
-      const virus = this.config.items.virus
+      const virus = this.config.enemies.virus
       this.virus = virus.map((virus) => new Virus(this, this.positionHorizontal(virus.x), this.positionVertical(virus.y)))
       
-      const meanies = this.config.items.meanie
+      const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
       
       this.update(3, 33)
@@ -95,8 +112,16 @@ export default class LevelScene extends Phaser.Scene{
     // Collisions
 
     public handlePlayerDoorCollision(){ 
-        if (this.door.y === this.player.y && this.player.x  === this.door.x ) {
-            this.scene.start(levelTesting)
-        }
+      if (this.door.y === this.player.y && this.player.x  === this.door.x ) {
+        this.scene.start(levelTesting)
+      }
+    }
+
+    public handlePlayerEnemiesCollision(){
+      console.log("ping")
+    }
+
+    public handlePlayerItemsCollision(){
+      console.log("ping")
     }
 }

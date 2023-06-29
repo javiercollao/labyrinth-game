@@ -9,6 +9,7 @@ export default class MenuScene extends Phaser.Scene{
           key : config.key
         }) 
         this.config = config
+       
     }
 
     public create () { 
@@ -19,6 +20,7 @@ export default class MenuScene extends Phaser.Scene{
 
       this.add.existing(img)
       this.add.existing(button)
+
 
       button.setInteractive()
       button.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
