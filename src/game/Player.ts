@@ -16,23 +16,33 @@ export default class Player extends Character {
      if (left && this.getMoveLeft()) {
         this.setX(this.x-16)
         this.setFlipX(true)
-        this.anims.play('playerWalk') 
+        this.anims.play('playerWalk')
+        this.removeTiles() 
+     }else if(left && !this.getMoveLeft()){
+        this.setFlipX(true)
+        this.anims.play('playerWalk')
      } else if(right && this.getMoveRight()){  
         this.setFlipX(false)
         this.setX(this.x+16)
-        this.anims.play('playerWalk') 
+        this.anims.play('playerWalk')
+        this.removeTiles()
+     }else if(right && !this.getMoveRight()){
+         this.setFlipX(false)
+         this.anims.play('playerWalk')
      } else if (up && this.getMoveUp()) { 
         this.setFlipX(false)
-        this.setY(this.y-16)  
+        this.setY(this.y-16)
+        this.removeTiles()  
      }else if(down && this.getMoveDown()){ 
         this.setFlipX(false)
-        this.setY(this.y+16)  
+        this.setY(this.y+16)
+        this.removeTiles()  
      }else{
         this.setFlipX(false)
-        this.anims.play('player') 
-        
+        this.anims.play('player')
+        this.removeTiles()
      }
-     this.removeTiles()
+     
      this.checkingTileToRightFromPosition(invalidTileIndicesDexter)
      this.checkingTileToLeftFromPosition(invalidTileIndicesDexter)
      this.checkingTileToUpFromPosition(invalidTileIndicesDexter)
@@ -42,9 +52,6 @@ export default class Player extends Character {
     public removeTiles() {
         this.scene.map.putTileAtWorldXY(0, this.x, this.y)
     }
-
-  
-    
 
      
 }

@@ -18,6 +18,6 @@ export  const menuGameOver: ConfigMenu = {
     key: 'GameOver',
     image: 'menu-end',
     btn: 'btn-menu-end',
-    x: 20,
-    y: 289
+    x: 80,
+    y: 300
 };
