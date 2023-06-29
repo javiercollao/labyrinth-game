@@ -11,8 +11,11 @@ export default class Microchip extends Character {
         this.anims.play('microchip')
     }
     
-    public remove() {
-        this.destroy()
+    public behavior(){
+        const chip = this.scene.data.get('chip')
+        const score = this.scene.data.get('score')
+        this.scene.data.set('score', score+10)
+        this.scene.data.set('chip', chip+1)
     }
 
 }

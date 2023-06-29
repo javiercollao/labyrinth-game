@@ -16,6 +16,8 @@ window.onload = function () {
     parent: 'root',
     pixelArt: true,
     backgroundColor: '#00679b',
+    width: gameOptions.boardSize.cols * gameOptions.tileSize,
+    height: (gameOptions.boardSize.rows * gameOptions.tileSize)-6,
     fps:{
       target: 15,
       forceSetTimeOut: true,
@@ -24,15 +26,11 @@ window.onload = function () {
       min: 1
     },
     physics: {
-      default: "matter",
-      matter: {
-        debug: false,
-    },
-  },
-    width: gameOptions.boardSize.cols * gameOptions.tileSize,
-    height: (gameOptions.boardSize.rows * gameOptions.tileSize)-6,
-    //scene: [BootScene, MenuScene, LevelScene]
-    //scene: [BootGame, Menu, PlayGame]
+      default: "arcade",
+      arcade: {
+          debug: true
+      }
+    }
   }
 
   const body = document.body

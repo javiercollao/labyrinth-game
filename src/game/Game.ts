@@ -1,8 +1,8 @@
 import BootScene from "./BootScene";
-import LevelScene from "./LevelScene";
+import LevelScene from "./LevelScene"; 
 import MenuScene from "./MenuScene";
 import { menuGameInit, menuGameOver } from "../config/menu";
-import { level10Config, level1Config, level2Config, level3Config, level4Config, level5Config, level6Config, level7Config, level8Config, level9Config } from "../config/level";
+import { level10Config, level1Config, level2Config, level3Config, level4Config, level5Config, level6Config, level7Config, level8Config, level9Config} from "../config/level";
 
 export default class Game extends Phaser.Game {
 
@@ -30,6 +30,7 @@ export default class Game extends Phaser.Game {
         const level9 = new LevelScene(level9Config);
         const level10 = new LevelScene(level10Config);
 
+ 
         this.scene.add('Level1', level1);
         this.scene.add('Level2', level2);
         this.scene.add('Level3', level3);

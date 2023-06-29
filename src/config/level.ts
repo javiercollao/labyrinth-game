@@ -5,7 +5,7 @@ export const tiles: Phaser.Types.Tilemaps.TilemapConfig = {
   tileHeight: 16
 };
 
-export const levelInitTesting = "Level2"
+export const levelInitTesting = "Level4"
 export const levelTesting = "GameOver"
 
 const noElement = { x: -1, y: -1}

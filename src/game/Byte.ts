@@ -10,4 +10,7 @@ export default class Byte extends Character {
         this.anims.play('byte')
     }
 
+    public behavior(){
+        console.log("log")
+    }
 }

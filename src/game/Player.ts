@@ -1,6 +1,6 @@
 import Character from "./Character";
 import LevelScene from "./LevelScene";
-import { dexterWalk , dexterStand, tileType, invalidTileIndicesDexter} from './../config/sprite';
+import { dexterWalk , dexterStand, invalidTileIndicesDexter} from './../config/sprite';
 
 export default class Player extends Character {
      

@@ -10,4 +10,7 @@ export default class Floppy extends Character {
         this.anims.play('floppy')
     }
 
+    public behavior(){
+        console.log("log")
+    }
 }

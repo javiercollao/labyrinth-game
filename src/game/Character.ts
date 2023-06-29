@@ -1,4 +1,3 @@
-import { dexterStand } from './../config/gameOptions';
 import LevelScene from './LevelScene';
 
 export default class Character extends Phaser.GameObjects.Sprite {

@@ -1,5 +1,5 @@
  
-import { tiles,levelTesting } from "../config/level"; 
+import { tiles, levelTesting} from "../config/level"; 
 import Bolt from "./Bolt";
 import Byte from "./Byte";
 import Door from "./Door";
@@ -22,6 +22,7 @@ export default class LevelScene extends Phaser.Scene{
     public floppy!: Floppy[]
     public virus!: Virus[]
     public meanie!: Meanie[]
+    public score!: Phaser.GameObjects.Text;
 
     constructor(config : any) {
         super({
@@ -31,11 +32,11 @@ export default class LevelScene extends Phaser.Scene{
     }
 
     public init() {
-      this.inputs = new Inputs(this);
-      this.data = new Phaser.Data.DataManager(this); 
-      this.data.set('score', 0);
-      this.data.set('chip', 0);
-      this.data.set('bit', 0);
+      this.inputs = new Inputs(this)
+      this.data = new Phaser.Data.DataManager(this)
+      this.data.set('score', 0)
+      this.data.set('chip', 0)
+      this.data.set('bit', 0)
     }
     
     public create (): void {  
@@ -49,28 +50,25 @@ export default class LevelScene extends Phaser.Scene{
       const laberynth = this.map.addTilesetImage('sprites2', 'levelTiles')
       const layer = this.map.createLayer(this.config.levelNumber, laberynth, 0, 0)
       layer.setDepth(1)
-
+      
       // Info
-        this.data.set('level', this.config.levelNumber+1);
-        
-        const score = this.data.get('score');
-        const chip = this.data.get('chip');
-        const bit = this.data.get('bit');
-        const level = this.data.get('level');
-        console.log(score, chip, bit, level); 
-
-
-      const t = this.add.text(111, 316,  '999999', { fontFamily: 'CustomFont', fontSize: '9px' })
-      t.setAlign('right')
-      t.setDepth(2)
-
+      this.data.set('level', this.config.levelNumber+1);
+      
+      const score = this.data.get('score')
+      const chip = this.data.get('chip')
+      const bit = this.data.get('bit')
+      const level = this.data.get('level')
+      console.log(score, chip, bit, level) 
+      this.score = this.add.text(111, 316,  score, { fontFamily: 'CustomFont', fontSize: '9px' })
+      this.score.setAlign('right')
+      this.score.setDepth(2)
 
       // Player
       this.player = new Player(this, this.positionHorizontal(this.config.player.x),this.positionVertical(this.config.player.y))
-
+      
       // Door
       this.door = new Door(this,this.positionHorizontal(this.config.door.x),this.positionVertical(this.config.door.y))
-      
+       
       // Bolt
       const bolts = this.config.items.bolt
       this.bolt = bolts.map((bolt) => new Bolt(this, this.positionHorizontal(bolt.x), this.positionVertical(bolt.y)))
@@ -98,7 +96,12 @@ export default class LevelScene extends Phaser.Scene{
     public update(time: number, delta: number): void {
       this.player.behavior()
       this.handlePlayerDoorCollision()
-
+      this.handlePlayerItemsCollision(this.player, this.microchip);
+      this.handlePlayerItemsCollision(this.player, this.byte);
+      this.handlePlayerItemsCollision(this.player, this.floppy);
+      this.handlePlayerEnemiesCollision(this.player, this.virus)
+      this.handlePlayerEnemiesCollision(this.player, this.meanie)
+      this.score.setText(this.data.get('score'))
     }
 
     public positionHorizontal(tile: number): number {
@@ -117,11 +120,19 @@ export default class LevelScene extends Phaser.Scene{
       }
     }
 
-    public handlePlayerEnemiesCollision(){
-      console.log("ping")
+    public handlePlayerEnemiesCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]){
+      objects.map(object => {
+        if (object.y === player.y && object.x === player.x) {
+          console.log("Pierde vida")
+        }
+      });
     }
 
-    public handlePlayerItemsCollision(){
-      console.log("ping")
+    public handlePlayerItemsCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]) {
+      objects.map(object => {
+        if (object.y === player.y && object.x === player.x) {
+          object.destroy();
+        }
+      });
     }
 }
