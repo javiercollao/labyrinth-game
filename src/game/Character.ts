@@ -110,6 +110,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
     public checkingTileToDownFromPosition(invalidTileIndicesIndex: number[]): void {
       this.checkTileCollision('down', 0, 16, invalidTileIndicesIndex);
     }
+
+    public behavior(){
+      console.log("hola")
+    }
       
 
  

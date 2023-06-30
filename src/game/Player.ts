@@ -8,6 +8,10 @@ export default class Player extends Character {
         super(scene, x, y);
         this.anims.create({key:'player', frames:dexterStand, repeat:-1})
         this.anims.create({key:'playerWalk', frames:dexterWalk, repeat:-1})
+        this.checkingTileToRightFromPosition(invalidTileIndicesDexter)
+        this.checkingTileToLeftFromPosition(invalidTileIndicesDexter)
+        this.checkingTileToUpFromPosition(invalidTileIndicesDexter)
+        this.checkingTileToDownFromPosition(invalidTileIndicesDexter)
       }
 
     public behavior() {
@@ -42,7 +46,6 @@ export default class Player extends Character {
         this.anims.play('player')
         this.removeTiles()
      }
-     
      this.checkingTileToRightFromPosition(invalidTileIndicesDexter)
      this.checkingTileToLeftFromPosition(invalidTileIndicesDexter)
      this.checkingTileToUpFromPosition(invalidTileIndicesDexter)

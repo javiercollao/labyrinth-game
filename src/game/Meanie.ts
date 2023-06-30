@@ -10,4 +10,6 @@ export default class Meanie extends Character {
         this.anims.play('meanie')
     }
 
+    public behavior(){
+    }
 }

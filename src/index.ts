@@ -19,11 +19,11 @@ window.onload = function () {
     width: gameOptions.boardSize.cols * gameOptions.tileSize,
     height: (gameOptions.boardSize.rows * gameOptions.tileSize)-6,
     fps:{
-      target: 15,
+      target: 12,
       forceSetTimeOut: true,
       smoothStep: false,
       deltaHistory: 2,
-      min: 1
+      min: 2
     },
     physics: {
       default: "arcade",

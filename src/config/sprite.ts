@@ -202,3 +202,11 @@ export const byte = [
     wallB,
     2
   ]
+
+  export const invalidTileIndicesVirus: number[] = [
+    wallA,
+    wallB,
+    blockA,
+    blockB,
+    blockC
+  ]

@@ -2,12 +2,14 @@
 import { tiles, levelTesting} from "../config/level"; 
 import Bolt from "./Bolt";
 import Byte from "./Byte";
+import Character from "./Character";
 import Door from "./Door";
 import Floppy from "./Floppy";
 import Inputs from "./Inputs";
 import Meanie from "./Meanie";
 import Microchip from "./Microchip";
 import Player from "./Player";
+import Power from "./Power";
 import Virus from "./Virus";
 
 export default class LevelScene extends Phaser.Scene{
@@ -23,6 +25,7 @@ export default class LevelScene extends Phaser.Scene{
     public virus!: Virus[]
     public meanie!: Meanie[]
     public score!: Phaser.GameObjects.Text;
+    public power!: Power[];
 
     constructor(config : any) {
         super({
@@ -83,22 +86,26 @@ export default class LevelScene extends Phaser.Scene{
       const floppys = this.config.items.floppy
       this.floppy = floppys.map((floppy) =>  new Floppy(this, this.positionHorizontal(floppy.x), this.positionVertical(floppy.y)))
 
+      const powers = this.config.items.power
+      this.power = powers.map((power) =>  new Power(this, this.positionHorizontal(power.x), this.positionVertical(power.y)))
+
       // Enemies
       const virus = this.config.enemies.virus
       this.virus = virus.map((virus) => new Virus(this, this.positionHorizontal(virus.x), this.positionVertical(virus.y)))
       
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
-      
-      this.update(3, 33)
+       
     }
 
     public update(time: number, delta: number): void {
       this.player.behavior()
+      this.enemiesBehaivor(this.virus)
       this.handlePlayerDoorCollision()
-      this.handlePlayerItemsCollision(this.player, this.microchip);
-      this.handlePlayerItemsCollision(this.player, this.byte);
-      this.handlePlayerItemsCollision(this.player, this.floppy);
+      this.handlePlayerItemsCollision(this.player, this.microchip)
+      this.handlePlayerItemsCollision(this.player, this.byte)
+      this.handlePlayerItemsCollision(this.player, this.power)
+      this.handlePlayerItemsCollision(this.player, this.floppy)
       this.handlePlayerEnemiesCollision(this.player, this.virus)
       this.handlePlayerEnemiesCollision(this.player, this.meanie)
       this.score.setText(this.data.get('score'))
@@ -124,6 +131,7 @@ export default class LevelScene extends Phaser.Scene{
       objects.map(object => {
         if (object.y === player.y && object.x === player.x) {
           console.log("Pierde vida")
+          this.scene.restart()
         }
       });
     }
@@ -134,5 +142,9 @@ export default class LevelScene extends Phaser.Scene{
           object.destroy();
         }
       });
+    }
+
+    public enemiesBehaivor(objects: Character[]){
+      objects.map(object => object.behaivor())
     }
 }
