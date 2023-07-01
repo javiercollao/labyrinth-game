@@ -46,6 +46,7 @@ export default class Player extends Character {
         this.anims.play('player')
         this.removeTiles()
      }
+     console.log(this.x,this.y)
      this.checkingTileToRightFromPosition(invalidTileIndicesDexter)
      this.checkingTileToLeftFromPosition(invalidTileIndicesDexter)
      this.checkingTileToUpFromPosition(invalidTileIndicesDexter)

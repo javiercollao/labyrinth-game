@@ -96,11 +96,15 @@ export default class LevelScene extends Phaser.Scene{
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
        
+
+      setInterval(() => {
+        this.enemiesBehaivor(this.virus)
+      }, 200);
     }
 
     public update(time: number, delta: number): void {
       this.player.behavior()
-      this.enemiesBehaivor(this.virus)
+      
       this.handlePlayerDoorCollision()
       this.handlePlayerItemsCollision(this.player, this.microchip)
       this.handlePlayerItemsCollision(this.player, this.byte)
@@ -145,6 +149,6 @@ export default class LevelScene extends Phaser.Scene{
     }
 
     public enemiesBehaivor(objects: Character[]){
-      objects.map(object => object.behaivor())
+      objects.map(object => object.behavior())
     }
 }

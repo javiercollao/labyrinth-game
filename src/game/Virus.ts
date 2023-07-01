@@ -18,7 +18,7 @@ export default class Virus extends Character {
         this.checkingTileToDownFromPosition(invalidTileIndicesVirus)
     }
 
-    public behaivor(){
+    public behavior(){
         if(this.getMoveLeft() && this.getMoveDown()){
             this.previousPositionX = this.x
             this.previousPositionY = this.y
