@@ -210,3 +210,12 @@ export const byte = [
     blockB,
     blockC
   ]
+
+  export const invalidTileIndicesBolt: number[] = [
+    wallA,
+    wallB,
+    blockA,
+    blockB,
+    blockC,
+    2
+  ]
