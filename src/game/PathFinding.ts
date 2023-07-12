@@ -9,6 +9,10 @@ export default class PathFinding {
   matriz: State[][] | [];
   inicio: any | null;
   target: any | null;
+  openSet: State[]
+  closeSet: State[];
+  terminado: boolean;
+  camino: State[];
 
   constructor(w: number, h: number) {
     this.width = w;
@@ -17,6 +21,10 @@ export default class PathFinding {
     this.crearMatriz();
     this.inicio = null;
     this.target = null;
+    this.openSet = []
+    this.closeSet = []
+    this.terminado = false
+    this.camino = []
   }
 
   public crearMatriz() {
@@ -26,6 +34,7 @@ export default class PathFinding {
         let x = 56 + 16*j;
         let y = 56 + 16*i;
         this.matriz[i][j] = new State(x, y);
+
       }
     }
   }
@@ -64,6 +73,30 @@ export default class PathFinding {
   public crearTarget(x : number, y : number) {
     //Player
     this.target = this.matriz[y - 3][x - 3];
+  }
+
+  public crearOpenSet(){
+    const newOpenSet : State[] = this.openSet
+    newOpenSet.push(this.inicio)
+    this.openSet = newOpenSet
+  }
+
+  public algoritmo(){
+    if(!this.terminado){
+      if(this.openSet.length > 0){
+        let indexGanador = 0
+
+        for(let i=0; i<this.openSet.length; i++){
+          if(this.openSet[i].f < this.openSet[indexGanador].f){
+            indexGanador = i;
+          }
+        }
+      
+      } 
+
+    }
+
+
   }
 
 }
