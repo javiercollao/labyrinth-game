@@ -98,15 +98,18 @@ export default class LevelScene extends Phaser.Scene{
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
        
       // Matrix
+ 
+      let path = new PathFinding(this,20, 13)
+ 
+     path.main()
 
-      let path = new PathFinding(20, 13)
-      let meanie1 = meanies[0] 
-      path.crearInicio(meanie1.x, meanie1.y) 
-      path.crearTarget(this.config.player.x, this.config.player.y)
-      console.log("inicio",path.inicio)
-      console.log("objetivo",path.target)
-      path.crearVecinos()
-      console.log(path.matriz)
+      // setInterval(() => {
+      //    path.main()
+      //    console.log("=============")
+      //    console.log("matriz", path.matriz)
+      //    console.log("camino", path.camino)
+      //    console.log("=============") 
+      // }, 5000);
 
 
       // Behaivors
