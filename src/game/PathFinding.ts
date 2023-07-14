@@ -32,17 +32,30 @@ export default class PathFinding {
   }
 
   public main(){
-    this.crearMatriz()
-    this.crearInicio(this.scene.meanie[0])
-    this.crearTarget(this.scene.player)
-    this.crearVecinos()
-    this.crearOpenSet()
-    console.log("inicio: ",this.inicio)
-    console.log("target: ",this.target)
-    console.log("openSet: ",this.openSet)
-    this.algoritmo()
-    console.log("camino: ",this.camino)
-    console.log("terminado: ",this.terminado)
+   
+    
+      this.crearMatriz()
+      this.crearInicio(this.scene.meanie[0])
+      this.crearTarget(this.scene.player)
+      this.crearVecinos()
+      this.crearOpenSet()
+      this.algoritmo()
+      console.log("inicio: ",this.inicio)
+      console.log("target: ",this.target)
+      console.log("openSet: ",this.openSet)
+      console.log("closeSet: ",this.closeSet)
+      console.log("camino: ",this.camino)
+      console.log("terminado: ",this.terminado)
+
+      setInterval(() => {
+        this.algoritmo() 
+
+        this.crearTarget(this.scene.player)
+      }, 100);
+       
+
+    
+    
   }
   
 
@@ -108,8 +121,8 @@ export default class PathFinding {
   }
 
   public heuristica(a: State,b :State){
-    let x = Math.abs(a.x - b.x);
-    let y = Math.abs(a.y - b.y);
+    let x = Math.abs(((a.x-56)/16) - ((b.x-56)/16));
+    let y = Math.abs(((a.y-56)/16) - ((b.y-56)/16));
     let dist = x+y;
     return dist;
   }
@@ -120,11 +133,12 @@ export default class PathFinding {
         let indexGanador = 0
 
         for(let i=0; i<this.openSet.length; i++){
-          if(this.openSet[i].f < this.openSet[indexGanador].f){
+          if(this.openSet[i].f <= this.openSet[indexGanador].f){
             indexGanador = i;
           }
         }
 
+        // Estado ganador
         let actual = this.openSet[indexGanador]
 
         if(actual === this.target){
@@ -139,22 +153,25 @@ export default class PathFinding {
           }
           this.terminado = true
         }else{
-          let newOpenSet : State[] = this.openSet
-          newOpenSet.filter(s => s !== actual)
+
+          let newOpenSet : State[] = []
+ 
+          newOpenSet.filter(s => s.x !== actual.x && s.y !== actual.y)
           this.openSet = newOpenSet
 
           let newCloseSet : State[] = this.closeSet
           newCloseSet.push(actual)
           this.closeSet = newCloseSet
 
+
           let vecinos = actual.neighbors
           for(let i=0; i< vecinos.length; i++){
-            var vecino = vecinos[i];
+            let vecino = vecinos[i];
   
             //SI EL VECINO NO ESTÁ EN CLOSEDSET Y NO ES UNA PARED, HACEMOS LOS CÁLCULOS
             if(!this.closeSet.includes(vecino) && vecino.type!=1){
               let tempG = actual.g + 1;
-  
+   
               //si el vecino está en OpenSet y su peso es mayor
               if(this.openSet.includes(vecino)){
                 if(tempG < vecino.g){
@@ -174,156 +191,28 @@ export default class PathFinding {
   
               //GUARDAMOS EL PADRE (DE DÓNDE VENIMOS)
               vecino.parent = actual;
+
+              this.scene.meanie[0].x= actual.x
+              this.scene.meanie[0].y= actual.y
   
             }
         }
       } 
     }else{
       console.log('No hay un camino posible');
-      this.terminado = true;
-    }
+  
+      this.crearMatriz()
+      this.crearInicio(this.scene.meanie[0])
+      this.crearTarget(this.scene.player)
+      this.crearVecinos()
+      this.crearOpenSet()
+      this.terminado = false
+      
+    } 
+    
   }
   }
 
 }
 
  
-
-
- 
-
-
-
-// colaStates: State[];
-// sucesores: State[];
-// historial: State[];
-// pasos: String[];
-// index_pasos: number;
-// inicial: State;
-// objetivo: State;
-// actual: State;
-// entidad: State ;
-// exito: boolean;
-// enemigo: State;
-
-// constructor() {
-//   this.colaStates = [];
-//   this.sucesores = [];
-//   this.historial = [];
-//   this.pasos = [];
-//   this.index_pasos = 0;
-//   this.inicial = new State(0, 0, "inicial", null)
-//   this.objetivo = new State(0, 0, "", null)
-//   this.actual = new State(0, 0, "", null)
-//   this.entidad = new State(0, 0, "", null)
-//   this.exito = false;
-//   this.enemigo = new State(1, 3, "", null)
-// }
-
-// public busqueda(): void {
-//   this.evaluar(this.inicial);
-//   this.colaStates.push(this.inicial);
-//   this.historial.push(this.inicial);
-
-//   while (this.colaStates.length != 0 && !this.exito) {
-//     this.actual = this.colaStates.shift();
-
-//     if (this.objetivo.equals(this.actual)) {
-//       this.objetivo = this.actual;
-//       this.exito = true;
-//     } else {
-//       this.procesarSucesores(this.actual);
-//     }
-//   }
-
-//   this.reconstruirSolucion();
-// }
-
-// public procesarSucesores(e: State): void {
-//   this.calcularSucesores(e);
-
-//   for (let i = 0; i < this.sucesores.length; i++) {
-//     if (!this.historial.some((State) => State.equals(this.sucesores[i]))) {
-//       this.colaStates.add(this.sucesores[i]);
-//       this.historial.push(this.sucesores[i]);
-//     } else {
-//       const index = this.historial.findIndex((State) => State.equals(this.sucesores[i]));
-//       const enHistorial = this.historial[index];
-
-//       if (this.sucesores[i].f > enHistorial.f) {
-//         enHistorial.f = this.sucesores[i].f;
-//         enHistorial.g = this.sucesores[i].g;
-//         enHistorial.h = this.sucesores[i].h;
-//         enHistorial.predecesor = this.sucesores[i].predecesor;
-//       }
-//     }
-//   }
-
-//   this.sucesores = [];
-// }
-
-// public evaluar(nuevo: State): void {
-//   nuevo.g = nuevo.distanciaEuclidea(this.enemigo);
-//   nuevo.h = nuevo.distanciaEuclidea(this.objetivo);
-//   nuevo.f = (0.9 * nuevo.g) + (0.1 * nuevo.h);
-// }
-
-// public calcularSucesores(e: State): void {
-//   if (
-//     e.y > 0 &&
-//     entidad.mv.escenario.celdas[e.x][e.y - 1].tipo !== OBSTACULO &&
-//     entidad.mv.escenario.celdas[e.x][e.y - 1].tipo !== ADVERSARIO
-//   ) {
-//     const arriba = new State(e.x, e.y - 1, "arriba", e);
-//     this.evaluar(arriba);
-//     this.sucesores.push(arriba);
-//   }
-
-//   if (
-//     e.y < NUMERO_CELDAS_LARGO - 1 &&
-//     entidad.mv.escenario.celdas[e.x][e.y + 1].tipo !== OBSTACULO &&
-//     entidad.mv.escenario.celdas[e.x][e.y + 1].tipo !== ADVERSARIO
-//   ) {
-//     const abajo = new State(e.x, e.y + 1, "abajo", e);
-//     this.evaluar(abajo);
-//     this.sucesores.push(abajo);
-//   }
-
-//   if (
-//     e.x > 0 &&
-//     entidad.mv.escenario.celdas[e.x - 1][e.y].tipo !== OBSTACULO &&
-//     entidad.mv.escenario.celdas[e.x - 1][e.y].tipo !== ADVERSARIO
-//   ) {
-//     const izq = new State(e.x - 1, e.y, "izquierda", e);
-//     this.evaluar(izq);
-//     this.sucesores.push(izq);
-//   }
-
-//   if (
-//     e.x < NUMERO_CELDAS_ANCHO - 1 &&
-//     entidad.mv.escenario.celdas[e.x + 1][e.y].tipo !== OBSTACULO &&
-//     entidad.mv.escenario.celdas[e.x + 1][e.y].tipo !== ADVERSARIO
-//   ) {
-//     const der = new State(e.x + 1, e.y, "derecha", e);
-//     this.evaluar(der);
-//     this.sucesores.push(der);
-//   }
-// }
-
-// public reconstruirSolucion(): void {
-//   const solucion: Array<State> = [];
-//   let aux: State | null = this.objetivo;
-
-//   while (aux !== null) {
-//     solucion.push(aux);
-//     aux = aux.predecesor;
-//   }
-
-//   for (let i = solucion.length - 1; i >= 0; i--) {
-//     this.pasos.push(solucion[i].oper);
-//   }
-// }
-
-// public getPasos(): Array<string> {
-//   return this.pasos;
-// }
