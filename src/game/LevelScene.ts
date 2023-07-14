@@ -10,7 +10,7 @@ import Meanie from "./Meanie";
 import Microchip from "./Microchip";
 import PathFinding from "./PathFinding";
 import Player from "./Player";
-import Power from "./Power";
+import Power from "./Power"; 
 import Virus from "./Virus";
 
 export default class LevelScene extends Phaser.Scene{
@@ -26,13 +26,14 @@ export default class LevelScene extends Phaser.Scene{
     public virus!: Virus[]
     public meanie!: Meanie[]
     public score!: Phaser.GameObjects.Text;
-    public power!: Power[];
+    public power!: Power[]; 
+    public pathFinding!: PathFinding;
 
     constructor(config : any) {
         super({
           key : config.key
         })
-        this.config = config 
+        this.config = config  
     }
 
     public init() {
@@ -67,6 +68,10 @@ export default class LevelScene extends Phaser.Scene{
       this.score.setAlign('right')
       this.score.setDepth(2)
 
+      // MapPathFinding
+      this.pathFinding = new PathFinding(this, 20, 13)
+      this.pathFinding.main()
+
       // Player
       this.player = new Player(this, this.positionHorizontal(this.config.player.x),this.positionVertical(this.config.player.y))
       
@@ -96,31 +101,16 @@ export default class LevelScene extends Phaser.Scene{
       
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
-       
-      // Matrix
- 
-      let path = new PathFinding(this,20, 13)
- 
-     path.main()
-
-      // setInterval(() => {
-      //    path.main()
-      //    console.log("=============")
-      //    console.log("matriz", path.matriz)
-      //    console.log("camino", path.camino)
-      //    console.log("=============") 
-      // }, 5000);
-
 
       // Behaivors
-
-      setInterval(() => {
-        this.enemiesBehaivor(this.virus)
-      }, 200);
+      this.meanie.map(m => m.main())
+      this.virus.map(v => v.main())
+      
     }
 
     public update(time: number, delta: number): void {
       this.player.behavior()
+
       
       this.handlePlayerDoorCollision()
       this.handlePlayerItemsCollision(this.player, this.microchip)
