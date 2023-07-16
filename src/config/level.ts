@@ -5,10 +5,10 @@ export const tiles: Phaser.Types.Tilemaps.TilemapConfig = {
   tileHeight: 16
 };
 
-export const levelInitTesting = "Level5"
+export const levelInitTesting = "Level2"
 export const levelTesting = "GameOver"
 
-const noElement = { x: -1, y: -1}
+const noElement = { x: -1, y:-1}
 
 export const level1Config = {
   key: "Level1",
@@ -68,7 +68,10 @@ export const level1Config = {
   },
   enemies: {
     blob: [noElement],
-    meanie: [noElement],
+    meanie: [{
+      x: 10,
+      y: 14
+    }],
     nanorobot: [noElement],
     virus: [noElement]
   } 
@@ -212,7 +215,10 @@ export const level2Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [{
+      x: 19,
+      y: 5
+    }],
     nanorobot: [noElement],
     virus: [noElement]
   }
@@ -295,7 +301,10 @@ export const level3Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [{
+      x: 22,
+      y: 12
+    }],
     nanorobot: [noElement],
     virus: [noElement]
   }
@@ -319,7 +328,10 @@ export const level4Config  = {
   items: 
     {
       bolt : [
-        noElement
+        {
+          x:13,
+          y: 3
+        }
       ],
       byte : [
         noElement
@@ -338,7 +350,16 @@ export const level4Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [
+      {
+       x: 10,
+       y: 9 
+      },
+      {
+        x: 15,
+        y: 9
+      }
+    ],
     nanorobot: [noElement],
     virus: [
       {x:5,y:8},
@@ -429,7 +450,10 @@ export const level6Config  = {
   items: 
     {
       bolt : [
-        noElement
+        {
+          x: 13,
+          y: 9
+        }
       ],
       byte : [
         noElement
@@ -450,7 +474,12 @@ export const level6Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [
+      {
+        x: 12,
+        y: 9
+      }
+    ],
     nanorobot: [noElement],
     virus: [
       {x:5,y:5},
@@ -487,7 +516,7 @@ export const level7Config  = {
   items: 
     {
       bolt : [
-        noElement
+        {x:3,y:15}
       ],
       byte : [
         {x:5,y:3},
@@ -558,7 +587,7 @@ export const level7Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [{x:22,y:5}],
     nanorobot: [noElement],
     virus: [noElement]
   }
@@ -581,9 +610,7 @@ export const level8Config  = {
   items: 
     {
       bolt : [
-        {
-         noElement
-        }
+        {x:10,y:3}
       ],
       byte : [
         noElement
@@ -602,7 +629,7 @@ export const level8Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [{x:10,y:15}],
     nanorobot: [noElement],
     virus: [noElement]
   }
@@ -691,7 +718,14 @@ export const level9Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [
+      {
+      x: 21,
+      y: 4
+    },{
+      x: 4,
+      y: 4
+    }],
     nanorobot: [noElement],
     virus: [noElement]
   }
@@ -714,7 +748,7 @@ export const level10Config  = {
   items: 
     {
       bolt : [
-        noElement
+        {x:5,y:5}
       ],
       byte : [
         noElement
@@ -785,8 +819,8 @@ export const level10Config  = {
     blob: [
       noElement
     ],
-    meanie: [noElement],
+    meanie: [{x:13,y:11}],
     nanorobot: [noElement],
-    virus: [{x:13,y:11}]
+    virus: [noElement]
   }
 }

@@ -13,6 +13,7 @@ export default class Virus extends Character {
             frames: virus,
             repeat: -1 });
         this.startAnimation() 
+        console.log("x: ", this.x, "y: ", this.y)
     }
 
     startAnimation() : void{ 

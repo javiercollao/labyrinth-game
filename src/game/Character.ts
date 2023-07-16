@@ -71,11 +71,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
       
         const invalidTileIndices = new Set(invalidTileIndicesIndex);
       
-        let canMove = true;
-      
-        if (invalidTileIndices.has(tile.index)) {
-          canMove = false;
-        }
+        const canMove = !invalidTileIndices.has(tile?.index);
       
         switch (direction) {
           case 'right':

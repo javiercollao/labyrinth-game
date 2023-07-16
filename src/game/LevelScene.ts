@@ -98,21 +98,23 @@ export default class LevelScene extends Phaser.Scene{
       // Enemies
       const virus = this.config.enemies.virus
       this.virus = virus.map((virus) => new Virus(this, this.positionHorizontal(virus.x), this.positionVertical(virus.y)))
+       
       
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
-
+       
       // Behaivors
-      this.meanie.map(m => m.main())
-      this.virus.map(v => v.main())
+      //this.meanie.map(m => m.main())
+      //this.virus.map(v => v.main())
+      
       
     }
 
     public update(time: number, delta: number): void {
-      this.player.behavior()
-
-      
+      this.player.behavior() 
+      this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
+      this.handlePlayerBoltCollision(this.player, this.bolt)
       this.handlePlayerItemsCollision(this.player, this.microchip)
       this.handlePlayerItemsCollision(this.player, this.byte)
       this.handlePlayerItemsCollision(this.player, this.power)
@@ -146,6 +148,15 @@ export default class LevelScene extends Phaser.Scene{
         }
       });
     }
+
+    public handlePlayerBoltCollision(player: Phaser.GameObjects.Sprite, objects: Bolt[]){
+      objects.map(object => {
+        if (object.y === player.y && object.x === player.x) {
+          this.player.moveTilePosition(object)
+        }
+      });
+    }
+    
 
     public handlePlayerItemsCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]) {
       objects.map(object => {
