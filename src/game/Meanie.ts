@@ -53,7 +53,10 @@ export default class Meanie extends Character {
     }
 
     public behavior() {
+
+      this.scene.pathFinding.crearMatriz()
         if(!this.terminado){
+
           if(this.openSet.length > 0){
             let indexGanador = 0
     
@@ -125,7 +128,6 @@ export default class Meanie extends Character {
           } 
         }else{
           console.log('No hay un camino posible');  
-          this.scene.pathFinding.crearMatriz()
           this.crearInicio()
           this.crearTarget()
           this.scene.pathFinding.crearVecinos()

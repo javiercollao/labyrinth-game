@@ -1,4 +1,4 @@
-import { invalidTileIndicesBolt } from "../config/sprite";
+import { invalidTileIndicesMeanie } from "../config/sprite";
 import LevelScene from "./LevelScene"; 
 import State from "./State";
  
@@ -29,7 +29,7 @@ export default class PathFinding {
         let y = 56 + 16*i;
         this.matriz[i][j] = new State(x, y);
         const tile = this.scene.map.getTileAtWorldXY(x, y, true);
-        const invalidTileIndices = new Set(invalidTileIndicesBolt);
+        const invalidTileIndices = new Set(invalidTileIndicesMeanie);
         if (invalidTileIndices.has(tile.index)) {
           this.matriz[i][j].type = 1
         }

@@ -239,6 +239,17 @@ export const byte = [
     microchipTile
   ]
 
+  export const invalidTileIndicesMeanie: number[] = [
+    wallA,
+    wallB,
+    blockA,
+    blockB,
+    blockC,
+    642,
+    doorTile, 
+    microchipTile
+  ]
+
   export const invalidTileIndicesBolt: number[] = [
     wallA,
     wallB,

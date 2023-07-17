@@ -181,7 +181,7 @@ export default class LevelScene extends Phaser.Scene{
 
     public update(time: number, delta: number): void { 
       this.player.behavior() 
-      
+      console.log(this.map)
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
       this.handlePlayerBoltCollision(this.player, this.bolt)
@@ -207,10 +207,7 @@ export default class LevelScene extends Phaser.Scene{
     // Collisions
 
     public handlePlayerDoorCollision(){ 
-      if (this.door.y === this.player.y && this.player.x  === this.door.x ) {
-        this.meanie.map(m => m.target = null)
-        this.meanie.map(m => m.destroy())
-        this.virus.map(m => m.destroy())
+      if (this.door.y === this.player.y && this.player.x  === this.door.x ) { 
         this.scene.start(this.config.keyNext,  {score: Number(this.data.get('score')), life: Number(this.data.get('life'))})
       }
     }
