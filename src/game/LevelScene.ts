@@ -1,8 +1,7 @@
  
 import { tiles, levelTesting} from "../config/level"; 
 import Bolt from "./Bolt";
-import Byte from "./Byte";
-import Character from "./Character";
+import Byte from "./Byte"; 
 import Door from "./Door";
 import Floppy from "./Floppy";
 import Inputs from "./Inputs";
@@ -110,7 +109,7 @@ export default class LevelScene extends Phaser.Scene{
       
     }
 
-    public update(time: number, delta: number): void {
+    public update(time: number, delta: number): void { 
       this.player.behavior() 
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
@@ -158,15 +157,13 @@ export default class LevelScene extends Phaser.Scene{
     }
     
 
-    public handlePlayerItemsCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]) {
+    public handlePlayerItemsCollision(player: Player, objects: (Microchip | Byte | Floppy | Power)[]) {
       objects.map(object => {
         if (object.y === player.y && object.x === player.x) {
-          object.destroy();
+          object.destroy(); 
         }
       });
     }
 
-    public enemiesBehaivor(objects: Character[]){
-      objects.map(object => object.behavior())
-    }
+ 
 }

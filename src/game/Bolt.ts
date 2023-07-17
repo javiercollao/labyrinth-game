@@ -23,9 +23,9 @@ export default class Bolt extends Character {
         const tileB = this.scene.map.getTileAtWorldXY(this.x+16, this.y+16, true);
         
         if (invalidTileIndicesBolt.includes(tileA.index) && invalidTileIndicesBolt.includes(tileB.index) || invalidTileIndicesBolt.includes(tileA.index) && !invalidTileIndicesBolt.includes(tileB.index) || !invalidTileIndicesBolt.includes(tileA.index) && invalidTileIndicesBolt.includes(tileB.index)) {
-          this.canMoveRightAndDown =false ;
+          this.canMoveRightAndDown = false;
         } else {
-          this.canMoveRightAndDown = true ;
+          this.canMoveRightAndDown = true;
         }
     }
 
@@ -62,7 +62,6 @@ export default class Bolt extends Character {
   }
 
   public behavior() { 
- 
         if(this.getMoveDown()){ 
           this.removeTile()
           this.setY(this.y+16)  
@@ -79,6 +78,7 @@ export default class Bolt extends Character {
         this.checkingTileToLeftAndDownFromPosition()
         this.checkingTileToRightAndDownFromPosition()
         this.checkingTileToDownFromPosition(invalidTileIndicesBolt) 
+        this.checkingTileToUpFromPosition(invalidTileIndicesBolt)
         this.checkingTileToRightFromPosition(invalidTileIndicesBolt) 
         this.checkingTileToLeftFromPosition(invalidTileIndicesBolt)
       }

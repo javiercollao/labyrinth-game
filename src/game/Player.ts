@@ -20,37 +20,39 @@ export default class Player extends Character {
 
     public behavior() {
      const { left, right, up, down } = this.scene.inputs;
-    
+        
      if (left && this.getMoveLeft()) {
+        this.removeTile() 
         this.setX(this.x-16)
         this.setFlipX(true)
         this.anims.play('playerWalk')
-        this.removeTile() 
+        this.setTile()
      }else if(left && !this.getMoveLeft()){
         this.setFlipX(true)
         this.anims.play('playerWalk')
      } else if(right && this.getMoveRight()){  
+        this.removeTile()
         this.setFlipX(false)
         this.setX(this.x+16)
         this.anims.play('playerWalk')
-        this.removeTile()
-        console.log("d1")
+        this.setTile()  
      }else if(right && !this.getMoveRight()){
          this.setFlipX(false)
          this.anims.play('playerWalk')
      } else if (up && this.getMoveUp()) { 
+        this.removeTile()  
         this.setFlipX(false)
         this.setY(this.y-16)
-        this.removeTile()  
+        this.setTile() 
      }else if(down && this.getMoveDown()){ 
+        this.removeTile()  
         this.setFlipX(false)
         this.setY(this.y+16)
-        this.removeTile()  
+        this.setTile() 
      }else{
         this.setFlipX(false)
-        this.anims.play('player')
-        this.removeTile()
-     }
+        this.anims.play('player') 
+     } 
      this.checkingTileToRightFromPosition(invalidTileIndicesDexter)
      this.checkingTileToLeftFromPosition(invalidTileIndicesDexter)
      this.checkingTileToUpFromPosition(invalidTileIndicesDexter)
@@ -80,11 +82,12 @@ export default class Player extends Character {
          console.log(bolt.getMoveRight())
       }
       if(left && bolt.getMoveLeft() && !this.getMoveLeft()){
+
+         this.removeTile()
         bolt.removeTile() 
         bolt.setX(bolt.x-16) 
         bolt.setTile() 
         this.setX(this.x-16)
-         this.removeTile()
          this.setTile()
         console.log("left")
       } 

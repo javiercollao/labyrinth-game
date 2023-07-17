@@ -1,5 +1,5 @@
  
-import { door } from "../config/sprite";
+import { door, doorTile } from "../config/sprite";
 import Character from "./Character"; 
 import LevelScene from "./LevelScene";
 
@@ -8,5 +8,14 @@ import LevelScene from "./LevelScene";
         super(scene, x, y); 
         this.anims.create({key:'door', frames:door, repeat: -1});
         this.play('door')
+        this.setTile()
     }
+
+    public setTile() :void{
+        this.scene.map.putTileAtWorldXY(doorTile, this.x, this.y)
+     }
+
+     public removeTile(): void {
+        this.scene.map.putTileAtWorldXY(0, this.x, this.y)
+     }
 }

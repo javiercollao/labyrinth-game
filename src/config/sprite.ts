@@ -185,13 +185,13 @@ export const byte = [
   const blockB = 639
   const blockC = 641
 
-  const playerTile = 7
-  const boltTile = 2
-  const microchipTile = 3
-  const byteTile = 6
-  const doorTile = 9
-  const floppyTile = 5
-  const powerTile = 4
+  export const playerTile = 7
+  export const boltTile = 2
+  export const microchipTile = 3
+  export const byteTile = 6
+  export const doorTile = 9
+  export const floppyTile = 5
+  export const powerTile = 4
 
   export const tileType = {
     wall: {
@@ -211,6 +211,18 @@ export const byte = [
     boltTile
   ]
 
+  export const invalidTileIndicesItem: number[] = [
+    wallA,
+    wallB,
+    blockA,
+    blockB,
+    boltTile,
+    microchipTile,
+    byteTile,
+    powerTile,
+    floppyTile
+  ]
+
   export const invalidTileIndicesVirus: number[] = [
     wallA,
     wallB,
@@ -224,8 +236,11 @@ export const byte = [
     wallB,
     blockA,
     blockB,
-    blockC,
-    95,
+    blockC, 
     boltTile,
-    playerTile
+    playerTile,
+    byteTile,
+    microchipTile
   ]
+
+  //95

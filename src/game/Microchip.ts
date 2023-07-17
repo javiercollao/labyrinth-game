@@ -1,4 +1,4 @@
-import { microchip } from "../config/sprite";
+import { invalidTileIndicesItem, microchip, microchipTile } from "../config/sprite";
 import Character from "./Character";
 import LevelScene from "./LevelScene";
 
@@ -9,13 +9,14 @@ export default class Microchip extends Character {
         scene.add.existing(this)
         this.anims.create({key:'microchip', frames:microchip, repeat:-1})
         this.anims.play('microchip')
+        this.setTile()
     }
     
-    public behavior(){
-        const chip = this.scene.data.get('chip')
-        const score = this.scene.data.get('score')
-        this.scene.data.set('score', score+10)
-        this.scene.data.set('chip', chip+1)
-    }
+    public setTile() :void{
+        this.scene.map.putTileAtWorldXY(microchipTile, this.x, this.y)
+     }
 
+     public removeTile(): void {
+        this.scene.map.putTileAtWorldXY(0, this.x, this.y)
+     }
 }
