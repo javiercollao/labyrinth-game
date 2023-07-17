@@ -1,14 +1,15 @@
 ## README: Dexter's Labyrinth Clone
 
-Dexter's Labyrinth is a maze-puzzle game where the player takes control of Dexter, a boy genius who must repair his infected computer in a virtual world. The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player must collect chips to progress to the next level, while avoiding enemies and hazards.
+The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player can collect chips and progress to the next level, while avoiding enemies and hazards.
 
 ### Gameplay
 
-Dexter starts with three lives and a score of zero. The player must navigate through each level, avoiding enemies and hazards such as falling objects and walls. The game features different types of enemies, some of which are more difficult to evade than others. As the player progresses through the levels, new enemies and more complex mazes are introduced.
+Dexter starts with three lives and a score of zero. The player must navigate through each level, avoiding enemies and walls.
 
-![](./src/assets/sprites/cover.png)
+The game includes objects called chips and bits that the player can collect to increase their score.
+ 
+<img src="./src/assets/sprites/cover.png" alt="drawing" style="width:500px;"/>
 
-The game includes objects called chips and bits that the player can collect to increase their score. Dexter can also push screws, which can be used to eliminate enemies or create paths through the maze. However, if a screw falls on Dexter's head, he will lose a life. When an enemy is defeated, it transforms into six chips.
 
 ### Controls
 
