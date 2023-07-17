@@ -43,10 +43,16 @@ export default class LevelScene extends Phaser.Scene{
       this.inputs = new Inputs(this)
       this.data = new Phaser.Data.DataManager(this)
       this.data.set('score', data.score)
+      this.data.set('life', data.life)
       this.data.set('level', this.config.levelNumber + 1)
     }
     
     public create (): void {   
+
+      if(this.data.get('life') == 0){ 
+        this.scene.setVisible(false)
+        this.game.scene.start('InitGame')
+      }
       
       this.map = this.make.tilemap(tiles)
       
@@ -89,8 +95,18 @@ export default class LevelScene extends Phaser.Scene{
       this.add.existing(life3)
 
       // missin life
-      life1.setAlpha(.7,.4,.4,.3)
+      if(this.data.get('life') == 2){
+        life3.setAlpha(.7,.4,.4,.3)
+      }else if(this.data.get('life') == 1){
+        life3.setAlpha(.7,.4,.4,.3)
+        life2.setAlpha(.7,.4,.4,.3)
+      }else if(this.data.get('life') == 0){
+        life3.setAlpha(.7,.4,.4,.3)
+        life2.setAlpha(.7,.4,.4,.3)
+        life1.setAlpha(.7,.4,.4,.3) 
+      }
 
+      
      
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)
@@ -195,15 +211,15 @@ export default class LevelScene extends Phaser.Scene{
         this.meanie.map(m => m.target = null)
         this.meanie.map(m => m.destroy())
         this.virus.map(m => m.destroy())
-        this.scene.start(this.config.keyNext,  {score: Number(this.data.get('score'))})
+        this.scene.start(this.config.keyNext,  {score: Number(this.data.get('score')), life: Number(this.data.get('life'))})
       }
     }
 
     public handlePlayerEnemiesCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]){
       objects.map(object => {
         if (object.y === player.y && object.x === player.x) {
-          console.log("Pierde vida")
-          this.scene.restart()
+          this.data.set('life', this.data.get('life') - 1)
+          this.scene.restart({score: Number(this.data.get('score')),life: Number(this.data.get('life'))})
         }
       });
     }
@@ -224,6 +240,6 @@ export default class LevelScene extends Phaser.Scene{
         }
       }); 
     }
-
+ 
  
 }
