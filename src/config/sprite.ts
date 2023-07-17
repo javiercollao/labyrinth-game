@@ -228,7 +228,11 @@ export const byte = [
     wallB,
     blockA,
     blockB,
-    blockC
+    blockC,
+    642,
+    doorTile,
+    95,
+    microchipTile
   ]
 
   export const invalidTileIndicesBolt: number[] = [

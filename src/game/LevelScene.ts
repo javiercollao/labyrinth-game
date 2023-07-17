@@ -103,14 +103,17 @@ export default class LevelScene extends Phaser.Scene{
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
        
       // Behaivors
-      //this.meanie.map(m => m.main())
-      //this.virus.map(v => v.main())
+      setInterval(() => {
+        this.meanie.map(m => m.behavior())
+        this.virus.map(v => v.behavior())
+      }, 400);
       
       
     }
 
     public update(time: number, delta: number): void { 
       this.player.behavior() 
+     
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
       this.handlePlayerBoltCollision(this.player, this.bolt)
@@ -135,7 +138,10 @@ export default class LevelScene extends Phaser.Scene{
 
     public handlePlayerDoorCollision(){ 
       if (this.door.y === this.player.y && this.player.x  === this.door.x ) {
-        this.scene.start(levelTesting)
+        this.meanie.map(m => m.target = null)
+        this.meanie.map(m => m.destroy())
+        this.virus.map(m => m.destroy())
+        this.scene.start(this.config.keyNext)
       }
     }
 

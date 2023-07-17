@@ -63,13 +63,4 @@ export default class Virus extends Character {
     }
 
 
-    main(){
-
-        // cambiar a un while hasta que muera player
-        setInterval(() => { 
-            this.behavior()
-          }, 400);
-    }
-
-
 }

@@ -405,7 +405,7 @@ export const level5Config  = {
        {x:12,y:9},
        {x:13,y:10},
        {x:14,y:11},
-       {x:15,y:12}
+       {x:15,y:12} 
       ],
       power: [
        {x:16,y:13},
@@ -465,7 +465,10 @@ export const level6Config  = {
         {x:20,y:3}
       ],
       microchip: [
-        noElement
+        {
+          x: 17,
+          y: 9
+        }
       ],
       power: [noElement]
     }
@@ -595,7 +598,7 @@ export const level7Config  = {
 
 export const level8Config  = {
   key: "Level8",
-  keyNext: "Level9",
+  keyNext: "GameOver",
   levelNumber: 7,
   tileWidth: 16,
   tileHeigth: 16,

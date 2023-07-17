@@ -1,5 +1,4 @@
-import { ConfigMenu } from "../config/menu"
-import { levelInitTesting } from "../config/level"
+import { ConfigMenu } from "../config/menu" 
 
 export default class MenuScene extends Phaser.Scene{
     private config: ConfigMenu
@@ -24,7 +23,7 @@ export default class MenuScene extends Phaser.Scene{
 
       button.setInteractive()
       button.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-        this.game.scene.start(levelInitTesting)
+        this.game.scene.start("Level1")
         this.scene.setVisible(false)
       })
     }
