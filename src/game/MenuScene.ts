@@ -1,3 +1,4 @@
+import { buttonResetImg } from "../config/sprite"
 import { ConfigMenu } from "../config/menu" 
 
 export default class MenuScene extends Phaser.Scene{
@@ -14,12 +15,13 @@ export default class MenuScene extends Phaser.Scene{
     public create () { 
       const img = new Phaser.GameObjects.Image(this, 0, 0, this.config.image)
       img.setOrigin(0)
-
+ 
       const button = new Phaser.GameObjects.Image(this, this.config.x, this.config.y, this.config.btn)
 
       this.add.existing(img)
       this.add.existing(button)
 
+      
 
       button.setInteractive()
       button.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {

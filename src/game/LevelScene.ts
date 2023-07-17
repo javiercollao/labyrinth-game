@@ -1,4 +1,5 @@
  
+import { buttonResetImg } from "../config/sprite";
 import { tiles, levelTesting} from "../config/level"; 
 import Bolt from "./Bolt";
 import Byte from "./Byte"; 
@@ -46,14 +47,27 @@ export default class LevelScene extends Phaser.Scene{
     public create (): void {  
       
       this.map = this.make.tilemap(tiles)
+     
       
       const container = this.map.addTilesetImage('principal','mainGame')
       const gameContainer = this.map.createLayer('static', container, 0, 0)
       gameContainer.setDepth(2)
 
+
       const laberynth = this.map.addTilesetImage('sprites2', 'levelTiles')
       const layer = this.map.createLayer(this.config.levelNumber, laberynth, 0, 0)
       layer.setDepth(1)
+
+      const buttonReset = new Phaser.GameObjects.Image(this, 367, 317, buttonResetImg.btn)
+      buttonReset.displayWidth= 65
+      buttonReset.displayHeight= 25
+      this.add.existing(buttonReset)
+      buttonReset.setDepth(3)
+
+      buttonReset.setInteractive()
+      buttonReset.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
+        this.scene.restart()
+      })
       
       // Info
       this.data.set('level', this.config.levelNumber+1);
@@ -66,6 +80,8 @@ export default class LevelScene extends Phaser.Scene{
       this.score = this.add.text(111, 316,  score, { fontFamily: 'CustomFont', fontSize: '9px' })
       this.score.setAlign('right')
       this.score.setDepth(2)
+
+      
 
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)

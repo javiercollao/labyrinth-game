@@ -1,4 +1,9 @@
 
+export const buttonResetImg = { 
+  btn: 'btn-reset',
+  x: 100,
+  y: 100
+}
 
 export const dexterStand = [
     { key: 'sprites', frame: 'p_tile000.png'}
