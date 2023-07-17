@@ -25,7 +25,7 @@ export default class MenuScene extends Phaser.Scene{
 
       button.setInteractive()
       button.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
-        this.game.scene.start("Level1")
+        this.game.scene.start("Level1", {score: 0})
         this.scene.setVisible(false)
       })
     }

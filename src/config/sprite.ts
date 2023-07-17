@@ -235,8 +235,7 @@ export const byte = [
     blockB,
     blockC,
     642,
-    doorTile,
-    95,
+    doorTile, 
     microchipTile
   ]
 

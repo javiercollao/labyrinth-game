@@ -28,23 +28,25 @@ export default class LevelScene extends Phaser.Scene{
     public score!: Phaser.GameObjects.Text;
     public power!: Power[]; 
     public pathFinding!: PathFinding;
+    public chip!: Phaser.GameObjects.Text;
+    public bit!: Phaser.GameObjects.Text;
+    public level!: Phaser.GameObjects.Text;
 
     constructor(config : any) {
         super({
           key : config.key
         })
-        this.config = config  
+        this.config = config
     }
 
-    public init() {
+    public init(data) {
       this.inputs = new Inputs(this)
       this.data = new Phaser.Data.DataManager(this)
-      this.data.set('score', 0)
-      this.data.set('chip', 0)
-      this.data.set('bit', 0)
+      this.data.set('score', data.score)
+      this.data.set('level', this.config.levelNumber + 1)
     }
     
-    public create (): void {  
+    public create (): void {   
       
       this.map = this.make.tilemap(tiles)
       
@@ -89,18 +91,7 @@ export default class LevelScene extends Phaser.Scene{
       // missin life
       life1.setAlpha(.7,.4,.4,.3)
 
-      // Info
-      this.data.set('level', this.config.levelNumber+1);
-      
-      const score = this.data.get('score')
-      const chip = this.data.get('chip')
-      const bit = this.data.get('bit')
-      const level = this.data.get('level')
-      console.log(score, chip, bit, level) 
-      this.score = this.add.text(111, 316,  score, { fontFamily: 'CustomFont', fontSize: '9px' })
-      this.score.setAlign('right')
-      this.score.setDepth(2)
-
+     
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)
       this.pathFinding.main()
@@ -128,6 +119,31 @@ export default class LevelScene extends Phaser.Scene{
       const powers = this.config.items.power
       this.power = powers.map((power) =>  new Power(this, this.positionHorizontal(power.x), this.positionVertical(power.y)))
 
+       // Info
+       this.data.set('level', this.config.levelNumber+1);
+       this.data.set('chip', this.microchip.length)
+       this.data.set('bit', this.byte.length) 
+       
+       
+       const score = this.data.get('score')
+       const chip = this.data.get('chip')
+       const bit = this.data.get('bit')
+       const level = this.data.get('level') 
+       this.score = this.add.text(111, 316,  score, { fontFamily: 'CustomFont', fontSize: '9px' })
+       this.score.setAlign('right')
+       this.score.setDepth(2)
+ 
+       this.chip = this.add.text(198, 316, chip, { fontFamily: 'CustomFont', fontSize: '9px' })
+       this.bit = this.add.text(251, 316, bit, { fontFamily: 'CustomFont', fontSize: '9px' })
+       this.level = this.add.text(291, 316, level, { fontFamily: 'CustomFont', fontSize: '9px' })
+ 
+       this.chip.setAlign('left') 
+       this.chip.setDepth(2)
+       this.bit.setAlign('right')
+       this.bit.setDepth(2)
+       this.level.setAlign('right')
+       this.level.setDepth(2)
+
       // Enemies
       const virus = this.config.enemies.virus
       this.virus = virus.map((virus) => new Virus(this, this.positionHorizontal(virus.x), this.positionVertical(virus.y)))
@@ -136,6 +152,8 @@ export default class LevelScene extends Phaser.Scene{
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
        
+
+     
       // Behaivors
       setInterval(() => {
         this.meanie.map(m => m.behavior())
@@ -147,7 +165,7 @@ export default class LevelScene extends Phaser.Scene{
 
     public update(time: number, delta: number): void { 
       this.player.behavior() 
-     
+      
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
       this.handlePlayerBoltCollision(this.player, this.bolt)
@@ -157,6 +175,8 @@ export default class LevelScene extends Phaser.Scene{
       this.handlePlayerItemsCollision(this.player, this.floppy)
       this.handlePlayerEnemiesCollision(this.player, this.virus)
       this.handlePlayerEnemiesCollision(this.player, this.meanie)
+      this.chip.setText(this.data.get('chip'))
+      this.bit.setText(this.data.get('bit'))
       this.score.setText(this.data.get('score'))
     }
 
@@ -175,7 +195,7 @@ export default class LevelScene extends Phaser.Scene{
         this.meanie.map(m => m.target = null)
         this.meanie.map(m => m.destroy())
         this.virus.map(m => m.destroy())
-        this.scene.start(this.config.keyNext)
+        this.scene.start(this.config.keyNext,  {score: Number(this.data.get('score'))})
       }
     }
 
@@ -199,10 +219,10 @@ export default class LevelScene extends Phaser.Scene{
 
     public handlePlayerItemsCollision(player: Player, objects: (Microchip | Byte | Floppy | Power)[]) {
       objects.map(object => {
-        if (object.y === player.y && object.x === player.x) {
-          object.destroy(); 
+        if (object.active == true && object?.y === player.y && object?.x === player.x) {
+          object.removeSprite()
         }
-      });
+      }); 
     }
 
  

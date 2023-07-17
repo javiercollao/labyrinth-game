@@ -20,4 +20,8 @@ export default class Power extends Character {
         this.scene.map.putTileAtWorldXY(0, this.x, this.y)
      }
 
+     public removeSprite(): void { 
+        this.scene.data.set('score', this.scene.data.get('score') + 15)
+        this.destroy(true)
+    }
 }
