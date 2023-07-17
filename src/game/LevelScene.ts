@@ -47,16 +47,16 @@ export default class LevelScene extends Phaser.Scene{
     public create (): void {  
       
       this.map = this.make.tilemap(tiles)
-     
       
       const container = this.map.addTilesetImage('principal','mainGame')
       const gameContainer = this.map.createLayer('static', container, 0, 0)
       gameContainer.setDepth(2)
 
-
       const laberynth = this.map.addTilesetImage('sprites2', 'levelTiles')
       const layer = this.map.createLayer(this.config.levelNumber, laberynth, 0, 0)
       layer.setDepth(1)
+
+      // Button Reset
 
       const buttonReset = new Phaser.GameObjects.Image(this, 367, 317, buttonResetImg.btn)
       buttonReset.displayWidth= 65
@@ -68,7 +68,27 @@ export default class LevelScene extends Phaser.Scene{
       buttonReset.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, () => {
         this.scene.restart()
       })
-      
+
+      // Life counter
+
+      const lifeBackground = new Phaser.GameObjects.Image(this, 45, 317, 'back-life')
+      lifeBackground.displayWidth= 75
+      lifeBackground.setDepth(3)
+      this.add.existing(lifeBackground)
+
+      const life1 = new Phaser.GameObjects.Image(this, 25, 317, 'player-life')
+      const life2 = new Phaser.GameObjects.Image(this, 45, 317, 'player-life')
+      const life3 = new Phaser.GameObjects.Image(this, 65, 317, 'player-life')
+      life1.setDepth(3)
+      life2.setDepth(3)
+      life3.setDepth(3)
+      this.add.existing(life1)
+      this.add.existing(life2)
+      this.add.existing(life3)
+
+      // missin life
+      life1.setAlpha(.7,.4,.4,.3)
+
       // Info
       this.data.set('level', this.config.levelNumber+1);
       
@@ -80,8 +100,6 @@ export default class LevelScene extends Phaser.Scene{
       this.score = this.add.text(111, 316,  score, { fontFamily: 'CustomFont', fontSize: '9px' })
       this.score.setAlign('right')
       this.score.setDepth(2)
-
-      
 
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)
