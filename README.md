@@ -38,8 +38,17 @@ Thank you for understanding and respecting the intellectual property rights of o
 
 ### Installation
 
-To play the game, simply download the files and open the index.html file in your browser. The game can be played with a keyboard.
- 
+To use this repository for development, follow these steps:
+1. Clone the repository to your local machine using git clone
+2. Navigate to the cloned repository directory, and install the dependencies using npm
+```
+npm install -E
+```
+* To compile the application in development mode and serve it on a local server
+```
+npm run start
+```
+
 ### Acknowledgments
 
 This game was inspired by the original game Dexter's Laberynth. Thank you to the creators of the original game for the inspiration.
