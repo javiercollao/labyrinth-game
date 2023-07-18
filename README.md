@@ -2,7 +2,7 @@
 
 The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player can collect chips and progress to the next level, while avoiding enemies and walls.
 
-#### [Play demo](https://javiercollao.github.io/lottery-simulator/) 
+#### [Play demo](https://javiercollao.github.io/labyrinth-game/) 
 
 ### Controls
 
