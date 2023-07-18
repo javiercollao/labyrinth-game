@@ -180,8 +180,7 @@ export default class LevelScene extends Phaser.Scene{
     }
 
     public update(time: number, delta: number): void { 
-      this.player.behavior() 
-      console.log(this.map)
+      this.player.behavior()  
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
       this.handlePlayerBoltCollision(this.player, this.bolt)

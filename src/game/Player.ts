@@ -77,9 +77,7 @@ export default class Player extends Character {
          bolt.setTile()
          this.setX(this.x+16)
          this.removeTile()
-         this.setTile()
-         console.log("right")
-         console.log(bolt.getMoveRight())
+         this.setTile() 
       }
       if(left && bolt.getMoveLeft() && !this.getMoveLeft()){
 
@@ -88,8 +86,7 @@ export default class Player extends Character {
         bolt.setX(bolt.x-16) 
         bolt.setTile() 
         this.setX(this.x-16)
-         this.setTile()
-        console.log("left")
+         this.setTile() 
       } 
       bolt.checkingTileToLeftFromPosition(invalidTileIndicesBolt)
       bolt.checkingTileToRightFromPosition(invalidTileIndicesBolt)

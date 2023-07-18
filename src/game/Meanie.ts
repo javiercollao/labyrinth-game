@@ -126,8 +126,7 @@ export default class Meanie extends Character {
                 }
             }
           } 
-        }else{
-          console.log('No hay un camino posible');  
+        }else{ 
           this.crearInicio()
           this.crearTarget()
           this.scene.pathFinding.crearVecinos()

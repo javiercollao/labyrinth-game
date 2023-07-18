@@ -42,19 +42,19 @@ export default class PathFinding {
       for (let j = 0; j < this.width; j++) {
         let listNbrs: State[] = [];
         if(j > 0){
-          listNbrs.push(this.matriz[i][j-1]);   //vecino izquierdo
+          listNbrs.push(this.matriz[i][j-1])
         }
 
         if(j < this.width-1){
-          listNbrs.push(this.matriz[i][j+1]);   //vecino derecho
+          listNbrs.push(this.matriz[i][j+1])
         }
 
         if(i > 0){
-          listNbrs.push(this.matriz[i-1][j]);   //vecino de arriba
+          listNbrs.push(this.matriz[i-1][j])
         }
 
         if(i < this.height-1){ 
-          listNbrs.push(this.matriz[i+1][j]); //vecino de abajo
+          listNbrs.push(this.matriz[i+1][j])
         }
 
         this.matriz[i][j].addNeighbors(listNbrs);
