@@ -1,15 +1,8 @@
 ## README: Dexter's Labyrinth Clone
 
-The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player can collect chips and progress to the next level, while avoiding enemies and hazards.
+The game is played on a 20 x 13 grid, and Dexter moves one grid square at a time. The player can collect chips and progress to the next level, while avoiding enemies and walls.
 
-### Gameplay
-
-Dexter starts with three lives and a score of zero. The player must navigate through each level, avoiding enemies and walls.
-
-The game includes objects called chips and bits that the player can collect to increase their score.
- 
-<img src="./src/assets/sprites/cover.png" alt="drawing" style="width:500px;"/>
-
+####[Play demo](https://javiercollao.github.io/labyrinth-game/)
 
 ### Controls
 
@@ -24,6 +17,17 @@ The game includes objects called chips and bits that the player can collect to i
 * W: Move Dexter upwards.
 * D: Move Dexter to the right.
 * S: Move Dexter downwards.
+
+
+### Gameplay
+
+Dexter starts with three lives and a score of zero. The player must navigate through each level, avoiding enemies and walls.
+
+The game includes objects called chips and bits that the player can collect to increase their score.
+ 
+<img src="./src/assets/sprites/cover.png" alt="drawing" style="width:500px;"/>
+
+
 
 ### Copyright
 
