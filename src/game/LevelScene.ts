@@ -109,11 +109,9 @@ export default class LevelScene extends Phaser.Scene{
         life2.setAlpha(.7,.4,.4,.3)
         life1.setAlpha(.7,.4,.4,.3) 
       }
-
       
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)
-      
 
       // Player
       this.player = new Player(this, this.positionHorizontal(this.config.player.x),this.positionVertical(this.config.player.y))
@@ -143,7 +141,6 @@ export default class LevelScene extends Phaser.Scene{
        this.data.set('chip', this.microchip.length)
        this.data.set('bit', this.byte.length) 
        
-       
        const score = this.data.get('score')
        const chip = this.data.get('chip')
        const bit = this.data.get('bit')
@@ -171,7 +168,6 @@ export default class LevelScene extends Phaser.Scene{
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
         
-   
       // Behaivors
       setInterval(() => {
         this.meanie.map(m => m.main())
@@ -234,7 +230,6 @@ export default class LevelScene extends Phaser.Scene{
         }
       });
     }
-    
 
     public handlePlayerItemsCollision(player: Player, objects: (Microchip | Byte | Floppy | Power)[]) {
       objects.map(object => {
