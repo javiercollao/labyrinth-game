@@ -30,7 +30,7 @@ export default class LevelScene extends Phaser.Scene{
     public pathFinding!: PathFinding;
     public chip!: Phaser.GameObjects.Text;
     public bit!: Phaser.GameObjects.Text;
-    public level!: Phaser.GameObjects.Text;
+    public level!: Phaser.GameObjects.Text; 
 
     constructor(config : any) {
         super({
@@ -48,6 +48,10 @@ export default class LevelScene extends Phaser.Scene{
     }
     
     public create (): void {   
+  
+      if(!this.scene.isVisible()){
+        this.scene.stop()
+      }
 
       if(this.data.get('life') == 0){ 
         this.scene.setVisible(false)
@@ -95,22 +99,21 @@ export default class LevelScene extends Phaser.Scene{
       this.add.existing(life3)
 
       // missin life
-      if(this.data.get('life') == 2){
+      if(this.data.get('life') == 3){
         life3.setAlpha(.7,.4,.4,.3)
-      }else if(this.data.get('life') == 1){
+      }else if(this.data.get('life') == 2){
         life3.setAlpha(.7,.4,.4,.3)
         life2.setAlpha(.7,.4,.4,.3)
-      }else if(this.data.get('life') == 0){
+      }else if(this.data.get('life') == 1){
         life3.setAlpha(.7,.4,.4,.3)
         life2.setAlpha(.7,.4,.4,.3)
         life1.setAlpha(.7,.4,.4,.3) 
       }
 
       
-     
       // MapPathFinding
       this.pathFinding = new PathFinding(this, 20, 13)
-      this.pathFinding.main()
+      
 
       // Player
       this.player = new Player(this, this.positionHorizontal(this.config.player.x),this.positionVertical(this.config.player.y))
@@ -167,20 +170,19 @@ export default class LevelScene extends Phaser.Scene{
       
       const meanies = this.config.enemies.meanie
       this.meanie = meanies.map((meanie) => new Meanie(this, this.positionHorizontal(meanie.x), this.positionVertical(meanie.y)))
-       
-
-     
+        
+   
       // Behaivors
       setInterval(() => {
-        this.meanie.map(m => m.behavior())
-        this.virus.map(v => v.behavior())
-      }, 400);
-      
-      
+        this.meanie.map(m => m.main())
+      }, 500);
+       
     }
 
     public update(time: number, delta: number): void { 
-      this.player.behavior()  
+      this.pathFinding.main()
+      this.player.behavior()   
+      this.virus.map(v => v.behavior())
       this.bolt.map(b => b.main())
       this.handlePlayerDoorCollision()
       this.handlePlayerBoltCollision(this.player, this.bolt)
@@ -206,14 +208,19 @@ export default class LevelScene extends Phaser.Scene{
     // Collisions
 
     public handlePlayerDoorCollision(){ 
-      if (this.door.y === this.player.y && this.player.x  === this.door.x ) { 
+      if (this.door.y === this.player.y && this.player.x  === this.door.x  && this.data.get('life') > 0) { 
+        this.scene.pause()
+        this.door.destroy()
+        this.player.removedFromScene()
         this.scene.start(this.config.keyNext,  {score: Number(this.data.get('score')), life: Number(this.data.get('life'))})
       }
     }
 
     public handlePlayerEnemiesCollision(player: Phaser.GameObjects.Sprite, objects: Phaser.GameObjects.Sprite[]){
       objects.map(object => {
-        if (object.y === player.y && object.x === player.x) {
+        if (object.y === player.y && object.x === player.x && this.data.get('life') != 0) {
+          this.scene.pause(this.config.key) 
+          this.scene.setVisible(false)   
           this.data.set('life', this.data.get('life') - 1)
           this.scene.restart({score: Number(this.data.get('score')),life: Number(this.data.get('life'))})
         }
@@ -236,6 +243,5 @@ export default class LevelScene extends Phaser.Scene{
         }
       }); 
     }
- 
  
 }
