@@ -24,7 +24,7 @@ export default class Meanie extends Character {
         this.closeSet = []
         this.terminado = false
         this.camino = []
-        this.main()
+        this.main() 
     }
 
     public crearInicio() {  
@@ -144,11 +144,12 @@ export default class Meanie extends Character {
       this.scene.pathFinding.crearVecinos()
       this.crearOpenSet()
       this.behavior() 
-
-      setInterval(() => {
-        this.behavior() 
-        this.crearTarget()
-      }, 400);
-       
+      this.recursive()
     }
+
+    public recursive(){
+      this.behavior() 
+      this.crearTarget()
+    }
+ 
 }
